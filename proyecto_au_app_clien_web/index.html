@@ -31,7 +31,6 @@
             <li><a href="#cita">Cita Médica</a></li>
             <li><a href="#recomendacion">Recomendaciones de Medicina</a></li>
             <li><a href="#equipo">Equipo</a></li>
-            <li><a href="#habilidades">Habilidades</a></li>
         </ul>  
         </div>
     </nav>
@@ -81,7 +80,7 @@
             </div>
         </section>
         <section id="agendamiento" class="producto1">
-            <h2> Agendar Cita </h2>
+            <h2> Agendamiento de Citas Médicas </h2>
             <table class="tabla1">
                 <thead>
                     <tr>
@@ -112,7 +111,7 @@
             <form action="#" class="formulario1">
                 <fieldset>
                     <legend>Información de la Consulta</legend>
-                    <label for="medico">Médico:</label>
+                    <label for="medico">Médico de Cardiología:</label>
                     <select id="medico" name="medico" required>
                         <option value="">Seleccione un médico</option>
                         <option value="dr_carlos_rodriguez">Dr. Carlos Rodríguez</option>
@@ -122,9 +121,22 @@
                     <input type="date" id="fecha" name="fecha" required>
                     <label for="hora">Hora de la Consulta:</label>
                     <input type="time" id="hora" name="hora" min="08:00" max="18:00" required>
+                    <label for="motivo">Motivo de la consulta:</label>
+                    <textarea id="motivo" name="motivo" maxlength="250" required></textarea>
+                    <label for="tipo">Tipo de atención:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Seleccione su modalidad</option>
+                        <option>Presencial</option>
+                        <option>Virtual</option>
+                    </select>
                 </fieldset>
                 <br>
-                <button type="submit">Registrar Consulta</button>
+                <a href="#mensajeConfirmacion" class="boton-inicio">
+                    Registrar Consulta
+                </a>
+                <p id="mensajeConfirmacion">
+                    ✅ Cita agendada correctamente
+                </p>
             </form>
         </section>
         <section id="cita" class="producto2">
@@ -279,26 +291,25 @@
                     <figure>
                         <img src="https://picsum.photos/200" alt="Tyrone Anchundia">
                         <figcaption>Tyrone Anchundia</figcaption>
+                        <a href="https://github.com/tyronealan" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                        </a>
                     </figure>
                     <figure>
                         <img src="https://picsum.photos/200" alt="Anthony Guaman">
                         <figcaption>Anthony Guaman</figcaption>
+                        <a href="https://github.com/GabrielGL11" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                        </a>
                     </figure>
                     <figure>
                         <img src="https://picsum.photos/200" alt="Adonis Mero">
                         <figcaption>Adonis Mero</figcaption>
+                        <a href="https://github.com/AdonisMer" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                        </a>
                     </figure>
                 </div>
-        </section>
-        <section class="habilidades">
-            <h2>Habilidades técnicas</h2>
-            <ul class="habilidades__lista">
-                <li><i class="fa-brands fa-html5"></i> HTML5</li>
-                <li><i class="fa-brands fa-css3-alt"></i> CSS3</li>
-                <li><i class="fa-brands fa-js"></i> JavaScript</li>
-                <li><i class="fa-brands fa-git-alt"></i> Git</li>
-                <li><i class="fa-brands fa-github"></i> GitHub</li>
-            </ul>
         </section>
     </main>
     <footer class="footer">
@@ -306,14 +317,14 @@
             <a href="https://github.com/usuario" target="_blank" rel="noopener" aria-label="GitHub">
                 <i class="fa-brands fa-github"></i>
             </a>
-            <a href="https://linkedin.com/in/usuario" target="_blank" rel="noopener" arialabel="LinkedIn">
-                <i class="fa-brands fa-linkedin"></i>
+            <a href="https://www.uleam.edu.ec/" target="_blank" rel="noopener" aria-label="Sitio web">
+                <i class="fa-solid fa-globe"></i>
             </a>
             <a href="mailto:correo@uleam.edu.ec" aria-label="Email">
                 <i class="fa-solid fa-envelope"></i>
             </a>
         </div>
-        <p>&copy; 2026 · Tu Nombre · Hecho con HTML, CSS y mucho café</p>
+        <p>&copy; 2026 · Cardinova · ULEAM · Hecho con HTML y CSS </p>
     </footer>
 </body>
 </html>

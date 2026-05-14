@@ -5,7 +5,7 @@
     padding: 0;
 }
 :root {
-    --color-fondo-claro: #F1F5F9; /*Color de fondo 
+    --color-fondo-claro: #F1F5F9; /*Color de fondo*/
     --color-primary: #839989; /*Fondo principal*/
     --color-secondary: #05271f; /*Fondo secundario*/
     --color-tertiary: #0c362d; /*Fondo terciario*/
@@ -26,15 +26,21 @@
     --spacing-xl: 64px;
     --radius: 8px;
 }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 body {
- font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
  /* font-weight: 400; */
- line-height: 1.6;
- color: var(--color-texto);
+    line-height: 1.6;
+    color: var(--color-texto);
 }
 h1, h2, h3 {
  /* font-weight: 700; */
- line-height: 1.2;
+    line-height: 1.2;
 }
 
 nav {
@@ -161,7 +167,7 @@ nav {
 
 
 .titulo-problema {
-   font-size: 40px;
+    font-size: 40px;
     margin-bottom: 25px;
     color: #0F172A;
 }
@@ -228,57 +234,99 @@ nav {
     align-items: center;
     padding: 60px 20px;
     background-color: var(--color-quaternary);
+    width: 100%;
 }
 .tabla1 {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
     background-color: white;
 }
 .tabla1 th {
     background-color: var(--color-secondary);
     color: white;
+    padding: 10px;
 }
 .tabla1 td {
     border: 1px solid var(--color-secondary);
-    padding: 8px;
+    padding: 10px;
     text-align: center;
+}
+.tabla1 tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.tabla1 tr:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    cursor: pointer;
 }
 .formulario1 {
     color: var(--color-text);
-    background-color: #aaaaaa;
+    background-color: #ffffff;
     text-align: left;
     padding: 20px;
     border-radius: var(--radius);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border: var(--color-secondary) solid 1px;
+    max-width: 500px;
+    width: 100%;
 }
 .formulario1 legend {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 20px;
+    color: var(--color-secondary);
+    text-align: center;
 }
 .formulario1 label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
+    color: var(--color-secondary);
+    text-align: center;
 }
-.formulario1 input, .formulario1 select {
+.formulario1 input, .formulario1 select, #motivo {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 16px;
     border: 1px solid var(--color-secondary);
     border-radius: var(--radius);
+    transition: 0.3s;
+}    
+.formulario1 input:focus, 
+.formulario1 select:focus, 
+#motivo:focus {
+    border-color: var(--color-secondary);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
-.formulario1 button {
+#motivo {
+    min-height: 100px;
+    resize: vertical;
+}
+.boton-inicio {
+    display: block;
+    width: 100%;
+    text-align: center;
     background-color: var(--color-secondary);
     color: white;
-    border: none;
-    padding: 10px 20px;
+    padding: 12px;
     border-radius: var(--radius);
-    cursor: pointer;
-    transition: var(--background-color) 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
 }
-.formulario1 button:hover {
+.boton-inicio:hover {
     background-color: var(--color-quinary);
-}     
+    transform: scale(1.03);
+}
+#mensajeConfirmacion:target {
+    display: block;
+    background-color: #dcfce7;
+    padding: 10px;
+    border-radius: 8px;
+}
 .producto2 {
     display: flex;
     flex-direction: column;
@@ -293,7 +341,13 @@ nav {
     padding: 60px 20px;
     background-color: var(--color-quaternary);
 }
-
+#mensajeConfirmacion {
+    display: none; 
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
 
 /*MODULO FARMACIAS*/
 #recomendacion{
@@ -476,7 +530,6 @@ nav {
 }
 
 
-
 /*EQUIPO*/
 
 #equipo {
@@ -500,25 +553,6 @@ nav {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.habilidades__lista {
- display: flex;
- flex-wrap: wrap;
- gap: 1rem;
- list-style: none;
- padding: 0;
- justify-content: center;
-}
-.habilidades__lista li {
- background-color: var(--color-fondo-claro);
- padding: 0.75rem 1.25rem;
- border-radius: 4px;
- font-weight: 600;
-}
-.habilidades__lista li i {
- color: var(--color-acento);
- margin-right: 0.5rem;
-}
-
 footer {
     text-align: center;
     padding: var(--spacing-md);
@@ -526,17 +560,79 @@ footer {
     color: var(--color-text-nav);
 }
 .redes {
- display: flex;
- gap: 1.5rem;
- justify-content: center;
- margin-bottom: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 .redes a {
- font-size: 1.5rem;
- color: var(--color-texto);
- transition: color 0.2s, transform 0.2s;
+    font-size: 1.5rem;
+    color: var(--color-texto);
+    transition: color 0.2s, transform 0.2s;
 }
 .redes a:hover {
- color: var(--color-quinary);
- transform: translateY(-2px);
+    color: var(--color-quinary);
+    transform: translateY(-2px);
+}
+
+
+/*CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES*/
+@media (max-width: 768px) {
+    /* NAV */
+    nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* INICIO */
+    .bloque-cabecera {
+        position: static;
+        transform: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .titulo-frontal {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .imagen-fondo {
+        height: auto;
+        border-radius: 20px;
+    }
+
+    /* PUBLICO OBJETIVO */
+    .publico_objetivo {
+        flex-direction: column;
+        text-align: center;
+    }
+    .imagen-publico img {
+        width: 200px;
+        height: 200px;
+    }
+    /* FARMACIAS */
+    #recomendacion .beneficios {
+        grid-template-columns: 1fr;
+    }
+    #recomendacion .galeria {
+        grid-template-columns: 1fr;
+    }
+    .buscador-farmacia {
+        flex-direction: column;
+        border-radius: 20px;
+    }
+    .buscador-farmacia button {
+        width: 100%;
+    }
+    /* EQUIPO */
+    .miembros {
+        flex-direction: column;
+    }
 }
