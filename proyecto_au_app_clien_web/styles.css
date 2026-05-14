@@ -6,18 +6,22 @@
 }
 :root {
     --color-fondo-claro: #F1F5F9; /*Color de fondo*/
-    --color-primary: #839989; /*Fondo principal*/
+    --color-primary: #E4ECE7; /*Fondo principal*/
     --color-secondary: #05271f; /*Fondo secundario*/
     --color-tertiary: #0c362d; /*Fondo terciario*/
     --color-quaternary: #c0d1b2; /*Fondo quaternario*/
     --color-quinary: #425851; /*Fondo quinary*/
-    --color-text-title: #0F172A; /*Texto de los títulos*/
-    --color-text: #64748B; /*Texto principal*/
+    --color-text-title: #2F4858; /*Texto de los títulos*/
+    --color-text: #52616B; /*Texto principal*/
     --color-text-logo: #ffffff; /*Texto del logo*/
-    --color-nav: #05271f; /*Fondo de la barra de navegación*/
+    --color-nav: #1F4E5F; /*Fondo de la barra de navegación*/
     --color-text-nav: #ffffff; /*Texto de la barra de navegación*/
     --color-cards: #ffffff; /*Color de fondo de las tarjetas*/
+    --color-boton: #1F4E5F; /*Color de fondo de los botones*/
+    --color-boton-2: white; /*Color de fondo de los botones al pasar el mouse*/
     --font-title: "Stack Sans Notch", sans-serif;
+    --font--body: "caudex", sans-serif;
+    --font-3:"swanky and moo moo", sans-serif;
     --font-2: "Lexend Tera", sans-serif;
     --font-nav: "helvetica neue", sans-serif;
     --spacing-sm: 8px;
@@ -25,11 +29,6 @@
     --spacing-lg: 32px;
     --spacing-xl: 64px;
     --radius: 8px;
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 body {
@@ -43,10 +42,33 @@ h1, h2, h3 {
     line-height: 1.2;
 }
 
+h2 {
+    font-family: var(--font-2);
+    color: var(--color-text-title);
+    font-size: 40px;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.35);
+
+}
+
+.botones{
+    background-color: var(--color-boton);
+    color: var(--color-boton-2);
+    padding: 15px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botones:hover{
+    background-color: #598b9c;
+    transform: scale(1.03);}
+
 nav {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     /* padding: var(--spacing-md) var(--spacing-lg); */
     background-color: var(--color-nav);
     padding:0 20px;
@@ -56,7 +78,7 @@ nav {
     font-size: 2.5rem;
     font-family: var(--font-title);
     font-weight: bold;
-    text-decoration: none; 
+    text-decoration: none;
     flex-shrink: 0;
 }
 
@@ -65,7 +87,7 @@ nav {
 }
 
 .nav-links ul {
-    display: flex; 
+    display: flex;
     gap: 35px;
     list-style: none;
     margin: 0;
@@ -87,6 +109,7 @@ nav {
 /*TITULO*/
 .titulo{
     text-align: center;
+    background-color: var(--color-fondo-claro);
 }
 .titulo h1{
     font-family: var(--font-title);
@@ -101,7 +124,7 @@ nav {
 /*INICIO*/
 #inicio {
     padding: 10px 20px;
-    background-color: var(--color-primary);
+    background-color: var(--color-fondo-claro);
     text-align: center;
 }
 
@@ -118,11 +141,11 @@ nav {
     left: 0;
     width: 100%;
     height: 90%;
-    object-fit: cover; 
+    object-fit: cover;
     display: block;
-    border-radius: 70px;
+    border-radius: 60px;
     margin: auto;
-    margin-top: 30px;    
+    margin-top: 30px;
 }
 
 .bloque-cabecera {
@@ -135,7 +158,8 @@ nav {
 }
 
 .titulo-frontal {
-    font-size: 3.8rem;
+    font-family: var(--font-2);
+    font-size: 2.4rem;
     font-weight: 700;
     line-height: 1.05;
     text-align: start;
@@ -145,35 +169,35 @@ nav {
 .boton-inicio {
     display: flex;
     justify-self: start;
-    background-color: #16A34A;
-    color: white;
+    /* color: white; */
     padding: 8px 32px;
     font-size: 18px;
     border-radius: 14px;
-    text-decoration: none;
     font-weight: 600;
-    
 }
 
 .boton-inicio:hover {
-    background-color: var(--color-nav); 
-    transform: scale(1.05); 
+    transform: scale(1.05);
 }
 
+
+/*PROBLEMA*/
 .seccion-problema {
     padding: 80px 10%;
-    background-color: #F1F5F9;          
+    background-color: var(--color-primary);
+    border-radius: 60px;
 }
 
 
 .titulo-problema {
     font-size: 40px;
     margin-bottom: 25px;
-    color: #0F172A;
+    color: var(--color-text-title);
+    font-family: var(--font-2);
 }
 
 .columna-texto {
-    flex: 2;               
+    flex: 2;
 }
 
 .columna-texto p {
@@ -187,43 +211,46 @@ nav {
 /*PUBLICO OBJETIVO*/
 
 .publico_objetivo {
-    display: flex;          
-    align-items: center;   
+    padding: 80px 10%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 60px;
     gap: 40px;
+    border-radius: 20px;
 }
 .titulo-publico-objetivo {
-    font-size: 3.5rem;
+    font-size: 40px;
     color: var(--color-text-title);
-    font-family: serif;    
-    margin: 0;
+    font-family: var(--font-2);
+    margin: 0 0 25px 0;
 }
 
 .texto-publico {
-    flex: 2;    
+    flex: 2;
 }
 
 .texto-publico p {
     font-size: 1.2rem;
     line-height: 1.6;
     margin: 0;
-    color: var(--color-nav);
+    color: var(--color-text);
     text-align: justify;
     font-weight: bold ;
+    font-family: var(--font--body);
 }
 
 .imagen-publico {
-    flex: 1;                
+    flex: 1;
     display: flex;
     justify-content: center;
 }
 
 .imagen-publico img {
-    width: 300px;           
-    height: 300px;          
-    object-fit: cover;      
-    border-radius: 50%;     
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 
@@ -233,9 +260,12 @@ nav {
     flex-direction: column;
     align-items: center;
     padding: 60px 20px;
-    background-color: var(--color-quaternary);
     width: 100%;
+    background: linear-gradient(to bottom, var(--color-fondo-claro), var(--color-primary));
 }
+
+.
+
 .tabla1 {
     width: 100%;
     max-width: 800px;
@@ -293,9 +323,9 @@ nav {
     border: 1px solid var(--color-secondary);
     border-radius: var(--radius);
     transition: 0.3s;
-}    
-.formulario1 input:focus, 
-.formulario1 select:focus, 
+}
+.formulario1 input:focus,
+.formulario1 select:focus,
 #motivo:focus {
     border-color: var(--color-secondary);
     outline: none;
@@ -309,8 +339,6 @@ nav {
     display: block;
     width: 100%;
     text-align: center;
-    background-color: var(--color-secondary);
-    color: white;
     padding: 12px;
     border-radius: var(--radius);
     text-decoration: none;
@@ -318,7 +346,6 @@ nav {
     transition: 0.3s;
 }
 .boton-inicio:hover {
-    background-color: var(--color-quinary);
     transform: scale(1.03);
 }
 #mensajeConfirmacion:target {
@@ -333,21 +360,9 @@ nav {
     align-items: center;
     padding: 60px 20px;
     background-color: var(--color-primary);
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-fondo-claro));
 }
-.producto3 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    background-color: var(--color-quaternary);
-}
-#mensajeConfirmacion {
-    display: none; 
-    color: green;
-    font-weight: bold;
-    margin-top: 10px;
-    text-align: center;
-}
+
 
 /*MODULO FARMACIAS*/
 #recomendacion{
@@ -378,9 +393,9 @@ nav {
 }
 
 .etiqueta span{
-    background-color: #22c55e;
-    color: white;
-    padding: 12px 25px;
+    background-color: var(--color-boton);
+    color: var(--color-boton-2);
+    padding: 12px 100px;
     border-radius: 30px;
     font-weight: bold;
     font-size: 14px;
@@ -392,9 +407,10 @@ nav {
 
 .titulo-farmacia{
     font-size: 60px;
-    color: #0f172a;
+    color: var(--color-text-title);
     line-height: 1.1;
     margin-bottom: 25px;
+    font-family: var(--font-2);
 }
 
 .columna-texto{
@@ -430,20 +446,12 @@ nav {
     font-size: 17px;
     border-radius: 50px;
 }
-
 .buscador-farmacia button{
     border: none;
-    background-color: #16a34a;
-    color: white;
-    padding: 18px 35px;
-    border-radius: 50px;
-    font-size: 16px;
+    padding: 14px 25px;
+    border-radius: 15px;
     cursor: pointer;
     transition: 0.3s;
-}
-
-.buscador-farmacia button:hover{
-    background-color: #15803d;
 }
 
 .beneficios{
@@ -517,27 +525,22 @@ nav {
 
 .galeria article button{
     border: none;
-    background-color: #16a34a;
-    color: white;
     padding: 14px 25px;
     border-radius: 15px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-.galeria article button:hover{
-    background-color: #15803d;
-}
-
 
 /*EQUIPO*/
-
 #equipo {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 60px 20px;
     background-color: var(--color-primary);
+    background: linear-gradient(to bottom, var(--color-fondo-claro), var(--color-primary));
+
 }
 .miembros {
     display: flex;
