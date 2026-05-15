@@ -354,15 +354,252 @@ nav {
     padding: 10px;
     border-radius: 8px;
 }
-.producto2 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    background-color: var(--color-primary);
-    background: linear-gradient(to bottom, var(--color-primary), var(--color-fondo-claro));
+/* ===== SECCIÓN CITA MÉDICA ===== */
+
+.producto2{
+    width: 100%;
+    padding: 90px 10%;
+
+    background: linear-gradient(
+        to bottom,
+        var(--color-primary),
+        var(--color-fondo-claro)
+    );
 }
 
+.contenedor-cita{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+
+    flex-wrap: wrap;
+}
+
+/* IZQUIERDA */
+
+.info-cita{
+    flex: 1;
+    min-width: 320px;
+}
+
+.etiqueta-cita{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    background: var(--color-quaternary);
+    color: var(--color-secondary);
+
+    padding: 12px 24px;
+
+    border-radius: 40px;
+
+    font-family: var(--font-nav);
+    font-size: 15px;
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+.info-cita h2{
+    font-size: 42px;
+    line-height: 1.3;
+
+    color: var(--color-text-title);
+
+    font-family: var(--font-2);
+
+    margin-bottom: 25px;
+}
+
+.info-cita h2 span{
+    color: var(--color-tertiary);
+}
+
+.info-cita p{
+    font-size: 1.1rem;
+    line-height: 1.8;
+
+    color: var(--color-text);
+
+    font-family: var(--font--body);
+    font-weight: bold;
+
+    text-align: justify;
+
+    margin-bottom: 40px;
+}
+
+/* BENEFICIOS */
+
+.beneficios{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.beneficio{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    background: var(--color-cards);
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.beneficio i{
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: var(--color-primary);
+    color: var(--color-tertiary);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 22px;
+}
+
+.beneficio h4{
+    font-size: 18px;
+
+    color: var(--color-text-title);
+
+    font-family: var(--font-2);
+
+    margin-bottom: 5px;
+}
+
+.beneficio span{
+    font-size: 15px;
+
+    color: var(--color-text);
+
+    font-family: var(--font--body);
+    font-weight: bold;
+}
+
+/* DERECHA */
+
+.paneles-medicos{
+    flex: 1;
+    min-width: 340px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.panel-medico{
+    background: var(--color-cards);
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+
+    border: 2px solid var(--color-quaternary);
+}
+
+.panel-medico h3{
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    color: var(--color-text-title);
+
+    font-size: 28px;
+
+    font-family: var(--font-2);
+}
+
+/* CAMPOS */
+
+.grupo-campo{
+    margin-bottom: 22px;
+}
+
+.grupo-campo label{
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--color-text-title);
+
+    font-size: 17px;
+
+    font-family: var(--font-2);
+}
+
+.campo{
+    width: 100%;
+
+    background: var(--color-fondo-claro);
+
+    border: 2px solid var(--color-quinary);
+
+    border-radius: 12px;
+
+    padding: 15px 18px;
+
+    color: var(--color-text);
+
+    font-size: 15px;
+
+    font-family: var(--font--body);
+    font-weight: bold;
+
+    box-sizing: border-box;
+}
+
+.area{
+    min-height: 110px;
+
+    line-height: 1.7;
+}
+
+@media(max-width: 991px){
+
+    .contenedor-cita{
+        flex-direction: column;
+    }
+    .info-cita{
+        text-align: center;
+    }
+
+    .info-cita p{
+        text-align: center;
+    }
+
+    .beneficio{
+        text-align: left;
+    }
+}
+@media(max-width: 600px){
+    .cita-medica{
+        padding: 70px 20px;
+    }
+    .info-cita h2{
+        font-size: 32px;
+    }
+    .panel-medico h3{
+        font-size: 22px;
+    }
+    .beneficio{
+        flex-direction: column;
+        text-align: center;
+    }
+}
 
 /*MODULO FARMACIAS*/
 #recomendacion{
