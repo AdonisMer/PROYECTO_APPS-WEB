@@ -7,9 +7,6 @@
 :root {
     --color-fondo-claro: #F1F5F9; /*Color de fondo*/
     --color-primary: #E4ECE7; /*Fondo principal*/
-    --color-secondary: #05271f; /*Fondo secundario*/
-    --color-tertiary: #0c362d; /*Fondo terciario*/
-    --color-quaternary: #c0d1b2; /*Fondo quaternario*/
     --color-quinary: #425851; /*Fondo quinary*/
     --color-text-title: #2F4858; /*Texto de los títulos*/
     --color-text: #52616B; /*Texto principal*/
@@ -29,12 +26,11 @@
     --spacing-md: 16px;
     --spacing-lg: 32px;
     --spacing-xl: 64px;
-    --radius: 8px;
+    --radius: 9px;
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
- /* font-weight: 400; */
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-fondo-claro);
@@ -42,12 +38,11 @@ body {
 
 main {
     padding: 40px 20px;
-    /* max-width: 1300px; */
     margin: auto;
+
 }
 
 h1, h2, h3 {
- /* font-weight: 700; */
     line-height: 1.2;
 }
 
@@ -57,6 +52,10 @@ h2 {
     font-size: 40px;
     text-shadow: 3px 3px 10px rgba(0,0,0,0.35);
 
+}
+p {
+    color: var(--color-text);
+    font-family: var(--font--body);
 }
 
 .botones{
@@ -72,8 +71,14 @@ h2 {
 
 .botones:hover{
     background-color: #598b9c;
-    transform: scale(1.03);}
+    transform: scale(1.03);
+}
 
+
+
+
+
+/* ===== BARRA DE NAVEGACIÓN ===== */
 nav {
     display: flex;
     justify-content: space-between;
@@ -82,6 +87,7 @@ nav {
     background-color: var(--color-nav);
     padding:0 20px;
 }
+
 .nav-logo {
     color: var(--color-text-logo);
     font-size: 2.5rem;
@@ -103,6 +109,7 @@ nav {
     padding: 0;
     white-space: nowrap;
 }
+
 .nav-links a {
     color: var(--color-text-nav);
     text-decoration: none;
@@ -110,12 +117,17 @@ nav {
     border-bottom: 2px solid transparent;
     transition: color 0.3s, border-color 0.3s;
 }
+
 .nav-links a:hover {
     color: var(--color-accent);
     border-bottom-color: var(--color-accent);
 }
 
-/*INICIO*/
+
+
+
+
+/* ===== INICIO ===== */
 #inicio {
     padding: 10px 20px;
     background-color: var(--color-fondo-claro);
@@ -152,10 +164,6 @@ nav {
 
 .titulo-frontal {
     font-family: var(--font-2);
-
-    /* Responsive */
-    font-size: clamp(2rem, 5vw, 2.4rem);
-
     font-weight: 700;
     line-height: 1.1;
     text-align: start;
@@ -174,6 +182,660 @@ nav {
 .boton-inicio:hover {
     transform: scale(1.05);
 }
+
+
+
+
+
+/* ===== PROBLEMA ===== */
+.seccion-problema {
+    padding: 80px 10%;
+    background-color: var(--color-primary);
+    border-radius: 60px;
+}
+
+.titulo-problema {
+    font-size: 40px;
+    margin-bottom: 25px;
+    color: var(--color-text-title);
+    font-family: var(--font-2);
+}
+
+.columna-texto {
+    flex: 2;
+}
+
+.columna-texto p {
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 800px;
+}
+
+
+
+
+
+/* ===== PÚBLICO OBJETIVO ===== */
+.publico_objetivo {
+    padding: 80px 10%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    border-radius: 60px;
+    margin: 0 20px;
+}
+.titulo-publico-objetivo {
+    font-size: 40px;
+    color: var(--color-text-title);
+    font-family: var(--font-2);
+    margin: 0 0 25px 0;
+}
+
+.texto-publico {
+    flex: 2;
+}
+
+.columna-titulo p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+    font-weight: normal; ;
+}
+
+.texto-publico p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+    font-weight: normal; ;
+}
+
+.imagen-publico {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.imagen-publico img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+
+
+
+/* ===== MODULO AGENDAMIENTO DE CITA ===== */
+.producto1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    width: 100%;
+    background: linear-gradient(to bottom, var(--color-fondo-claro), var(--color-primary));
+}
+.tabla1 {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    background-color: white;
+}
+.tabla1 th {
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-quinary);
+    color: white;
+    padding: 10px;
+}
+.tabla1 td {
+    border: 1px solid var(--color-quinary);
+    padding: 10px;
+    text-align: center;
+}
+.tabla1 tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
+
+.tabla1 tr:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.formulario1 {
+    color: var(--color-text);
+    background-color: #ffffff;
+    text-align: left;
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: var(--color-quinary) solid 1px;
+    max-width: 500px;
+    width: 100%;
+}
+.formulario1 legend {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--color-quinary);
+    text-align: center;
+}
+.formulario1 label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--color-secondary);
+    text-align: center;
+}
+.formulario1 input, .formulario1 select, #motivo {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid var(--color-quinary);
+    border-radius: var(--radius);
+    transition: 0.3s;
+}
+.formulario1 input:focus,
+.formulario1 select:focus,
+#motivo:focus {
+    border-color: var(--color-quinary);
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+#motivo {
+    min-height: 100px;
+    resize: vertical;
+}
+.boton-registrar-consulta {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.boton-registrar-consulta:hover {
+    transform: scale(1.03);
+}
+#mensajeConfirmacion:target {
+    display: block;
+    background-color: #dcfce7;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+
+
+/* ===== MODULO CITA MÉDICA ===== */
+
+.producto2{
+    width: 100%;
+    padding: 90px 10%;
+
+    background: linear-gradient(
+        to bottom,
+        var(--color-primary),
+        var(--color-fondo-claro)
+    );
+}
+
+.contenedor-cita{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+
+    flex-wrap: wrap;
+}
+
+/* IZQUIERDA */
+
+.info-cita{
+    flex: 1;
+    min-width: 320px;
+}
+
+.etiqueta-cita{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-boton);
+    color: var(--color-boton-2);
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-family: var(--font-nav);
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.info-cita h2{
+    font-size: 42px;
+    line-height: 1.3;
+
+    color: var(--color-text-title);
+
+    font-family: var(--font-2);
+
+    margin-bottom: 25px;
+}
+
+.info-cita h2 span{
+    color: var(--color-tertiary);
+}
+
+.info-cita p{
+    font-size: 1.1rem;
+    line-height: 1.8;
+    font-weight: bold;
+    text-align: justify;
+    margin-bottom: 40px;
+}
+
+/* BENEFICIOS */
+
+.beneficios{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.beneficio{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--color-cards);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.beneficio i{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-tertiary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+.beneficio h4{
+    font-size: 18px;
+    color: var(--color-text-title);
+    font-family: var(--font-2);
+    margin-bottom: 5px;
+}
+
+.beneficio span{
+    font-size: 15px;
+    color: var(--color-text);
+    font-family: var(--font--body);
+    font-weight: bold;
+}
+
+/* DERECHA */
+.paneles-medicos{
+    flex: 1;
+    min-width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.panel-medico{
+    background: var(--color-cards);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    border: 2px solid var(--color-quaternary);
+}
+
+.panel-medico h3{
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--color-text-title);
+    font-size: 28px;
+    font-family: var(--font-2);
+}
+
+/* CAMPOS */
+.grupo-campo{
+    margin-bottom: 22px;
+}
+
+.grupo-campo label{
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-text-title);
+    font-size: 17px;
+    font-family: var(--font-2);
+}
+
+.campo{
+    width: 100%;
+    background: var(--color-fondo-claro);
+    border: 2px solid var(--color-quinary);
+    border-radius: 12px;
+    padding: 15px 18px;
+    color: var(--color-text);
+    font-size: 15px;
+    font-family: var(--font--body);
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.area{
+    min-height: 110px;
+    line-height: 1.7;
+}
+
+
+
+
+/* ===== MODULO FARMACIAS ===== */
+#recomendacion{
+    padding: 100px 10%;
+    background: var(--color-fondo-claro);
+}
+
+#recomendacion .beneficios{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 70px;
+}
+
+#recomendacion .galeria{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+#recomendacion .galeria article{
+    min-height: 280px;
+}
+
+.etiqueta{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.etiqueta span{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-boton);
+    color: var(--color-boton-2);
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-family: var(--font-nav);
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+
+.columna-titulo{
+    text-align: center;
+}
+
+.titulo-farmacia{
+    font-size: 60px;
+    color: var(--color-text-title);
+    line-height: 1.1;
+    margin-bottom: 25px;
+    font-family: var(--font-2);
+}
+
+.columna-texto{
+    text-align: center;
+    max-width: 750px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.columna-texto p{
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+.buscador-farmacia{
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+    padding: 15px;
+    border-radius: 70px;
+    display: flex;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-bottom: 60px;
+}
+
+.buscador-farmacia input{
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 20px;
+    font-size: 17px;
+    border-radius: 50px;
+}
+.buscador-farmacia button{
+    border: none;
+    padding: 10px 45px;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.beneficios{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+    margin-bottom: 70px;
+}
+
+.beneficio{
+    background-color: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.beneficio h4{
+    margin-bottom: 15px;
+    color: #0f172a;
+    font-size: 20px;
+}
+
+.beneficio p{
+    line-height: 1.6;
+}
+
+.galeria{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 30px;
+}
+
+.galeria article{
+    background-color : var(--color-cards);
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    transition: 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+
+.galeria article:hover{
+    transform: translateY(-10px);
+}
+
+.icono-card{
+    width: 70px;
+    height: 70px;
+    background-color: #dcfce7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.galeria article h3{
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+.galeria article p{
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.galeria article button{
+    border: none;
+    padding: 14px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+/*EQUIPO*/
+#equipo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: var(--color-primary);
+    background: linear-gradient(to bottom, var(--color-fondo-claro), var(--color-primary));
+
+}
+.miembros {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+.miembros figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.miembros figure {
+    text-align: center;
+}
+
+#equipo img {
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-nav);
+    color: var(--color-text-nav);
+}
+.redes {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.redes a {
+    font-size: 1.5rem;
+    color: var(--color-texto);
+    transition: color 0.2s, transform 0.2s;
+}
+.redes a:hover {
+    color: var(--color-quinary);
+    transform: translateY(-2px);
+}
+
+
+
+
+
+
+/*CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES*/
+@media (max-width: 768px) {
+    /* NAV */
+    nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* INICIO */
+    .bloque-cabecera {
+        position: static;
+        transform: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .titulo-frontal {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .imagen-fondo {
+        height: auto;
+        border-radius: 20px;
+    }
+
+    /* PUBLICO OBJETIVO */
+    .publico_objetivo {
+        flex-direction: column;
+        text-align: center;
+    }
+    .imagen-publico img {
+        width: 200px;
+        height: 200px;
+    }
+    /* FARMACIAS */
+    #recomendacion .beneficios {
+        grid-template-columns: 1fr;
+    }
+    #recomendacion .galeria {
+        grid-template-columns: 1fr;
+    }
+    .buscador-farmacia {
+        flex-direction: column;
+        border-radius: 20px;
+    }
+    .buscador-farmacia button {
+        width: 100%;
+    }
+    /* EQUIPO */
+    .miembros {
+        flex-direction: column;
+    }
+}
+
 
 
 /* ========================= */
@@ -255,395 +917,9 @@ nav {
 
 }
 
-/*PROBLEMA*/
-.seccion-problema {
-    padding: 80px 10%;
-    background-color: var(--color-primary);
-    border-radius: 60px;
-}
 
 
-.titulo-problema {
-    font-size: 40px;
-    margin-bottom: 25px;
-    color: var(--color-text-title);
-    font-family: var(--font-2);
-}
 
-.columna-texto {
-    flex: 2;
-}
-
-.columna-texto p {
-    font-size: 18px;
-    line-height: 1.8;
-    color: #475569;
-    max-width: 800px;
-}
-
-
-/*PUBLICO OBJETIVO*/
-
-.publico_objetivo {
-    padding: 80px 10%;
-    background-color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    border-radius: 60px;
-    margin: 0 20px;
-}
-.titulo-publico-objetivo {
-    font-size: 40px;
-    color: var(--color-text-title);
-    font-family: var(--font-2);
-    margin: 0 0 25px 0;
-}
-
-.texto-publico {
-    flex: 2;
-}
-
-.columna-titulo p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin: 0;
-    color: var(--color-text);
-    text-align: justify;
-    font-weight: normal; ;
-    font-family: var(--font--body);
-}
-
-.texto-publico p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin: 0;
-    color: var(--color-text);
-    text-align: justify;
-    font-weight: normal; ;
-    font-family: var(--font--body);
-}
-
-.imagen-publico {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.imagen-publico img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-
-/*MODULO AGENDAMIENTO DE CITA*/
-.producto1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    width: 100%;
-    background: linear-gradient(to bottom, var(--color-fondo-claro), var(--color-primary));
-}
-.tabla1 {
-    width: 100%;
-    max-width: 800px;
-    border-collapse: collapse;
-    background-color: white;
-}
-.tabla1 th {
-    background-color: var(--color-secondary);
-    color: white;
-    padding: 10px;
-}
-.tabla1 td {
-    border: 1px solid var(--color-secondary);
-    padding: 10px;
-    text-align: center;
-}
-.tabla1 tr:nth-child(even) {
-    background-color: #f5f5f5;
-}
-
-.tabla1 tr:hover {
-    background-color: var(--color-primary);
-    color: var(--color-text);
-    cursor: pointer;
-}
-.formulario1 {
-    color: var(--color-text);
-    background-color: #ffffff;
-    text-align: left;
-    padding: 20px;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border: var(--color-secondary) solid 1px;
-    max-width: 500px;
-    width: 100%;
-}
-.formulario1 legend {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: var(--color-secondary);
-    text-align: center;
-}
-.formulario1 label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--color-secondary);
-    text-align: center;
-}
-.formulario1 input, .formulario1 select, #motivo {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid var(--color-secondary);
-    border-radius: var(--radius);
-    transition: 0.3s;
-}
-.formulario1 input:focus,
-.formulario1 select:focus,
-#motivo:focus {
-    border-color: var(--color-secondary);
-    outline: none;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-#motivo {
-    min-height: 100px;
-    resize: vertical;
-}
-.boton-inicio {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 12px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.boton-inicio:hover {
-    transform: scale(1.03);
-}
-#mensajeConfirmacion:target {
-    display: block;
-    background-color: #dcfce7;
-    padding: 10px;
-    border-radius: 8px;
-}
-/* ===== SECCIÓN CITA MÉDICA ===== */
-
-.producto2{
-    width: 100%;
-    padding: 90px 10%;
-
-    background: linear-gradient(
-        to bottom,
-        var(--color-primary),
-        var(--color-fondo-claro)
-    );
-}
-
-.contenedor-cita{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 60px;
-
-    flex-wrap: wrap;
-}
-
-/* IZQUIERDA */
-
-.info-cita{
-    flex: 1;
-    min-width: 320px;
-}
-
-.etiqueta-cita{
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--color-boton);
-    color: var(--color-boton-2);
-    padding: 12px 24px;
-    border-radius: 40px;
-    font-family: var(--font-nav);
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
-.info-cita h2{
-    font-size: 42px;
-    line-height: 1.3;
-
-    color: var(--color-text-title);
-
-    font-family: var(--font-2);
-
-    margin-bottom: 25px;
-}
-
-.info-cita h2 span{
-    color: var(--color-tertiary);
-}
-
-.info-cita p{
-    font-size: 1.1rem;
-    line-height: 1.8;
-
-    color: var(--color-text);
-
-    font-family: var(--font--body);
-    font-weight: bold;
-
-    text-align: justify;
-
-    margin-bottom: 40px;
-}
-
-/* BENEFICIOS */
-
-.beneficios{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.beneficio{
-    display: flex;
-    align-items: center;
-    gap: 18px;
-
-    background: var(--color-cards);
-
-    padding: 20px;
-
-    border-radius: 20px;
-
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-}
-
-.beneficio i{
-    width: 55px;
-    height: 55px;
-
-    border-radius: 50%;
-
-    background: var(--color-primary);
-    color: var(--color-tertiary);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 22px;
-}
-
-.beneficio h4{
-    font-size: 18px;
-
-    color: var(--color-text-title);
-
-    font-family: var(--font-2);
-
-    margin-bottom: 5px;
-}
-
-.beneficio span{
-    font-size: 15px;
-
-    color: var(--color-text);
-
-    font-family: var(--font--body);
-    font-weight: bold;
-}
-
-/* DERECHA */
-
-.paneles-medicos{
-    flex: 1;
-    min-width: 340px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.panel-medico{
-    background: var(--color-cards);
-
-    border-radius: 20px;
-
-    padding: 30px;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-
-    border: 2px solid var(--color-quaternary);
-}
-
-.panel-medico h3{
-    text-align: center;
-
-    margin-bottom: 30px;
-
-    color: var(--color-text-title);
-
-    font-size: 28px;
-
-    font-family: var(--font-2);
-}
-
-/* CAMPOS */
-
-.grupo-campo{
-    margin-bottom: 22px;
-}
-
-.grupo-campo label{
-    display: block;
-
-    margin-bottom: 10px;
-
-    color: var(--color-text-title);
-
-    font-size: 17px;
-
-    font-family: var(--font-2);
-}
-
-.campo{
-    width: 100%;
-
-    background: var(--color-fondo-claro);
-
-    border: 2px solid var(--color-quinary);
-
-    border-radius: 12px;
-
-    padding: 15px 18px;
-
-    color: var(--color-text);
-
-    font-size: 15px;
-
-    font-family: var(--font--body);
-    font-weight: bold;
-
-    box-sizing: border-box;
-}
-
-.area{
-    min-height: 110px;
-
-    line-height: 1.7;
-}
  
 @media(max-width: 991px){
 
@@ -675,298 +951,5 @@ nav {
     .beneficio{
         flex-direction: column;
         text-align: center;
-    }
-}
-
-/*MODULO FARMACIAS*/
-#recomendacion{
-    padding: 100px 10%;
-    background: var(--color-fondo-claro);
-}
-
-#recomendacion .beneficios{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    margin-bottom: 70px;
-}
-
-#recomendacion .galeria{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-#recomendacion .galeria article{
-    min-height: 280px;
-}
-
-.etiqueta{
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.etiqueta span{
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--color-boton);
-    color: var(--color-boton-2);
-    padding: 12px 24px;
-    border-radius: 40px;
-    font-family: var(--font-nav);
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
-
-.columna-titulo{
-    text-align: center;
-}
-
-.titulo-farmacia{
-    font-size: 60px;
-    color: var(--color-text-title);
-    line-height: 1.1;
-    margin-bottom: 25px;
-    font-family: var(--font-2);
-}
-
-.columna-texto{
-    text-align: center;
-    max-width: 750px;
-    margin: auto;
-    margin-bottom: 40px;
-}
-
-.columna-texto p{
-    font-size: 20px;
-    color: #64748b;
-    line-height: 1.7;
-}
-
-.buscador-farmacia{
-    max-width: 800px;
-    margin: auto;
-    background-color: white;
-    padding: 15px;
-    border-radius: 70px;
-    display: flex;
-    gap: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    margin-bottom: 60px;
-}
-
-.buscador-farmacia input{
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 20px;
-    font-size: 17px;
-    border-radius: 50px;
-}
-.buscador-farmacia button{
-    border: none;
-    padding: 10px 45px;
-    border-radius: 35px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.beneficios{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 20px;
-    margin-bottom: 70px;
-}
-
-.beneficio{
-    background-color: rgba(255,255,255,0.7);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 25px;
-}
-
-.beneficio h4{
-    margin-bottom: 15px;
-    color: #0f172a;
-    font-size: 20px;
-}
-
-.beneficio p{
-    color: #64748b;
-    line-height: 1.6;
-}
-
-.galeria{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    gap: 30px;
-}
-
-.galeria article{
-    background-color : var(--color-cards);
-    padding: 30px;
-    border-radius: 30px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-    transition: 0.4s;
-    position: relative;
-    overflow: hidden;
-}
-
-.galeria article:hover{
-    transform: translateY(-10px);
-}
-
-.icono-card{
-    width: 70px;
-    height: 70px;
-    background-color: #dcfce7;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    margin-bottom: 25px;
-}
-
-.galeria article h3{
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #0f172a;
-}
-
-.galeria article p{
-    color: #64748b;
-    line-height: 1.8;
-    margin-bottom: 30px;
-}
-
-.galeria article button{
-    border: none;
-    padding: 14px 25px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-
-/*EQUIPO*/
-#equipo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    background-color: var(--color-primary);
-    background: linear-gradient(to bottom, var(--color-fondo-claro), var(--color-primary));
-
-}
-.miembros {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-    align-items: center;
-}
-.miembros figcaption {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.miembros figure {
-    text-align: center;
-}
-
-#equipo img {
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-footer {
-    text-align: center;
-    padding: var(--spacing-md);
-    background-color: var(--color-nav);
-    color: var(--color-text-nav);
-}
-.redes {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-.redes a {
-    font-size: 1.5rem;
-    color: var(--color-texto);
-    transition: color 0.2s, transform 0.2s;
-}
-.redes a:hover {
-    color: var(--color-quinary);
-    transform: translateY(-2px);
-}
-
-
-/*CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES*/
-@media (max-width: 768px) {
-    /* NAV */
-    nav {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-    }
-
-    .nav-links ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* INICIO */
-    .bloque-cabecera {
-        position: static;
-        transform: none;
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .titulo-frontal {
-        font-size: 2rem;
-        text-align: center;
-    }
-
-    .imagen-fondo {
-        height: auto;
-        border-radius: 20px;
-    }
-
-    /* PUBLICO OBJETIVO */
-    .publico_objetivo {
-        flex-direction: column;
-        text-align: center;
-    }
-    .imagen-publico img {
-        width: 200px;
-        height: 200px;
-    }
-    /* FARMACIAS */
-    #recomendacion .beneficios {
-        grid-template-columns: 1fr;
-    }
-    #recomendacion .galeria {
-        grid-template-columns: 1fr;
-    }
-    .buscador-farmacia {
-        flex-direction: column;
-        border-radius: 20px;
-    }
-    .buscador-farmacia button {
-        width: 100%;
-    }
-    /* EQUIPO */
-    .miembros {
-        flex-direction: column;
     }
 }
