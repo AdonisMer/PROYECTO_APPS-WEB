@@ -36,9 +36,6 @@
     </nav>
     </header>
     <main> 
-        <section class="titulo">
-            <h1>Cardinova</h1>
-        </section>
         <section id="inicio">
             <div class="contenido-texto">
                 <img src="imagenes/gestion_medica.png" alt="Fondo Médico" class="imagen-fondo">   
@@ -140,127 +137,107 @@
             </form>
         </section>
         <section id="cita" class="producto2">
+            <div class="contenedor-cita">
+                <div class="info-cita">
+                    <span class="etiqueta-cita">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        CITA MÉDICA
+                    </span>
+                    <h2>
+                        Registro de síntomas <br>
+                    </h2>
+                    <p>
+                        El sistema permite ingresar síntomas del paciente para generar
+                        una consulta médica inicial junto a un posible diagnóstico
+                        y medicamentos recomendados.
+                    </p>
+                    <div class="beneficios">
+                        <div class="beneficio">
+                            <i class="fa-solid fa-notes-medical"></i>
+                            <div>
+                                <h4>Registro rápido</h4>
+                                <span>Ingreso síntomas fácilmente.</span>
+                            </div>
+                        </div>
+                            <div class="beneficio">
+                                <i class="fa-solid fa-file-prescription"></i>
+                                <div>
+                                    <h4>Receta médica</h4>
+                                    <span>Medicamentos sugeridos automáticamente por casos registrados previamente.</span>
+                                </div>
+                            </div>
+                                <div class="beneficio">
+                                    <i class="fa-solid fa-shield-heart"></i>
 
-    <div class="contenedor-cita">
+                                    <div>
+                                        <h4>Atención preventiva</h4>
+                                        <span>Ayuda a detectar riesgos tempranos.</span>
+                                    </div>
+                                </div>
 
-        <!-- TEXTO IZQUIERDO -->
-        <div class="info-cita">
+                            </div>
 
-            <span class="etiqueta-cita">
-                <i class="fa-solid fa-heart-pulse"></i>
-                CITA MÉDICA
-            </span>
-
-            <h2>
-                Registro de síntomas <br>
-            </h2>
-
-            <p>
-                El sistema permite ingresar síntomas del paciente para generar
-                una consulta médica inicial junto a un posible diagnóstico
-                y medicamentos recomendados.
-            </p>
-
-            <div class="beneficios">
-
-                <div class="beneficio">
-                    <i class="fa-solid fa-notes-medical"></i>
-
-                    <div>
-                        <h4>Registro rápido</h4>
-                        <span>Ingreso síntomas fácilmente.</span>
                     </div>
-                </div>
 
-                <div class="beneficio">
-                    <i class="fa-solid fa-file-prescription"></i>
+                    <div class="paneles-medicos">
+                    <div class="panel-medico">
+                        <h3>Información de la Consulta</h3>
+                        <div class="grupo-campo">
+                            <label>Paciente:</label>
+                            <div class="campo">Juan Pérez</div>
+                        </div>
+                        <div class="grupo-campo">
+                            <label>Especialidad:</label>
+                            <div class="campo">Cardiología</div>
+                        </div>
 
-                    <div>
-                        <h4>Receta médica</h4>
-                        <span>Medicamentos sugeridos automáticamente por casos registrados previamente.</span>
+                        <div class="grupo-campo">
+                            <label>Fecha:</label>
+                            <div class="campo">10 / 02 / 2026</div>
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label>Síntomas:</label>
+
+                            <div class="campo area">
+                                Dolor pectoral, Fatiga extrema y Hinchazón en extremidades inferiores.
+                            </div>
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="beneficio">
-                    <i class="fa-solid fa-shield-heart"></i>
+                    <div class="panel-medico">
+                        <h3>Diagnóstico y Receta</h3>
+                        <div class="grupo-campo">
+                            <label>Diagnóstico:</label>
+                            <div class="campo area">
+                                Riesgo de insuficiencia cardiaca en etapa A,
+                                a partir de los síntomas registrados.
+                            </div>
+                        </div>
 
-                    <div>
-                        <h4>Atención preventiva</h4>
-                        <span>Ayuda a detectar riesgos tempranos.</span>
+                        <div class="grupo-campo">
+                            <label>Medicamentos:</label>
+
+                            <div class="campo area">
+                                • Enalapril <br>
+                                • Valsartán <br>
+                                • Empagliflozina
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
 
             </div>
-
-        </div>
-
-        <!-- PANEL DERECHO -->
-        <div class="paneles-medicos">
-
-            <!-- PANEL CONSULTA -->
-            <div class="panel-medico">
-
-                <h3>Información de la Consulta</h3>
-
-                <div class="grupo-campo">
-                    <label>Paciente:</label>
-                    <div class="campo">Juan Pérez</div>
-                </div>
-
-                <div class="grupo-campo">
-                    <label>Especialidad:</label>
-                    <div class="campo">Cardiología</div>
-                </div>
-
-                <div class="grupo-campo">
-                    <label>Fecha:</label>
-                    <div class="campo">10 / 02 / 2026</div>
-                </div>
-
-                <div class="grupo-campo">
-                    <label>Síntomas:</label>
-
-                    <div class="campo area">
-                        Dolor pectoral, Fatiga extrema y Hinchazón en extremidades inferiores.
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- PANEL RECETA -->
-            <div class="panel-medico">
-
-                <h3>Diagnóstico y Receta</h3>
-
-                <div class="grupo-campo">
-                    <label>Diagnóstico:</label>
-
-                    <div class="campo area">
-                        Riesgo de insuficiencia cardiaca en etapa A,
-                        a partir de los síntomas registrados.
-                    </div>
-                </div>
-
-                <div class="grupo-campo">
-                    <label>Medicamentos:</label>
-
-                    <div class="campo area">
-                        • Enalapril <br>
-                        • Valsartán <br>
-                        • Empagliflozina
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
+        </section>
         <section id="recomendacion" class="producto3">
             <div class="etiqueta">
-                <span> MÓDULO DE FARMACIAS </span>
+                <span>
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    FARMACIAS RECOMENDADAS
+                </span>            
             </div>
 
             <div class="columna-titulo">

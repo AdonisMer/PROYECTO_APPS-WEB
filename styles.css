@@ -36,7 +36,15 @@ body {
  /* font-weight: 400; */
     line-height: 1.6;
     color: var(--color-texto);
+    background-color: var(--color-fondo-claro);
 }
+
+main {
+    padding: 40px 20px;
+    /* max-width: 1300px; */
+    margin: auto;
+}
+
 h1, h2, h3 {
  /* font-weight: 700; */
     line-height: 1.2;
@@ -106,21 +114,6 @@ nav {
     border-bottom-color: var(--color-accent);
 }
 
-/*TITULO*/
-.titulo{
-    text-align: center;
-    background-color: var(--color-fondo-claro);
-}
-.titulo h1{
-    font-family: var(--font-title);
-    font-size: 3rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.95);
-    text-shadow:
-    0 2px 4px rgba(0,0,0,0.25),
-    0 6px 15px rgba(0,0,0,0.15);
-}
-
 /*INICIO*/
 #inicio {
     padding: 10px 20px;
@@ -144,7 +137,6 @@ nav {
     object-fit: cover;
     display: block;
     border-radius: 60px;
-    margin: auto;
     margin-top: 30px;
 }
 
@@ -159,18 +151,20 @@ nav {
 
 .titulo-frontal {
     font-family: var(--font-2);
-    font-size: 2.4rem;
+
+    /* Responsive */
+    font-size: clamp(2rem, 5vw, 2.4rem);
+
     font-weight: 700;
-    line-height: 1.05;
+    line-height: 1.1;
     text-align: start;
     margin-bottom: 35px;
     text-shadow: 3px 3px 10px rgba(0,0,0,0.35);
 }
+
 .boton-inicio {
-    display: flex;
-    justify-self: start;
-    /* color: white; */
-    padding: 8px 32px;
+    display: inline-block;
+    padding: 10px 32px;
     font-size: 18px;
     border-radius: 14px;
     font-weight: 600;
@@ -180,6 +174,85 @@ nav {
     transform: scale(1.05);
 }
 
+
+/* ========================= */
+/* TABLETS */
+/* ========================= */
+
+@media (max-width: 992px) {
+
+    .bloque-cabecera {
+
+        left: 5%;
+        top: 55%;
+        max-width: 90%;
+    }
+
+    .titulo-frontal {
+        font-size: 3rem;
+        line-height: 1.1;
+    }
+
+    .imagen-fondo {
+        border-radius: 35px;
+    }
+}
+
+
+/* ========================= */
+/* CELULARES */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    .contenido-texto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .bloque-cabecera {
+        order: 1;
+        position: relative;
+        top: unset;
+        left: unset;
+        transform: none;
+        width: 90%;
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 25px;
+        color: var(--color-text-title);
+    }
+    
+    .imagen-fondo {
+        order: 2;
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        border-radius: 25px;
+
+        margin-top: 0;
+    }
+    .titulo-frontal {
+
+        font-size: 2.2rem;
+
+        text-align: center;
+
+        line-height: 1.2;
+    }
+
+    .boton-inicio {
+
+        display: inline-block;
+
+        margin-top: 15px;
+    }
+
+}
 
 /*PROBLEMA*/
 .seccion-problema {
@@ -217,7 +290,8 @@ nav {
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    border-radius: 20px;
+    border-radius: 60px;
+    margin: 0 20px;
 }
 .titulo-publico-objetivo {
     font-size: 40px;
@@ -263,9 +337,6 @@ nav {
     width: 100%;
     background: linear-gradient(to bottom, var(--color-fondo-claro), var(--color-primary));
 }
-
-.
-
 .tabla1 {
     width: 100%;
     max-width: 800px;
@@ -387,18 +458,13 @@ nav {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-
-    background: var(--color-quaternary);
-    color: var(--color-secondary);
-
+    background: var(--color-boton);
+    color: var(--color-boton-2);
     padding: 12px 24px;
-
     border-radius: 40px;
-
     font-family: var(--font-nav);
     font-size: 15px;
     font-weight: bold;
-
     margin-bottom: 25px;
 }
 
@@ -567,7 +633,7 @@ nav {
 
     line-height: 1.7;
 }
-
+ 
 @media(max-width: 991px){
 
     .contenedor-cita{
@@ -609,7 +675,7 @@ nav {
 
 #recomendacion .beneficios{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     margin-bottom: 70px;
 }
@@ -630,13 +696,19 @@ nav {
 }
 
 .etiqueta span{
-    background-color: var(--color-boton);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-boton);
     color: var(--color-boton-2);
-    padding: 12px 100px;
-    border-radius: 30px;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-family: var(--font-nav);
+    font-size: 15px;
     font-weight: bold;
-    font-size: 14px;
+    margin-bottom: 25px;
 }
+
 
 .columna-titulo{
     text-align: center;
@@ -685,8 +757,8 @@ nav {
 }
 .buscador-farmacia button{
     border: none;
-    padding: 14px 25px;
-    border-radius: 15px;
+    padding: 10px 45px;
+    border-radius: 35px;
     cursor: pointer;
     transition: 0.3s;
 }
