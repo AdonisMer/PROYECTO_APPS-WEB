@@ -19,6 +19,7 @@
     --color-cards: #ffffff; /*Color de fondo de las tarjetas*/
     --color-boton: #1F4E5F; /*Color de fondo de los botones*/
     --color-boton-2: white; /*Color de fondo de los botones al pasar el mouse*/
+    --color-accent: #598b9c; /*Color de acento para hover*/
     --font-title: "Stack Sans Notch", sans-serif;
     --font--body: "caudex", sans-serif;
     --font-3:"swanky and moo moo", sans-serif;
@@ -35,7 +36,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
  /* font-weight: 400; */
     line-height: 1.6;
-    color: var(--color-texto);
+    color: var(--color-text);
     background-color: var(--color-fondo-claro);
 }
 
@@ -105,7 +106,7 @@ nav {
 .nav-links a {
     color: var(--color-text-nav);
     text-decoration: none;
-    font-family: var(--text-nav);
+    font-family: var(--font-nav);
     border-bottom: 2px solid transparent;
     transition: color 0.3s, border-color 0.3s;
 }
@@ -304,13 +305,23 @@ nav {
     flex: 2;
 }
 
+.columna-titulo p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--color-text);
+    text-align: justify;
+    font-weight: normal; ;
+    font-family: var(--font--body);
+}
+
 .texto-publico p {
     font-size: 1.2rem;
     line-height: 1.6;
     margin: 0;
     color: var(--color-text);
     text-align: justify;
-    font-weight: bold ;
+    font-weight: normal; ;
     font-family: var(--font--body);
 }
 
@@ -858,6 +869,17 @@ nav {
     gap: 20px;
     align-items: center;
 }
+.miembros figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.miembros figure {
+    text-align: center;
+}
+
 #equipo img {
     width:150px;
     height:150px;
