@@ -75,9 +75,6 @@ p {
 }
 
 
-
-
-
 /* ===== BARRA DE NAVEGACIÓN ===== */
 nav {
     display: flex;
@@ -122,10 +119,6 @@ nav {
     color: var(--color-accent);
     border-bottom-color: var(--color-accent);
 }
-
-
-
-
 
 /* ===== INICIO ===== */
 #inicio {
@@ -183,10 +176,6 @@ nav {
     transform: scale(1.05);
 }
 
-
-
-
-
 /* ===== PROBLEMA ===== */
 .seccion-problema {
     padding: 80px 10%;
@@ -210,9 +199,6 @@ nav {
     line-height: 1.8;
     max-width: 800px;
 }
-
-
-
 
 
 /* ===== PÚBLICO OBJETIVO ===== */
@@ -265,10 +251,6 @@ nav {
     object-fit: cover;
     border-radius: 50%;
 }
-
-
-
-
 
 /* ===== MODULO AGENDAMIENTO DE CITA ===== */
 .producto1 {
@@ -369,8 +351,6 @@ nav {
     padding: 10px;
     border-radius: 8px;
 }
-
-
 
 
 /* ===== MODULO CITA MÉDICA ===== */
@@ -540,8 +520,6 @@ nav {
 }
 
 
-
-
 /* ===== MODULO FARMACIAS ===== */
 #recomendacion{
     padding: 100px 10%;
@@ -644,9 +622,10 @@ nav {
     margin-bottom: 70px;
 }
 
-.beneficio{
+.beneficio {
     background-color: rgba(255,255,255,0.7);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 25px;
 }
@@ -748,12 +727,6 @@ nav {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-footer {
-    text-align: center;
-    padding: var(--spacing-md);
-    background-color: var(--color-nav);
-    color: var(--color-text-nav);
-}
 .redes {
     display: flex;
     gap: 1.5rem;
@@ -762,18 +735,22 @@ footer {
 }
 .redes a {
     font-size: 1.5rem;
-    color: var(--color-texto);
+    color: var(--color-boton-2);
     transition: color 0.2s, transform 0.2s;
 }
 .redes a:hover {
     color: var(--color-quinary);
     transform: translateY(-2px);
 }
-
-
-
-
-
+footer {
+    text-align: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-nav);
+    color: var(--color-boton-2);
+}
+footer p {
+    color: var(--color-boton-2);
+}
 
 /*CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES*/
 @media (max-width: 768px) {
@@ -872,7 +849,6 @@ footer {
         display: flex;
         flex-direction: column;
         align-items: center;
-
     }
 
     .bloque-cabecera {
@@ -891,49 +867,34 @@ footer {
     .imagen-fondo {
         order: 2;
         position: relative;
-
         width: 100%;
         height: auto;
-
         border-radius: 25px;
-
         margin-top: 0;
     }
     .titulo-frontal {
-
         font-size: 2.2rem;
-
         text-align: center;
-
         line-height: 1.2;
     }
 
     .boton-inicio {
-
         display: inline-block;
-
         margin-top: 15px;
     }
 
 }
 
-
-
-
- 
 @media(max-width: 991px){
-
     .contenedor-cita{
         flex-direction: column;
     }
     .info-cita{
         text-align: center;
     }
-
     .info-cita p{
         text-align: center;
     }
-
     .beneficio{
         text-align: left;
     }
@@ -952,4 +913,23 @@ footer {
         flex-direction: column;
         text-align: center;
     }
+}
+
+/* BOTÓN VOLVER (IZQUIERDA) */
+.volver-container {
+    margin: 20px;
+    text-align: left;
+}
+
+.volver-container .botones {
+    display: inline-block;
+}
+
+.centrado {
+    margin: auto;
+}
+
+.texto-centro {
+    text-align: center;
+    margin-top: 15px;
 }

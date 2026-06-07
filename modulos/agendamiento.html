@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="stylesheet" href="../src/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+    <title>Agendamiento de Citas Médicas</title>
+</head>
+<body>
+    <section class="producto1">
+        <div class="etiqueta">
+            <span>
+                <i class="fa-solid fa-calendar-days"></i>
+                AGENDAMIENTO
+            </span>            
+        </div>
+        <h2>Agendamiento de Citas Médicas</h2>
+        <table class="tabla1">
+            <thead>
+                <tr>
+                    <th>Nombre del Médico</th>
+                    <th>Horarios</th>
+                    <th>Días</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dr. Carlos Rodríguez</td>
+                    <td>08:00 - 12:00</td>
+                    <td>Martes, Jueves, Sábados</td>
+                </tr>
+                <tr>
+                    <td>Dra. María Gómez</td>
+                    <td>14:00 - 18:00</td>
+                    <td>Lunes, Miércoles, Viernes</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Para más información, contáctenos al 123-456-7890</td>
+                </tr>
+            </tfoot>
+        </table>
+        <br>
+        <form action="#" class="formulario1">
+            <fieldset>
+                <legend>Información de la Consulta</legend>
+                <label for="medico">Médico de Cardiología:</label>
+                <select id="medico" name="medico" required>
+                    <option value="">Seleccione un médico</option>
+                    <option value="dr_carlos_rodriguez">Dr. Carlos Rodríguez</option>
+                    <option value="dra_maria_gomez">Dra. María Gómez</option>
+                </select>
+                <label for="fecha">Fecha de la Consulta:</label>
+                <input type="date" id="fecha" name="fecha" required>
+                <label for="hora">Hora de la Consulta:</label>
+                <input type="time" id="hora" name="hora" min="08:00" max="18:00" required>
+                <label for="motivo">Motivo de la consulta:</label>
+                <textarea id="motivo" name="motivo" maxlength="250" required></textarea>
+                <label for="tipo">Tipo de atención:</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">Seleccione su modalidad</option>
+                    <option>Presencial</option>
+                    <option>Virtual</option>
+                </select>
+            </fieldset>
+            <br>
+            <a href="#mensajeConfirmacion" class="boton-registrar-consulta botones">
+                Registrar Consulta
+            </a>
+            <p id="mensajeConfirmacion">
+                ✅ Cita agendada correctamente
+            </p>
+        </form>
+    </section>
+    <!-- 🔙 BOTÓN -->
+    <div class="volver-container">
+        <a href="../index.html" class="botones">⬅ Volver al inicio</a>
+    </div>
+    <footer class="footer">
+        <div class="redes">
+            <a href="https://github.com/usuario" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.uleam.edu.ec/" target="_blank" rel="noopener" aria-label="Sitio web">
+                <i class="fa-solid fa-globe"></i>
+            </a>
+            <a href="mailto:correo@uleam.edu.ec" aria-label="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        </div>
+        <p>&copy; 2026 · Cardinova · ULEAM · Hecho con HTML y CSS </p>
+    </footer>
+</body>
+</html>

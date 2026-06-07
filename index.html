@@ -8,33 +8,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
-    
     <!-- fonts -->  
     <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@100..900&family=Rock+3D&family=Spicy+Rice&family=Stack+Sans+Notch:wght@200..700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Allan:wght@400;700&family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Lexend+Tera:wght@100..900&family=Rock+3D&family=Smooch+Sans:wght@100..900&family=Spicy+Rice&family=Stack+Sans+Notch:wght@200..700&family=Uncial+Antiqua&display=swap" rel="stylesheet">    
     <link href="https://fonts.googleapis.com/css2?family=Allan:wght@400;700&family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Lexend+Tera:wght@100..900&family=Rock+3D&family=Smooch+Sans:wght@100..900&family=Spicy+Rice&family=Stack+Sans+Notch:wght@200..700&family=Swanky+and+Moo+Moo&family=Uncial+Antiqua&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/src/css/styles.css">
     <title>Cardinova</title>
 </head>
 <body>
     <header>
     <nav aria-label="Navegación principal"> 
-        <a href="#" class="nav-logo">Cardinova</a>
+        <a href="../index.html" class="nav-logo">Cardinova</a>
         <div class="nav-links">
-        <ul>
-            <li><a href="#titulo">Título</a></li>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#agendamiento">Agendar Cita</a></li>
-            <li><a href="#cita">Cita Médica</a></li>
-            <li><a href="#recomendacion">Recomendaciones de Medicina</a></li>
-            <li><a href="#equipo">Equipo</a></li>
+        <ul>    
+                <li><a href="../modulos/login.html">Iniciar Sesión</a></li>
+                <li><a href="../index.html#inicio">Inicio</a></li>
+                <li><a href="../modulos/agendamiento.html">Agendar Cita</a></li>
+                <li><a href="../modulos/cita.html">Cita Médica</a></li>
+                <li><a href="../modulos/recomendacion.html">Recomendaciones</a></li>
+                <li><a href="../index.html#equipo">Equipo</a></li>
         </ul>  
         </div>
     </nav>
-    </header>
+</header>
     <main> 
         <section id="inicio">
             <div class="contenido-texto">
@@ -46,7 +44,7 @@
                         Sistema de Gestión <br> 
                         Médica 
                     </h1>
-                    <a href="#equipo" class="boton-inicio botones">Ver Detalles</a>
+                    <a href="../modulos/registro.html" class="boton-inicio botones">Registrarse</a>
                 </div>
             </div>    
         
@@ -61,7 +59,6 @@
                         Esto se agrava en las farmacias, donde la falta de información en tiempo real sobre el stock 
                         obliga a los usuarios a recorrer varios lugares, generando <strong>pérdida de tiempo y dinero.</strong></p>
                 </div>
-
                 <div class="columna-texto">
                     <p>
                     
@@ -79,279 +76,10 @@
                         eficiente y accesible.
                     </p>
             </div>
-
             <div class="imagen-publico">
                 <img src="imagenes/seccion_publico_objetivo.png" alt="publico objetivo">
             </div>
         </section>
-        <section id="agendamiento" class="producto1">
-            <div class="etiqueta">
-                <span>
-                    <i class="fa-solid fa-calendar-days"></i>
-                    AGENDAMIENTO
-                </span>            
-            </div>
-            <h2> Agendamiento de Citas Médicas </h2>
-            <table class="tabla1">
-                <thead>
-                    <tr>
-                        <th>Nombre del Médico</th>
-                        <th>Horarios</th>
-                        <th>Días</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dr. Carlos Rodríguez</td>
-                        <td>08:00 - 12:00</td>
-                        <td>Martes, Jueves, Sábados</td>
-                    </tr>
-                    <tr>
-                        <td>Dra. María Gómez</td>
-                        <td>14:00 - 18:00</td>
-                        <td>Lunes, Miércoles, Viernes</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3">Para más información, contáctenos al 123-456-7890</td>
-                    </tr>
-                </tfoot>
-            </table>
-            <br>
-            <form action="#" class="formulario1">
-                <fieldset>
-                    <legend>Información de la Consulta</legend>
-                    <label for="medico">Médico de Cardiología:</label>
-                    <select id="medico" name="medico" required>
-                        <option value="">Seleccione un médico</option>
-                        <option value="dr_carlos_rodriguez">Dr. Carlos Rodríguez</option>
-                        <option value="dra_maria_gomez">Dra. María Gómez</option>
-                    </select>
-                    <label for="fecha">Fecha de la Consulta:</label>
-                    <input type="date" id="fecha" name="fecha" required>
-                    <label for="hora">Hora de la Consulta:</label>
-                    <input type="time" id="hora" name="hora" min="08:00" max="18:00" required>
-                    <label for="motivo">Motivo de la consulta:</label>
-                    <textarea id="motivo" name="motivo" maxlength="250" required></textarea>
-                    <label for="tipo">Tipo de atención:</label>
-                    <select id="tipo" name="tipo" required>
-                        <option value="">Seleccione su modalidad</option>
-                        <option>Presencial</option>
-                        <option>Virtual</option>
-                    </select>
-                </fieldset>
-                <br>
-                <a href="#mensajeConfirmacion" class="boton-registrar-consulta botones">
-                    Registrar Consulta
-                </a>
-                <p id="mensajeConfirmacion">
-                    ✅ Cita agendada correctamente
-                </p>
-            </form>
-        </section>
-        <section id="cita" class="producto2">
-            <div class="contenedor-cita">
-                <div class="info-cita">
-                    <span class="etiqueta-cita">
-                    <i class="fa-solid fa-briefcase-medical"></i>
-                    CITA MÉDICA
-                    </span>
-                    <h2>
-                        Registro de síntomas <br>
-                    </h2>
-                    <p>
-                        El sistema permite ingresar síntomas del paciente para generar
-                        una consulta médica inicial junto a un posible diagnóstico
-                        y medicamentos recomendados.
-                    </p>
-                    <div class="beneficios">
-                        <div class="beneficio">
-                            <i class="fa-solid fa-notes-medical"></i>
-                            <div>
-                                <h3>Registro rápido</h3>
-                                <span>Ingreso síntomas fácilmente.</span>
-                            </div>
-                        </div>
-                            <div class="beneficio">
-                                <i class="fa-solid fa-file-prescription"></i>
-                                <div>
-                                    <h3>Receta médica</h3>
-                                    <span>Medicamentos sugeridos automáticamente por casos registrados previamente.</span>
-                                </div>
-                            </div>
-                                <div class="beneficio">
-                                    <i class="fa-solid fa-shield-heart"></i>
-
-                                    <div>
-                                        <h3>Atención preventiva</h3>
-                                        <span>Ayuda a detectar riesgos tempranos.</span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                    </div>
-
-                    <div class="paneles-medicos">
-                    <div class="panel-medico">
-                        <h3>Información de la Consulta</h3>
-                        <div class="grupo-campo">
-                            <label>Paciente:</label>
-                            <div class="campo">Juan Pérez</div>
-                        </div>
-                        <div class="grupo-campo">
-                            <label>Especialidad:</label>
-                            <div class="campo">Cardiología</div>
-                        </div>
-
-                        <div class="grupo-campo">
-                            <label>Fecha:</label>
-                            <div class="campo">10 / 02 / 2026</div>
-                        </div>
-
-                        <div class="grupo-campo">
-                            <label>Síntomas:</label>
-
-                            <div class="campo area">
-                                Dolor pectoral, Fatiga extrema y Hinchazón en extremidades inferiores.
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="panel-medico">
-                        <h3>Diagnóstico y Receta</h3>
-                        <div class="grupo-campo">
-                            <label>Diagnóstico:</label>
-                            <div class="campo area">
-                                Riesgo de insuficiencia cardiaca en etapa A,
-                                a partir de los síntomas registrados.
-                            </div>
-                        </div>
-
-                        <div class="grupo-campo">
-                            <label>Medicamentos:</label>
-
-                            <div class="campo area">
-                                • Enalapril <br>
-                                • Valsartán <br>
-                                • Empagliflozina
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-        <section id="recomendacion" class="producto3">
-            <div class="etiqueta">
-                <span>
-                    <i class="fa-solid fa-pills"></i>
-                    FARMACIAS RECOMENDADAS
-                </span>            
-            </div>
-
-            <div class="columna-titulo">
-                <h2>
-                    Encuentra tus medicamentos <br> 
-                    en la farmacia más cercana 
-                </h2>
-            </div>
-
-            <div class="columna-texto">
-                <p>
-                    Compara precios, disponibilidad y distancia para elegir la mejor opción para tu salud.
-                </p>
-            </div>
-            
-            <div class="buscador-farmacia">
-                <input type="text" placeholder="Buscar medicamento...">
-                <button class="botones">Buscar</button>
-            </div>
-
-            <div class="beneficios">
-
-                <div class="beneficio">
-                    <h3>💲 Precios accesibles</h3>
-                    <p>Compara precios y ahorra en tus compras.</p>
-                </div>
-                
-                <div class="beneficio">
-                    <h3>📍 Farmacias cercanas</h3>
-                    <p>Encuentra opciones cerca de tu ubicación.</p>
-                </div>
-
-                <div class="beneficio">
-                    <h3>🕒 Disponibilidad 24/7</h3>
-                    <p>Consulta farmacias abiertas en cualquier momento.</p>
-                </div>
-
-                <div class="beneficio">
-                    <h3>✅ Productos confiables</h3>
-                    <p>Medicamentos seguros y certificados.</p>
-                </div>
-            </div>
-
-            <div class="galeria">
-                <article>
-                    <div class="icono-card">💲</div>
-                    <h3>Precios accesibles</h3>
-                    <p>
-                        Nuestros precios están adaptados para todo tipo de clientes.
-                    </p>
-                    <button class="botones">Ver más</button>
-                </article>
-
-                <article>
-                    <div class="icono-card">📦</div>
-                    <h3>Distintas categorías</h3>
-                    <p>
-                        Contamos con gran variedad de medicamentos y productos médicos.
-                    </p>
-                    <button class="botones">Ver más</button>
-                </article>
-
-                <article>
-                    <div class="icono-card">🚚</div>
-                    <h3>Garantía de envío</h3>
-                    <p>
-                        Entregas seguras y rápidas para tus medicamentos.
-                    </p>
-                    <button class="botones">Ver más</button>
-                </article>
-
-                <article>
-                    <div class="icono-card">📍</div>
-                    <h3>Farmacias cercanas</h3>
-                    <p>
-                        Encuentra la farmacia más próxima según tu ubicación.
-                    </p>
-                    <button class="botones">Ver más</button>
-                </article>
-
-                <article>
-                    <div class="icono-card">💊</div>
-                    <h3>Medicamentos disponibles</h3>
-                    <p>
-                        Consulta disponibilidad en tiempo real.
-                    </p>
-                    <button class="botones">Ver más</button>
-                </article>
-
-                <article>
-                    <div class="icono-card">⭐</div>
-                    <h3>Mejor valoración</h3>
-                    <p>
-                        Descubre las farmacias mejor calificadas por usuarios.
-                    </p>
-                    <button class="botones">Ver más</button>
-                </article>
-            </div>
-        </section>
-        
         <section id="equipo"> 
             <h2>Equipo</h2>
                 <div class="miembros">
