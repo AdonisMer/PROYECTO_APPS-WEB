@@ -933,3 +933,23 @@ footer p {
     text-align: center;
     margin-top: 15px;
 }
+
+.input-password {
+    position: relative;
+}
+
+.input-password input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+}

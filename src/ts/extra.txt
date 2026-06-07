@@ -1,0 +1,4 @@
+Instalar TypeScript
+npm install -g typescript   
+crear una de TS a JS
+tsc src/ts/main.ts --outDir src/js
