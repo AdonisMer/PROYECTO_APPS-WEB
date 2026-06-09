@@ -1,64 +1,75 @@
+import './style.css';
+import gestionMedica from './assets/gestion_medica.png';
+import publicoObjetivo from './assets/seccion_publico_objetivo.png';
+
+// 1. Asegurar que el DOM esté listo antes de ejecutar la lógica
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- LÓGICA DE IMÁGENES ---
+    const imgFondo = document.getElementById('img-fondo-medico') as HTMLImageElement | null;
+    const imgPublico = document.getElementById('img-publico') as HTMLImageElement | null;
+
+    if (imgFondo) imgFondo.src = gestionMedica;
+    if (imgPublico) imgPublico.src = publicoObjetivo;
+
+    // --- LÓGICA DE FORMULARIOS ---
     const form = document.querySelector("form") as HTMLFormElement | null;
-    if (!form) return;
-    // Obtención de elementos con su tipo correcto
     const nombreInput = document.getElementById("nombre") as HTMLInputElement | null;
     const correoInput = (document.getElementById("correo") || document.getElementById("email")) as HTMLInputElement | null;
     const passwordInput = document.getElementById("password") as HTMLInputElement | null;
     const confirmarInput = document.getElementById("confirmar") as HTMLInputElement | null;
-    // 👁️ Función mejorada para mostrar/ocultar contraseña
+
+    if (!form) return; // Si no hay formulario, terminamos aquí
+
     const setupPasswordToggle = (inputId: string, buttonId: string, iconId: string) => {
         const input = document.getElementById(inputId) as HTMLInputElement | null;
         const button = document.getElementById(buttonId) as HTMLButtonElement | null;
         const icon = document.getElementById(iconId) as HTMLElement | null;
+        
         if (button && input && icon) {
             button.addEventListener("click", () => {
                 const isPassword = input.type === "password";
                 input.type = isPassword ? "text" : "password";
-                // Cambiar clases del icono
-                icon.className = isPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";          
-                // Actualizar atributo de accesibilidad
-                button.setAttribute("aria-label", isPassword ? "Ocultar contraseña" : "Mostrar contraseña");
+                icon.className = isPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+                button.setAttribute("aria-label", isPassword ? "Ocultar" : "Mostrar");
             });
         }
     };
-    // Inicializar lógica de visibilidad
+
     setupPasswordToggle("password", "togglePassword", "eyeIcon");
-    if (confirmarInput) {
-        setupPasswordToggle("confirmar", "toggleConfirm", "eyeIconConfirm");
-    }
-    // 🔥 VALIDACIONES EN TIEMPO REAL
+    if (confirmarInput) setupPasswordToggle("confirmar", "toggleConfirm", "eyeIconConfirm");
+
     const setBorder = (el: HTMLInputElement | null, isValid: boolean) => {
         if (el) el.style.border = `2px solid ${isValid ? "green" : "red"}`;
     };
-    if (correoInput) {
-        correoInput.addEventListener("input", () => setBorder(correoInput, correoInput.value.includes("@")));
-    }
-    if (passwordInput) {
-        passwordInput.addEventListener("input", () => setBorder(passwordInput, passwordInput.value.length >= 4));
-    }
+
+    if (correoInput) correoInput.addEventListener("input", () => setBorder(correoInput, correoInput.value.includes("@")));
+    if (passwordInput) passwordInput.addEventListener("input", () => setBorder(passwordInput, passwordInput.value.length >= 4));
     if (confirmarInput && passwordInput) {
         confirmarInput.addEventListener("input", () => setBorder(confirmarInput, confirmarInput.value === passwordInput.value));
     }
-    // 🚀 ENVÍO DEL FORMULARIO
+
     form.addEventListener("submit", (e: Event) => {
         e.preventDefault();
-        const correo = correoInput?.value.trim();
-        const password = passwordInput?.value.trim();
+        const correo = correoInput?.value.trim() ?? "";
+        const password = passwordInput?.value.trim() ?? "";
+
         if (!correo || !password) return alert("❌ Completa los campos obligatorios");
-        // Identificar si es registro (basado en la existencia de los inputs de registro)
+
         const esRegistro = nombreInput !== null && confirmarInput !== null;
+
         if (esRegistro && nombreInput && confirmarInput) {
-            const nombre = nombreInput.value.trim();
-            const confirmar = confirmarInput.value.trim();
-            if (!nombre) return alert("❌ El nombre es obligatorio");
-            if (password !== confirmar) return alert("❌ Las contraseñas no coinciden");
-            const usuario = { nombre, correo, password };
+            if (password !== confirmarInput.value.trim()) return alert("❌ Las contraseñas no coinciden");
+            
+            const usuario = { 
+                nombre: nombreInput.value.trim(), 
+                correo: correo, 
+                password: password 
+            };
             localStorage.setItem("usuarioRegistrado", JSON.stringify(usuario));
             alert("✅ Cuenta creada correctamente");
             window.location.href = "login.html";
         } else {
-            // Lógica de Login
             const usuarioGuardado = JSON.parse(localStorage.getItem("usuarioRegistrado") || "{}");
             if (correo === usuarioGuardado.correo && password === usuarioGuardado.password) {
                 alert("✅ Bienvenido " + usuarioGuardado.nombre);
