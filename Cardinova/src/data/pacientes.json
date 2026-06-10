@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Juan Pérez",
+    "correo": "juan.perez@email.com",
+    "password": "paciente_juan123",
+    "rol": "paciente"
+  },
+  {
+    "nombre": "Ana López",
+    "correo": "ana.lopez@email.com",
+    "password": "paciente_ana123",
+    "rol": "paciente"
+  }
+]

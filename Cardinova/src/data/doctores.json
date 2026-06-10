@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Juan Pérez",
+    "correo": "juan.perez@email.com",
+    "password": "paciente_juan123",
+    "rol": "paciente",
+    "edad": 58,
+    "telefono": "0991234567",
+    "tipoSangre": "O+"
+  },
+  {
+    "nombre": "Ana López",
+    "correo": "ana.lopez@email.com",
+    "password": "paciente_ana123",
+    "rol": "paciente",
+    "edad": 62,
+    "telefono": "0987654321",
+    "tipoSangre": "A+"
+  }
+]
