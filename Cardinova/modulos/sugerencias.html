@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Sugerencias y Atención - Cardinova</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar" aria-label="Navegación principal"> 
+            <a href="../index.html" class="nav-logo">Cardinova</a>
+            <div class="nav-links">
+                <ul> 
+                    <li><a href="../modulos/login.html">Iniciar Sesión</a></li>
+                    <li><a href="../index.html#inicio">Inicio</a></li>
+                    <li><a href="../modulos/agendamiento.html">Agendar Cita</a></li>
+                    <li><a href="../modulos/cita.html">Cita Médica</a></li>
+                    <li><a href="../modulos/recomendacion.html">Recomendaciones</a></li>
+                    <li><a href="../modulos/sugerencias.html">Sugerencias</a></li>
+                    <li><a href="../modulos/registro_familiar.html">Registro Familiar</a></li>
+                    <li><a href="../modulos/administracion.html">Panel Administrativo</a></li>
+                    <li><a href="../index.html#equipo">Equipo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="producto1">
+        <div class="etiqueta"><span><i class="fa-solid fa-comments"></i> CENTRO DE ATENCIÓN</span></div>
+        <h2>Sugerencias y Comunicación</h2>
+
+        <div id="envio" style="margin-bottom: 50px;">
+            <h3><i class="fa-solid fa-pen-nib"></i> Enviar Sugerencia o Crítica</h3>
+            <form class="formulario1">
+                <textarea placeholder="Escribe aquí tu sugerencia, mejora o crítica constructiva..." style="width: 100%; height: 100px; padding: 10px; margin-bottom: 10px;"></textarea>
+                <button type="submit" class="botones">Enviar Mensaje</button>
+            </form>
+        </div>
+
+        <div id="notificaciones" style="margin-bottom: 50px;">
+            <h3><i class="fa-solid fa-bell"></i> Notificaciones y Turnos</h3>
+            <div class="formulario1" style="background: #f8fafc; padding: 15px; border-radius: 8px;">
+                <p><i class="fa-solid fa-circle-check" style="color: #22c55e;"></i> Tu turno para Cardiología ha sido confirmado para mañana 09:00 AM.</p>
+                <p><i class="fa-solid fa-calendar-days" style="color: #3b82f6;"></i> Recordatorio: Tienes una cita médica el 15 de junio.</p>
+            </div>
+        </div>
+
+        <div id="encuesta" style="margin-bottom: 50px;">
+            <h3><i class="fa-solid fa-star"></i> Encuesta de Satisfacción</h3>
+            <div class="formulario1">
+                <p>¿Cómo calificarías nuestra atención hoy?</p>
+                <div style="font-size: 1.5rem; color: #f59e0b;">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i>
+                </div>
+                <button class="botones" style="margin-top: 10px;">Enviar Calificación</button>
+            </div>
+        </div>
+
+        <div id="buzon">
+            <h3><i class="fa-solid fa-envelope-open-text"></i> Buzón de Mensajes</h3>
+            <table class="tabla1">
+                <thead><tr><th>Usuario</th><th>Mensaje</th><th>Acción</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>Admin</td>
+                        <td>Hemos recibido tu crítica sobre el tiempo de espera, estamos trabajando en ello.</td>
+                        <td><button class="btn-accion" aria-label="Responder"><i class="fa-solid fa-reply" style="color: #6366f1;"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div class="volver-container">
+        <a href="../index.html" class="botones">⬅ Volver al inicio</a>
+    </div>
+    <footer class="footer">
+        <div class="redes">
+            <a href="https://github.com/usuario" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.uleam.edu.ec/" target="_blank" rel="noopener" aria-label="Sitio web">
+                <i class="fa-solid fa-globe"></i>
+            </a>
+            <a href="mailto:correo@uleam.edu.ec" aria-label="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        </div>
+        <p>&copy; 2026 · Cardinova · ULEAM · Hecho con HTML y CSS </p>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

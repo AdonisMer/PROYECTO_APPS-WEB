@@ -76,50 +76,6 @@ p {
 
 
 /* ===== BARRA DE NAVEGACIÓN ===== */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* padding: var(--spacing-md) var(--spacing-lg); */
-    background-color: var(--color-nav);
-    padding:0 20px;
-}
-
-.nav-logo {
-    color: var(--color-text-logo);
-    font-size: 2.5rem;
-    font-family: var(--font-title);
-    font-weight: bold;
-    text-decoration: none;
-    flex-shrink: 0;
-}
-
-.nav-logo:hover {
-    color: var(--color-quaternary);
-}
-
-.nav-links ul {
-    display: flex;
-    gap: 35px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
-}
-
-.nav-links a {
-    color: var(--color-text-nav);
-    text-decoration: none;
-    font-family: var(--font-nav);
-    border-bottom: 2px solid transparent;
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
-}
-/* Busca o añade esto en tu style.css */
 header {
     position: sticky;
     top: 0;
@@ -127,6 +83,46 @@ header {
     background-color: var(--color-nav); 
     width: 100%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    min-height: 70px;
+}
+
+.nav-logo {
+    color: var(--color-text-logo);
+    font-size: 2rem; 
+    font-family: var(--font-title);
+    font-weight: bold;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.nav-links ul {
+    display: flex;
+    gap: 20px; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--color-text-nav);
+    text-decoration: none;
+    font-family: var(--font-nav);
+    font-size: 0.9rem; 
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-bottom-color 0.3s;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
 }
 /* ===== INICIO ===== */
 #inicio {
@@ -740,18 +736,105 @@ footer p {
     color: var(--color-boton-2);
 }
 
+/* BOTÓN VOLVER (IZQUIERDA) */
+.volver-container {
+    margin: 20px;
+    text-align: left;
+}
+
+.volver-container .botones {
+    display: inline-block;
+}
+
+.centrado {
+    margin: auto;
+}
+
+.texto-centro {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.input-password {
+    position: relative;
+}
+
+.input-password input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+}
+.saludo-doctor {
+    font-family: var(--font-title); 
+    color: var(--color-text-title);
+    font-size: 32px; /* ¡Más grande! (estaba en 26px o 28px) */
+    font-weight: 800;
+    margin-bottom: 12px; /* Un poco más de separación */
+    text-align: left;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.btn-accion { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 1.1rem; 
+    margin: 0 8px; 
+    transition: 0.3s; 
+}
+
+.btn-accion:hover { 
+    transform: scale(1.2); 
+}
+
+.btn-agregar { 
+    margin-top: 15px; 
+    display: inline-block; 
+}
+
+.admin-nav {
+    margin-bottom: 30px; 
+    text-align: center;
+}
+
+.tabla1 td {
+    padding: 12px;
+}
 /*CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES*/
 @media (max-width: 768px) {
     /* NAV */
+    header {
+        position: relative; 
+        top: auto;
+    }
     nav {
+        position: relative;
         flex-direction: column;
         align-items: center;
         padding: 10px;
     }
-
+    .nav-links {
+        position: absolute; 
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background-color: var(--color-nav);
+        z-index: 999;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
     .nav-links ul {
         flex-direction: column;
         gap: 10px;
+        padding: 20px;
     }
 
     /* INICIO */
@@ -902,51 +985,15 @@ footer p {
         text-align: center;
     }
 }
-
-/* BOTÓN VOLVER (IZQUIERDA) */
-.volver-container {
-    margin: 20px;
-    text-align: left;
-}
-
-.volver-container .botones {
-    display: inline-block;
-}
-
-.centrado {
-    margin: auto;
-}
-
-.texto-centro {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.input-password {
-    position: relative;
-}
-
-.input-password input {
-    width: 100%;
-    padding-right: 40px;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #555;
-}
-.saludo-doctor {
-    font-family: var(--font-title); 
-    color: var(--color-text-title);
-    font-size: 32px; /* ¡Más grande! (estaba en 26px o 28px) */
-    font-weight: 800;
-    margin-bottom: 12px; /* Un poco más de separación */
-    text-align: left;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+/* ========================= */
+/* NAVEGACIÓN */
+/* ========================= */
+@media (max-width: 1100px) {
+    .nav-links ul {
+        gap: 12px; 
+    }
+    
+    .nav-links a {
+        font-size: 0.8rem; 
+    }
 }

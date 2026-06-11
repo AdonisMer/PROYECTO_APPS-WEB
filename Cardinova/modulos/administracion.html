@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Panel Administrativo - Cardinova</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar" aria-label="Navegación principal"> 
+            <a href="../index.html" class="nav-logo">Cardinova</a>
+            <div class="nav-links">
+                <ul> 
+                    <li><a href="../modulos/login.html">Iniciar Sesión</a></li>
+                    <li><a href="../index.html#inicio">Inicio</a></li>
+                    <li><a href="../modulos/agendamiento.html">Agendar Cita</a></li>
+                    <li><a href="../modulos/cita.html">Cita Médica</a></li>
+                    <li><a href="../modulos/recomendacion.html">Recomendaciones</a></li>
+                    <li><a href="../modulos/sugerencias.html">Sugerencias</a></li>
+                    <li><a href="../modulos/registro_familiar.html">Registro Familiar</a></li>
+                    <li><a href="../modulos/administracion.html">Panel Administrativo</a></li>
+                    <li><a href="../index.html#equipo">Equipo</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section class="producto1">
+        <div class="etiqueta"><span><i class="fa-solid fa-lock"></i> PANEL ADMINISTRATIVO</span></div>
+        <h2>Gestión Integral Cardinova</h2>
+        <nav class="admin-nav" style="margin-bottom: 30px; text-align: center;">
+            <a href="#doctores" class="botones">Doctores</a>
+            <a href="#medicamentos" class="botones">Medicamentos</a>
+            <a href="#reportes" class="botones">Reportes</a>
+        </nav>
+        <div id="doctores">
+            <h3><i class="fa-solid fa-user-doctor"></i> Gestión de Doctores</h3>
+            <table class="tabla1">
+                <thead><tr><th>Nombre</th><th>Especialidad</th><th>Acciones</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>Dr. Carlos Rodríguez</td>
+                        <td>Cardiología</td>
+                        <td>
+                            <button class="btn-accion" title="Editar" aria-label="Editar doctor"><i class="fa-solid fa-pen-to-square" style="color: #3b82f6;"></i></button>
+                            <button class="btn-accion" title="Eliminar" aria-label="Eliminar doctor"><i class="fa-solid fa-trash" style="color: #ef4444;"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="botones btn-agregar"><i class="fa-solid fa-plus"></i> Agregar Nuevo Doctor</button>
+        </div>
+        <hr style="margin: 50px 0; border: 0; border-top: 1px solid #ccc;">
+        <div id="medicamentos">
+            <h3><i class="fa-solid fa-pills"></i> Gestión de Medicamentos</h3>
+            <table class="tabla1">
+                <thead><tr><th>Medicamento</th><th>Stock</th><th>Precio</th><th>Acciones</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>Aspirina</td>
+                        <td>50 unidades</td>
+                        <td>$0.50</td>
+                        <td>
+                            <button class="btn-accion" title="Editar" aria-label="Editar medicamento"><i class="fa-solid fa-pen-to-square" style="color: #3b82f6;"></i></button>
+                            <button class="btn-accion" title="Eliminar" aria-label="Eliminar medicamento"><i class="fa-solid fa-trash" style="color: #ef4444;"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="botones btn-agregar"><i class="fa-solid fa-plus"></i> Agregar Medicamento</button>
+        </div>
+        <hr style="margin: 50px 0; border: 0; border-top: 1px solid #ccc;">
+        <div id="reportes">
+            <h3><i class="fa-solid fa-chart-line"></i> Reportes Generales</h3>
+            
+            <div class="formulario1" style="max-width: 100%; margin-bottom: 30px;">
+                <p>Total de citas esta semana: <strong>24</strong></p>
+                <p>Medicamentos próximos a agotarse: <strong>3</strong></p>
+                <button class="botones"><i class="fa-solid fa-download"></i> Descargar Reporte Actual (PDF)</button>
+            </div>
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Histórico de Reportes</h3>
+            <table class="tabla1" style="margin-bottom: 30px;">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mayo 2026</td>
+                        <td>Reporte mensual de gestión médica</td>
+                        <td><button class="btn-accion" aria-label="Descargar reporte de Mayo 2026"><i class="fa-solid fa-file-pdf" style="color: #dc2626;"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Abril 2026</td>
+                        <td>Reporte mensual de gestión médica</td>
+                        <td><button class="btn-accion" aria-label="Descargar reporte de Abril 2026"><i class="fa-solid fa-file-pdf" style="color: #dc2626;"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Marzo 2026</td>
+                        <td>Reporte trimestral de inventario</td>
+                        <td><button class="btn-accion" aria-label="Descargar reporte de Marzo 2026"><i class="fa-solid fa-file-pdf" style="color: #dc2626;"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div class="volver-container">
+        <a href="../index.html" class="botones">⬅ Volver al inicio</a>
+    </div>
+    <footer class="footer">
+        <div class="redes">
+            <a href="https://github.com/usuario" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.uleam.edu.ec/" target="_blank" rel="noopener" aria-label="Sitio web">
+                <i class="fa-solid fa-globe"></i>
+            </a>
+            <a href="mailto:correo@uleam.edu.ec" aria-label="Email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+        </div>
+        <p>&copy; 2026 · Cardinova · ULEAM · Hecho con HTML y CSS </p>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

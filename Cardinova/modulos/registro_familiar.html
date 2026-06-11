@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../src/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
-    <title>Registro - Cardinova</title>
+    <title>Registro Familiar - Cardinova</title>
 </head>
-<body>
+<body>    
     <header>
         <nav class="navbar" aria-label="Navegación principal"> 
             <a href="../index.html" class="nav-logo">Cardinova</a>
@@ -28,56 +28,69 @@
     </header>
     <section class="producto1">
         <div class="etiqueta">
-            <span><i class="fa-solid fa-user-plus"></i> REGISTRO DE USUARIO</span>           
+            <span><i class="fa-solid fa-user-plus"></i> PERFIL FAMILIAR</span>           
         </div>
-        
-        <h2>Crea tu cuenta</h2>
-        
+        <h2>Completa tu información y gestiona dependientes</h2>
         <form class="formulario1 centrado">
             <fieldset>
-                <legend>Datos Personales</legend>
-                
+                <legend>Datos del Titular (Información Fija)</legend>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <div>
                         <label for="nombres">Nombres:</label>
-                        <input type="text" id="nombres" name="nombres" placeholder="Ej: Juan Carlos" required>
+                        <input type="text" id="nombres" name="nombres" value="Juan Carlos" readonly>
                     </div>
                     <div>
                         <label for="apellidos">Apellidos:</label>
-                        <input type="text" id="apellidos" name="apellidos" placeholder="Ej: Pérez García" required>
+                        <input type="text" id="apellidos" name="apellidos" value="Pérez García" readonly>
+                    </div>
+                </div>
+                <label for="cedula">Cédula de identidad:</label>
+                <input type="text" id="cedula" name="cedula" value="1300000000" readonly>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label for="edad">Edad:</label>
+                        <input type="number" id="edad" name="edad" min="0" max="120" required>
+                    </div>
+                    <div>
+                        <label for="telefono">Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" required>
                     </div>
                 </div>
 
-                <label for="cedula">Cédula de identidad:</label>
-                <input type="text" id="cedula" name="cedula" pattern="\d{10}" title="Debe contener exactamente 10 dígitos" placeholder="Ej: 1300000000" required>
+                <label for="direccion">Dirección de residencia:</label>
+                <input type="text" id="direccion" name="direccion" required>
 
                 <label for="correo">Correo electrónico:</label>
-                <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
-
-                <label for="password">Contraseña:</label>
-                <div class="input-password">
-                    <input type="password" id="password" name="password" required>
-                    <button type="button" class="toggle-password" id="togglePassword" aria-label="Mostrar contraseña">
-                        <i class="fa-solid fa-eye" id="eyeIcon"></i>
-                    </button>
-                </div>
-
-                <label for="confirmar">Confirmar contraseña:</label>
-                <div class="input-password">
-                    <input type="password" id="confirmar" name="confirmar" required>
-                    <button type="button" class="toggle-password" id="toggleConfirm" aria-label="Mostrar contraseña">
-                        <i class="fa-solid fa-eye" id="eyeIconConfirm"></i>
-                    </button>
-                </div>
-
-                <button type="submit" class="botones boton-registrar-consulta" style="width: 100%; margin-top: 20px;">
-                    Crear cuenta
-                </button>
-                
-                <p class="texto-centro">
-                    ¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a>
-                </p>
+                <input type="email" id="correo" name="correo" value="juan.perez@email.com" readonly>
             </fieldset>
+
+            <fieldset style="margin-top: 20px; border: 1px dashed #3b82f6; padding: 15px;">
+                <legend><i class="fa-solid fa-users"></i> Gestión de Integrantes</legend>
+                
+                <table class="tabla1" style="margin-bottom: 15px; width: 100%;">
+                    <thead>
+                        <tr><th>Nombre</th><th>Cédula</th><th>Parentesco</th><th>Estado</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maria Rodriguez</td>
+                            <td>1311111111</td>
+                            <td>Esposa</td>
+                            <td>
+                                <button type="button" class="btn-accion" title="Suspender acceso">
+                                    <i class="fa-solid fa-user-slash" style="color: #f59e0b;"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="botones" style="background: #3b82f6; width: 100%;">
+                    <i class="fa-solid fa-plus"></i> Agregar Familiar
+                </button>
+            </fieldset>
+
+            <button type="submit" class="botones" style="width: 100%; margin-top: 20px;">Guardar Perfil Completo</button>
         </form>
     </section>
     <div class="volver-container">
