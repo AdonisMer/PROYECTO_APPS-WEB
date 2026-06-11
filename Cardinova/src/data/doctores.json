@@ -1,20 +1,14 @@
 [
   {
-    "nombre": "Juan Pérez",
-    "correo": "juan.perez@email.com",
-    "password": "paciente_juan123",
-    "rol": "paciente",
-    "edad": 58,
-    "telefono": "0991234567",
-    "tipoSangre": "O+"
+    "nombre": "Dr. Carlos Rodríguez",
+    "correo": "carlos.rodriguez@cardinova.com",
+    "password": "doc_carlos123",
+    "rol": "doctor"
   },
   {
-    "nombre": "Ana López",
-    "correo": "ana.lopez@email.com",
-    "password": "paciente_ana123",
-    "rol": "paciente",
-    "edad": 62,
-    "telefono": "0987654321",
-    "tipoSangre": "A+"
+    "nombre": "Dra. María Gómez",
+    "correo": "maria.gomez@cardinova.com",
+    "password": "doc_maria123",
+    "rol": "doctor"
   }
 ]

@@ -1,10 +1,9 @@
 import './style.css';
 import gestionMedica from './assets/gestion_medica.png';
 import publicoObjetivo from './assets/seccion_publico_objetivo.png';
-// Importamos correctamente tu archivo JSON de datos
 import doctoresPredeterminados from './data/doctores.json';
+import pacientesPredeterminados from './data/pacientes.json';
 
-// 1. Asegurar que el DOM esté listo antes de ejecutar la lógica
 document.addEventListener("DOMContentLoaded", () => {
     
     // --- 1. CONTROL DE ACCESO Y PERSONALIZACIÓN DE CITA MÉDICA ---
@@ -16,21 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // --- SALUDO DINÁMICO PARA EL DOCTOR ---
         const rolUsuario = localStorage.getItem("rolUsuario");
         const nombreUsuario = localStorage.getItem("nombreUsuario");
 
+        // --- SALUDO DINÁMICO PARA EL DOCTOR ---
         if (rolUsuario === "doctor" && nombreUsuario) {
             const infoCita = document.querySelector(".info-cita");
             if (infoCita) {
                 const saludo = document.createElement("h1");
+                saludo.className = "saludo-doctor";
                 saludo.textContent = `👋 ¡HOLA, ${nombreUsuario.toUpperCase()}!`;
-                
-                saludo.style.fontFamily = "var(--font-2)";
-                saludo.style.color = "var(--color-text-title)";
-                saludo.style.fontSize = "32px";
-                saludo.style.marginBottom = "15px";
-                saludo.style.textAlign = "left";
 
                 const h2Cita = infoCita.querySelector("h2");
                 if (h2Cita) {
@@ -40,9 +34,71 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         }
+
+        // --- LÓGICA DEL SELECTOR DINÁMICO DE PACIENTES ---
+        const selectorPacientes = document.getElementById("seleccionar-paciente") as HTMLSelectElement | null;
+        const elEdad = document.getElementById("vista-edad");
+        const elTelefono = document.getElementById("vista-telefono");
+        const elSangre = document.getElementById("vista-sangre");
+        const elDiagnostico = document.getElementById("vista-diagnostico");
+        const elMedicamentos = document.getElementById("vista-medicamentos");
+
+        if (selectorPacientes) {
+            const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
+            const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
+
+            // FUNCIÓN QUE CAMBIA TODA LA INFORMACIÓN EN PANTALLA
+            const actualizarCamposPaciente = (paciente: any) => {
+                if (elEdad) elEdad.textContent = paciente.edad ? `${paciente.edad} años` : "No especificado";
+                if (elTelefono) elTelefono.textContent = paciente.telefono || "No especificado";
+                if (elSangre) elSangre.textContent = paciente.tipoSangre || "No especificado";
+                if (elDiagnostico) elDiagnostico.textContent = paciente.diagnostico || "Sin diagnóstico registrado";
+                if (elMedicamentos) elMedicamentos.innerHTML = paciente.medicamentos || "Sin medicamentos asignados";
+            };
+
+            if (rolUsuario === "doctor") {
+                selectorPacientes.innerHTML = "";
+                todosLosPacientes.forEach((paciente: any) => {
+                    const option = document.createElement("option");
+                    option.value = paciente.correo;
+                    option.textContent = paciente.nombre;
+                    selectorPacientes.appendChild(option);
+                });
+
+                selectorPacientes.addEventListener("change", () => {
+                    const pacienteSeleccionado = todosLosPacientes.find(p => p.correo === selectorPacientes.value);
+                    if (pacienteSeleccionado) {
+                        actualizarCamposPaciente(pacienteSeleccionado);
+                    }
+                });
+
+                if (todosLosPacientes.length > 0) {
+                    actualizarCamposPaciente(todosLosPacientes[0]);
+                }
+
+            } else {
+                selectorPacientes.innerHTML = "";
+                const option = document.createElement("option");
+                option.value = localStorage.getItem("nombreUsuario") || "paciente";
+                option.textContent = localStorage.getItem("nombreUsuario") || "Paciente Actual";
+                selectorPacientes.appendChild(option);
+                selectorPacientes.disabled = true;
+
+                const miPerfil = todosLosPacientes.find(p => p.nombre === nombreUsuario);
+                if (miPerfil) {
+                    actualizarCamposPaciente(miPerfil);
+                } else {
+                    if (elEdad) elEdad.textContent = "N/A";
+                    if (elTelefono) elTelefono.textContent = "N/A";
+                    if (elSangre) elSangre.textContent = "N/A";
+                    if (elDiagnostico) elDiagnostico.textContent = "Evaluación inicial pendiente.";
+                    if (elMedicamentos) elMedicamentos.textContent = "Sin recetas registradas.";
+                }
+            }
+        }
     }
 
-    // --- 2. LÓGICA DINÁMICA DE CERRAR SESIÓN (AL FINAL DE LA FILA) ---
+    // --- 2. LÓGICA DINÁMICA DE CERRAR SESIÓN EN LA NAVEGACIÓN ---
     const linkLogin = document.querySelector('a[href*="login.html"]') as HTMLAnchorElement | null;
     
     if (linkLogin && localStorage.getItem("sesionActiva") === "true") {
@@ -50,26 +106,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const ulMenu = linkLogin.closest("ul");
         
         if (ulMenu && liLogin) {
-            // Ocultamos por completo el li de "Iniciar Sesión" del principio
             liLogin.style.display = "none";
             
-            // Creamos la nueva opción para el menú
             const liLogout = document.createElement("li");
             const linkLogout = document.createElement("a");
             linkLogout.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión';
             linkLogout.href = "#";
             
-            // Evento para limpiar credenciales y salir
             linkLogout.addEventListener("click", (e) => {
                 e.preventDefault();
-                
                 localStorage.removeItem("sesionActiva");
                 localStorage.removeItem("rolUsuario");
                 localStorage.removeItem("nombreUsuario");
                 
                 alert("🔒 Sesión cerrada correctamente");
-                
-                // Redirección inteligente dependiendo de la ubicación actual
                 if (window.location.pathname.includes("modulos")) {
                     window.location.href = "../index.html";
                 } else {
@@ -77,7 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             
-            // Colocamos el enlace dentro del li, y el li al final del ul
             liLogout.appendChild(linkLogout);
             ulMenu.appendChild(liLogout);
         }
@@ -126,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (confirmarInput && passwordInput) {
         confirmarInput.addEventListener("input", () => setBorder(confirmarInput, confirmarInput.value === passwordInput.value));
     }
+
     form.addEventListener("submit", (e: Event) => {
         e.preventDefault();
         const correo = correoInput?.value.trim() ?? "";
@@ -135,34 +185,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const esRegistro = nombreInput !== null && confirmarInput !== null;
 
-        // --- LÓGICA DE REGISTRO ---
         if (esRegistro && nombreInput && confirmarInput) {
             if (password !== confirmarInput.value.trim()) return alert("❌ Las contraseñas no coinciden");
             
-            // 1. Traemos la lista de usuarios registrados previamente (si no hay, creamos un arreglo vacío)
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-            
-            // 2. Verificamos si el correo ya existe
             const correoExiste = usuariosGuardados.some((u: any) => u.correo === correo);
             if (correoExiste) return alert("❌ Este correo ya está registrado.");
 
-            // 3. Creamos el nuevo usuario y lo metemos a la lista
+            // Cuando un usuario nuevo se registre, le asignamos historial cardiovascular clínico inicial por defecto
             const nuevoUsuario = { 
                 nombre: nombreInput.value.trim(), 
                 correo: correo, 
                 password: password,
-                rol: "paciente"
+                rol: "paciente",
+                edad: Math.floor(Math.random() * (75 - 45 + 1)) + 45, 
+                telefono: "099" + Math.floor(1000000 + Math.random() * 9000000),
+                tipoSangre: "O+",
+                diagnostico: "Evaluación inicial preventiva pendiente. Monitoreo clínico de valores de presión arterial.",
+                medicamentos: "• Pendiente de asignación por el especialista médico."
             };
             usuariosGuardados.push(nuevoUsuario);
             
-            // 4. Guardamos la lista actualizada en nuestra "mini BD" del navegador
             localStorage.setItem("usuariosRegistrados", JSON.stringify(usuariosGuardados));
             alert("✅ Cuenta creada correctamente");
             window.location.href = "login.html";
-            
         } else {
-            // --- LÓGICA DE LOGIN ---
-            // 1. Buscamos primero si es un doctor
+            // --- LOGICA DE LOGIN ---
             const medicoEncontrado = doctoresPredeterminados.find(
                 (medico: any) => medico.correo === correo && medico.password === password
             );
@@ -176,14 +224,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 2. Si no es doctor, unimos los pacientes predeterminados del JSON con los nuevos registrados en localStorage
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-            
-            // Aquí puedes usar la importación de tu pacientes.json (asegúrate de importarlo arriba)
-            // Para este ejemplo asumimos que importaste: import pacientesPredeterminados from './data/pacientes.json';
             const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
 
-            // 3. Buscamos en toda la lista de pacientes
             const pacienteEncontrado = todosLosPacientes.find(
                 (paciente: any) => paciente.correo === correo && paciente.password === password
             );

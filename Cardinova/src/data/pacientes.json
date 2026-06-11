@@ -1,14 +1,68 @@
 [
   {
-    "nombre": "Juan Pérez",
-    "correo": "juan.perez@email.com",
-    "password": "paciente_juan123",
-    "rol": "paciente"
+    "nombre": "Carlos Mendoza",
+    "correo": "carlos.mendoza@email.com",
+    "password": "paciente_carlos123",
+    "rol": "paciente",
+    "edad": 55,
+    "telefono": "0998765432",
+    "tipoSangre": "B+",
+    "diagnostico": "Hipertensión arterial controlada con tratamiento farmacológico. Presenta episodios ocasionales de mareo y cefalea leve.",
+    "medicamentos": "• Losartán (50mg diario) • Amlodipino (5mg diario) • Hidroclorotiazida (25mg diario)"
   },
   {
-    "nombre": "Ana López",
-    "correo": "ana.lopez@email.com",
-    "password": "paciente_ana123",
-    "rol": "paciente"
+    "nombre": "María Fernández",
+    "correo": "maria.fernandez@email.com",
+    "password": "paciente_maria123",
+    "rol": "paciente",
+    "edad": 67,
+    "telefono": "0981122334",
+    "tipoSangre": "AB+",
+    "diagnostico": "Insuficiencia cardíaca leve en seguimiento médico. Mantiene buena respuesta al tratamiento y actividad física moderada.",
+    "medicamentos": "• Bisoprolol (5mg diario) • Furosemida (40mg diario) • Espironolactona (25mg diario)"
+  },
+  {
+    "nombre": "Luis Torres",
+    "correo": "luis.torres@email.com",
+    "password": "paciente_luis123",
+    "rol": "paciente",
+    "edad": 60,
+    "telefono": "0974455667",
+    "tipoSangre": "O-",
+    "diagnostico": "Arritmia cardíaca controlada mediante tratamiento médico. Refiere palpitaciones esporádicas sin complicaciones recientes.",
+    "medicamentos": "• Metoprolol (50mg cada 12h) • Apixabán (5mg cada 12h) • Atorvastatina (20mg noche)"
+  },
+  {
+    "nombre": "Carlos Mendoza",
+    "correo": "carlos.mendoza@email.com",
+    "password": "paciente_carlos123",
+    "rol": "paciente",
+    "edad": 55,
+    "telefono": "0998765432",
+    "tipoSangre": "B+",
+    "diagnostico": "Hipertensión arterial controlada con tratamiento farmacológico. Presenta episodios ocasionales de mareo y cefalea leve.",
+    "medicamentos": "• Losartán (50mg diario) • Amlodipino (5mg diario) • Hidroclorotiazida (25mg diario)"
+  },
+  {
+    "nombre": "María Fernández",
+    "correo": "maria.fernandez@email.com",
+    "password": "paciente_maria123",
+    "rol": "paciente",
+    "edad": 67,
+    "telefono": "0981122334",
+    "tipoSangre": "AB+",
+    "diagnostico": "Insuficiencia cardíaca leve en seguimiento médico. Mantiene buena respuesta al tratamiento y actividad física moderada.",
+    "medicamentos": "• Bisoprolol (5mg diario) • Furosemida (40mg diario) • Espironolactona (25mg diario)"
+  },
+  {
+    "nombre": "Luis Torres",
+    "correo": "luis.torres@email.com",
+    "password": "paciente_luis123",
+    "rol": "paciente",
+    "edad": 60,
+    "telefono": "0974455667",
+    "tipoSangre": "O-",
+    "diagnostico": "Arritmia cardíaca controlada mediante tratamiento médico. Refiere palpitaciones esporádicas sin complicaciones recientes.",
+    "medicamentos": "• Metoprolol (50mg cada 12h) • Apixabán (5mg cada 12h) • Atorvastatina (20mg noche)"
   }
 ]

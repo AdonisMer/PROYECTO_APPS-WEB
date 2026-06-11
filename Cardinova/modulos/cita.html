@@ -60,47 +60,46 @@
                     </div>
                 </div>
             </div>
+            <div class="paneles-medicos">
             <div class="panel-medico">
                     <h3>Información de la Consulta</h3>
                     <div class="grupo-campo">
-                        <label>Paciente:</label>
-                        <div class="campo" id="vista-paciente">Juan Pérez</div>
+                        <label for="seleccionar-paciente">Paciente:</label>
+                        <select id="seleccionar-paciente" class="campo">
+                            <option value="">Seleccione un paciente</option>
+                        </select>
                     </div>
                     <div class="grupo-campo">
                         <label>Especialidad:</label>
-                        <div class="campo" id="vista-especialidad">Cardiología</div>
+                        <div class="campo">Cardiología</div>
                     </div>
                     <div class="grupo-campo">
                         <label>Edad:</label>
-                        <div class="campo" id="vista-edad">58 años</div>
+                        <div class="campo" id="vista-edad">-</div>
                     </div>
                     <div class="grupo-campo">
                         <label>Teléfono de Contacto:</label>
-                        <div class="campo" id="vista-telefono">0991234567</div>
+                        <div class="campo" id="vista-telefono">-</div>
                     </div>
                     <div class="grupo-campo">
                         <label>Tipo de Sangre:</label>
-                        <div class="campo" id="vista-sangre">O+</div>
+                        <div class="campo" id="vista-sangre">-</div>
                     </div>
                 </div>
+
                 <div class="panel-medico">
                     <h3>Diagnóstico y Receta</h3>
                     <div class="grupo-campo">
                         <label>Diagnóstico:</label>
-                        <div class="campo area">
-                            Riesgo de insuficiencia cardiaca en etapa A,
-                            a partir de los síntomas registrados.
-                        </div>
+                        <div class="campo area" id="vista-diagnostico">-</div>
                     </div>
                     <div class="grupo-campo">
                         <label>Medicamentos:</label>
-                        <div class="campo area">
-                            • Enalapril <br>
-                            • Valsartán <br>
-                            • Empagliflozina
-                        </div>
+                        <div class="campo area" id="vista-medicamentos">-</div>
                     </div>
                 </div>
+
+            </div>
             </div>
         </div>
     </section>

@@ -385,34 +385,12 @@ header {
 
 /* IZQUIERDA */
 
-.info-cita{
-    flex: 1;
-    min-width: 320px;
-}
-
-.etiqueta-cita{
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--color-boton);
-    color: var(--color-boton-2);
-    padding: 12px 24px;
-    border-radius: 40px;
-    font-family: var(--font-nav);
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 25px;
-}
-
 .info-cita h2{
-    font-size: 42px;
+    font-size: 38px; /* ¡Más grande! (de 34px) */
     line-height: 1.3;
-
     color: var(--color-text-title);
-
     font-family: var(--font-2);
-
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* Más separación */
 }
 
 .info-cita h2 span{
@@ -420,11 +398,11 @@ header {
 }
 
 .info-cita p{
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 1.05rem; /* ¡Más grande! (de 1rem) */
+    line-height: 1.7;
     font-weight: bold;
     text-align: justify;
-    margin-bottom: 40px;
+    margin-bottom: 35px; /* Más separación */
 }
 
 /* BENEFICIOS */
@@ -474,38 +452,40 @@ header {
 /* DERECHA */
 .paneles-medicos{
     flex: 1;
-    min-width: 340px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; 
+    flex-wrap: wrap;     
     gap: 25px;
 }
 
 .panel-medico{
+    flex: 1;
+    min-width: 300px;
     background: var(--color-cards);
     border-radius: 20px;
-    padding: 30px;
+    padding: 25px 30px; 
     box-shadow: 0 10px 25px rgba(0,0,0,0.06);
     border: 2px solid var(--color-quaternary);
 }
 
 .panel-medico h3{
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px; /* Más separación */
     color: var(--color-text-title);
-    font-size: 28px;
+    font-size: 26px; /* ¡Letra del título más grande! (de 22px) */
     font-family: var(--font-2);
 }
 
-/* CAMPOS */
+/* CAMPOS GRISES (Agrandados) */
 .grupo-campo{
-    margin-bottom: 22px;
+    margin-bottom: 18px; /* ¡Más separación entre campos! (de 12px) */
 }
 
 .grupo-campo label{
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Más separación */
     color: var(--color-text-title);
-    font-size: 17px;
+    font-size: 16px; /* ¡Letra del label más grande! (de 15px) */
     font-family: var(--font-2);
 }
 
@@ -513,18 +493,18 @@ header {
     width: 100%;
     background: var(--color-fondo-claro);
     border: 2px solid var(--color-quinary);
-    border-radius: 12px;
-    padding: 15px 18px;
+    border-radius: 10px;
+    padding: 13px 16px; /* ¡Cajas grises más gruesas! (de 10px 14px) */
     color: var(--color-text);
-    font-size: 15px;
+    font-size: 15px; /* ¡Letra interna más grande! (de 14px) */
     font-family: var(--font--body);
     font-weight: bold;
     box-sizing: border-box;
 }
 
 .area{
-    min-height: 110px;
-    line-height: 1.7;
+    min-height: 90px; /* ¡Caja de texto más alta! (de 70px) */
+    line-height: 1.6;
 }
 
 
@@ -960,4 +940,13 @@ footer p {
     border: none;
     cursor: pointer;
     color: #555;
+}
+.saludo-doctor {
+    font-family: var(--font-title); 
+    color: var(--color-text-title);
+    font-size: 32px; /* ¡Más grande! (estaba en 26px o 28px) */
+    font-weight: 800;
+    margin-bottom: 12px; /* Un poco más de separación */
+    text-align: left;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
