@@ -1,11 +1,14 @@
 [
   "Aspirina (100mg)",
-  "Losartán (50mg)",
+  "Losartán (50mg diario)",
   "Enalapril (10mg)",
-  "Bisoprolol (5mg)",
-  "Amlodipino (5mg)",
-  "Atorvastatina (20mg)",
-  "Furosemida (40mg)",
+  "Bisoprolol (5mg diario)",
+  "Amlodipino (5mg diario)",
+  "Atorvastatina (20mg noche)",
+  "Furosemida (40mg diario)",
   "Carvedilol (6.25mg)",
-  "Espironolactona (25mg)"
+  "Espironolactona (25mg diario)",
+  "Hidroclorotiazida (25mg diario)",
+  "Metoprolol (50mg cada 12h)",
+  "Apixabán (5mg cada 12h)"
 ]

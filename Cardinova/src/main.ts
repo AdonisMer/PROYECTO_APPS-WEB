@@ -5,9 +5,10 @@ import doctoresPredeterminados from './data/doctores.json';
 import pacientesPredeterminados from './data/pacientes.json';
 import agendamientosData from './data/agendamientos.json'; 
 
-// Importamos las nuevas listas
 import sintomasList from './data/sintomas.json';
 import medicamentosList from './data/medicamentos_lista.json';
+// IMPORTAMOS EL INVENTARIO DE FARMACIAS
+import farmaciasData from './data/farmacias.json';
 
 import { iniciarRecomendaciones } from './recomendacion';
 import { mostrarFavoritos } from './favoritos';
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrarFavoritos();
     }
     
-    // --- 1. CONTROL DE ACCESO Y PERSONALIZACIÓN DE CITA MÉDICA ---
+    // --- CONTROL DE ACCESO Y PERSONALIZACIÓN DE CITA MÉDICA ---
     if (window.location.pathname.includes("cita.html")) {
         const sesionActiva = localStorage.getItem("sesionActiva");
         if (sesionActiva !== "true") {
@@ -53,22 +54,83 @@ document.addEventListener("DOMContentLoaded", () => {
         const elSangre = document.getElementById("vista-sangre");
         const elFecha = document.getElementById("vista-fecha"); 
         
-        // Elementos interactivos
         const elDiagnostico = document.getElementById("vista-diagnostico");
         const btnEditarDiag = document.getElementById("btn-editar-diagnostico");
         const elSintomasContenedor = document.getElementById("contenedor-sintomas");
         const elMedsContenedor = document.getElementById("contenedor-medicamentos");
 
-        // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) ---
-        const crearEtiqueta = (contenedor: HTMLElement, texto: string) => {
+        // --- LÓGICA DE LA VENTANA FLOTANTE (MODAL) ---
+        const modalFarmacias = document.getElementById("modal-farmacias");
+        const btnCerrarModal = document.getElementById("btn-cerrar-modal");
+        const tituloModal = document.getElementById("modal-titulo-med");
+        const listaFarmacias = document.getElementById("lista-farmacias-disponibles");
+
+        const abrirModalFarmacias = (nombreMedicamentoCompleto: string) => {
+            if (!modalFarmacias || !tituloModal || !listaFarmacias) return;
+
+            // Extrae el nombre base (Ej: "Enalapril (10mg)" -> "enalapril")
+            const nombreBusqueda = nombreMedicamentoCompleto.split(" (")[0].toLowerCase().trim();
+
+            tituloModal.innerHTML = `<i class="fa-solid fa-pills"></i> Disponible en: ${nombreMedicamentoCompleto.split(" (")[0]}`;
+            listaFarmacias.innerHTML = ""; 
+
+            // Filtra farmacias que tengan el medicamento
+            const farmaciasDisponibles = farmaciasData.filter((f: any) => 
+                f.medicamentos.some((m: string) => m.toLowerCase().includes(nombreBusqueda))
+            );
+
+            if (farmaciasDisponibles.length === 0) {
+                listaFarmacias.innerHTML = `<p style="text-align:center; color:#ef4444; font-weight:bold;">No hay stock reportado en farmacias cercanas.</p>`;
+            } else {
+                farmaciasDisponibles.forEach((f: any) => {
+                    const tarjeta = document.createElement("div");
+                    tarjeta.className = "tarjeta-farmacia-mini";
+                    tarjeta.innerHTML = `
+                        <h4><i class="fa-solid fa-house-medical"></i> ${f.nombre}</h4>
+                        <p><i class="fa-solid fa-location-dot"></i> ${f.direccion} <strong>(${f.distancia})</strong></p>
+                        <p><i class="fa-solid fa-phone"></i> ${f.telefono}</p>
+                    `;
+                    listaFarmacias.appendChild(tarjeta);
+                });
+            }
+            modalFarmacias.classList.remove("modal-oculto");
+            modalFarmacias.classList.add("modal-mostrar");
+        };
+
+        if (btnCerrarModal && modalFarmacias) {
+            btnCerrarModal.addEventListener("click", () => {
+                modalFarmacias.classList.remove("modal-mostrar");
+                modalFarmacias.classList.add("modal-oculto");
+            });
+            window.addEventListener("click", (e) => {
+                if (e.target === modalFarmacias) {
+                    modalFarmacias.classList.remove("modal-mostrar");
+                    modalFarmacias.classList.add("modal-oculto");
+                }
+            });
+        }
+
+        // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) ACTUALIZADA ---
+        const crearEtiqueta = (contenedor: HTMLElement, texto: string, esMedicamento: boolean = false) => {
             const tag = document.createElement("div");
             tag.className = "etiqueta-item";
             
+            // Si es medicamento, le damos el poder de abrir el modal
+            if (esMedicamento) {
+                tag.addEventListener("click", (e) => {
+                    if ((e.target as HTMLElement).closest(".btn-eliminar-etiqueta")) return; // Ignorar si dio clic en la X
+                    abrirModalFarmacias(texto);
+                });
+            }
+
             if (rolUsuario === "doctor") {
-                tag.innerHTML = `${texto} <button type="button" class="btn-eliminar-etiqueta" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>`;
-                tag.querySelector(".btn-eliminar-etiqueta")?.addEventListener("click", () => tag.remove());
+                tag.innerHTML = `<span>${texto}</span> <button type="button" class="btn-eliminar-etiqueta" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>`;
+                tag.querySelector(".btn-eliminar-etiqueta")?.addEventListener("click", (e) => {
+                    e.stopPropagation(); // Evita abrir el modal al eliminar
+                    tag.remove();
+                });
             } else {
-                tag.innerHTML = `${texto}`; // El paciente no tiene botón para eliminar
+                tag.innerHTML = `<span>${texto}</span>`; 
             }
             contenedor.appendChild(tag);
         };
@@ -76,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Lógica del botón Editar Diagnóstico (Solo Doctor)
         if (btnEditarDiag && elDiagnostico) {
             if (rolUsuario !== "doctor") {
-                btnEditarDiag.style.display = "none"; // Ocultamos si es paciente
+                btnEditarDiag.style.display = "none";
             } else {
                 btnEditarDiag.addEventListener("click", () => {
                     const editando = elDiagnostico.isContentEditable;
@@ -98,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
             const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
 
-            // Configurar listas desplegables
             const selectSint = document.getElementById("select-sintomas") as HTMLSelectElement;
             const selectMed = document.getElementById("select-medicamentos") as HTMLSelectElement;
             
@@ -106,21 +167,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (selectSint) sintomasList.forEach(s => selectSint.appendChild(new Option(s, s)));
                 if (selectMed) medicamentosList.forEach(m => selectMed.appendChild(new Option(m, m)));
                 
-                // Botones de agregar
                 document.getElementById("btn-agregar-sintoma")?.addEventListener("click", () => {
                     if(selectSint.value && elSintomasContenedor) {
-                        crearEtiqueta(elSintomasContenedor, selectSint.value);
+                        crearEtiqueta(elSintomasContenedor, selectSint.value, false); // No es medicamento
                         selectSint.value = "";
                     }
                 });
                 document.getElementById("btn-agregar-medicamento")?.addEventListener("click", () => {
                     if(selectMed.value && elMedsContenedor) {
-                        crearEtiqueta(elMedsContenedor, selectMed.value);
+                        crearEtiqueta(elMedsContenedor, selectMed.value, true); // SÍ es medicamento
                         selectMed.value = "";
                     }
                 });
             } else {
-                // Si es paciente, ocultamos por completo la barra para agregar cosas
                 document.getElementById("control-sintomas")!.style.display = "none";
                 document.getElementById("control-medicamentos")!.style.display = "none";
             }
@@ -129,25 +188,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (elEdad) elEdad.textContent = paciente.edad ? `${paciente.edad} años` : "No especificado";
                 if (elTelefono) elTelefono.textContent = paciente.telefono || "No especificado";
                 if (elSangre) elSangre.textContent = paciente.tipoSangre || "No especificado";
-                
-                // Rellenamos el diagnóstico editable
                 if (elDiagnostico) elDiagnostico.textContent = paciente.diagnostico || "Evaluación inicial pendiente.";
 
-                // Limpiamos contenedores de etiquetas
                 if (elSintomasContenedor) elSintomasContenedor.innerHTML = "";
                 if (elMedsContenedor) elMedsContenedor.innerHTML = "";
 
-                // Buscamos cita para extraer la fecha y el síntoma inicial
                 const agendamientosGuardados = JSON.parse(localStorage.getItem("agendamientos") || "null") || agendamientosData;
                 const cita = agendamientosGuardados.find((a: any) => a.cedula === paciente.cedula);
                 
                 if (elFecha) elFecha.textContent = cita ? cita.fecha : "Sin cita programada";
-                if (cita && elSintomasContenedor) crearEtiqueta(elSintomasContenedor, cita.motivo); // Etiqueta del síntoma de la cita
+                if (cita && elSintomasContenedor) crearEtiqueta(elSintomasContenedor, cita.motivo, false); 
 
-                // Convertimos el string de medicamentos viejo a etiquetas bonitas
+                // Aquí convertimos los medicamentos base y le pasamos "true" para que se pueda hacer clic
                 if (paciente.medicamentos && elMedsContenedor) {
                     const meds = paciente.medicamentos.split("•").map((m: string) => m.trim()).filter((m: string) => m.length > 0);
-                    meds.forEach((m: string) => crearEtiqueta(elMedsContenedor, m));
+                    meds.forEach((m: string) => crearEtiqueta(elMedsContenedor, m, true));
                 }
             };
 
@@ -182,44 +237,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 2. LÓGICA DINÁMICA DE CERRAR SESIÓN EN LA NAVEGACIÓN ---
+    // --- LÓGICA DE LA BARRA DE NAVEGACIÓN Y LOGIN (Se mantiene igual) ---
     const linkLogin = document.querySelector('a[href*="login.html"]') as HTMLAnchorElement | null;
-    
     if (linkLogin && localStorage.getItem("sesionActiva") === "true") {
         const liLogin = linkLogin.closest("li");
         const ulMenu = linkLogin.closest("ul");
-        
         if (ulMenu && liLogin) {
             liLogin.style.display = "none";
-            
             const liLogout = document.createElement("li");
             const linkLogout = document.createElement("a");
             linkLogout.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión';
             linkLogout.href = "#";
-            
             linkLogout.addEventListener("click", (e) => {
                 e.preventDefault();
                 localStorage.removeItem("sesionActiva");
                 localStorage.removeItem("rolUsuario");
                 localStorage.removeItem("nombreUsuario");
-                
                 alert("🔒 Sesión cerrada correctamente");
                 window.location.href = window.location.pathname.includes("modulos") ? "../index.html" : "index.html";
             });
-            
             liLogout.appendChild(linkLogout);
             ulMenu.appendChild(liLogout);
         }
     }
 
-    // --- 3. LÓGICA DE IMÁGENES ---
     const imgFondo = document.getElementById('img-fondo-medico') as HTMLImageElement | null;
     const imgPublico = document.getElementById('img-publico') as HTMLImageElement | null;
-
     if (imgFondo) imgFondo.src = gestionMedica;
     if (imgPublico) imgPublico.src = publicoObjetivo;
 
-    // --- 4. LÓGICA DE FORMULARIOS DE SESIÓN ---
     const form = document.querySelector("form") as HTMLFormElement | null;
     const nombresInput = document.getElementById("nombres") as HTMLInputElement | null;
     const apellidosInput = document.getElementById("apellidos") as HTMLInputElement | null;
