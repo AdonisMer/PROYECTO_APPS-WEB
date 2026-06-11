@@ -7,7 +7,6 @@ import agendamientosData from './data/agendamientos.json';
 
 import sintomasList from './data/sintomas.json';
 import medicamentosList from './data/medicamentos_lista.json';
-// IMPORTAMOS EL INVENTARIO DE FARMACIAS
 import farmaciasData from './data/farmacias.json';
 
 import { iniciarRecomendaciones } from './recomendacion';
@@ -68,13 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const abrirModalFarmacias = (nombreMedicamentoCompleto: string) => {
             if (!modalFarmacias || !tituloModal || !listaFarmacias) return;
 
-            // Extrae el nombre base (Ej: "Enalapril (10mg)" -> "enalapril")
             const nombreBusqueda = nombreMedicamentoCompleto.split(" (")[0].toLowerCase().trim();
 
             tituloModal.innerHTML = `<i class="fa-solid fa-pills"></i> Disponible en: ${nombreMedicamentoCompleto.split(" (")[0]}`;
             listaFarmacias.innerHTML = ""; 
 
-            // Filtra farmacias que tengan el medicamento
             const farmaciasDisponibles = farmaciasData.filter((f: any) => 
                 f.medicamentos.some((m: string) => m.toLowerCase().includes(nombreBusqueda))
             );
@@ -110,15 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) ACTUALIZADA ---
+        // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) ---
         const crearEtiqueta = (contenedor: HTMLElement, texto: string, esMedicamento: boolean = false) => {
             const tag = document.createElement("div");
             tag.className = "etiqueta-item";
             
-            // Si es medicamento, le damos el poder de abrir el modal
             if (esMedicamento) {
                 tag.addEventListener("click", (e) => {
-                    if ((e.target as HTMLElement).closest(".btn-eliminar-etiqueta")) return; // Ignorar si dio clic en la X
+                    if ((e.target as HTMLElement).closest(".btn-eliminar-etiqueta")) return; 
                     abrirModalFarmacias(texto);
                 });
             }
@@ -126,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (rolUsuario === "doctor") {
                 tag.innerHTML = `<span>${texto}</span> <button type="button" class="btn-eliminar-etiqueta" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>`;
                 tag.querySelector(".btn-eliminar-etiqueta")?.addEventListener("click", (e) => {
-                    e.stopPropagation(); // Evita abrir el modal al eliminar
+                    e.stopPropagation(); 
                     tag.remove();
                 });
             } else {
@@ -158,7 +154,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (selectorPacientes) {
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-            const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
+            
+            // 👉 ¡CORRECCIÓN AQUÍ!: Unimos las listas y filtramos duplicados basándonos en el correo único del paciente
+            const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados].filter(
+                (paciente, index, self) => self.findIndex(p => p.correo === paciente.correo) === index
+            );
 
             const selectSint = document.getElementById("select-sintomas") as HTMLSelectElement;
             const selectMed = document.getElementById("select-medicamentos") as HTMLSelectElement;
@@ -169,13 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 document.getElementById("btn-agregar-sintoma")?.addEventListener("click", () => {
                     if(selectSint.value && elSintomasContenedor) {
-                        crearEtiqueta(elSintomasContenedor, selectSint.value, false); // No es medicamento
+                        crearEtiqueta(elSintomasContenedor, selectSint.value, false); 
                         selectSint.value = "";
                     }
                 });
                 document.getElementById("btn-agregar-medicamento")?.addEventListener("click", () => {
                     if(selectMed.value && elMedsContenedor) {
-                        crearEtiqueta(elMedsContenedor, selectMed.value, true); // SÍ es medicamento
+                        crearEtiqueta(elMedsContenedor, selectMed.value, true); 
                         selectMed.value = "";
                     }
                 });
@@ -199,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (elFecha) elFecha.textContent = cita ? cita.fecha : "Sin cita programada";
                 if (cita && elSintomasContenedor) crearEtiqueta(elSintomasContenedor, cita.motivo, false); 
 
-                // Aquí convertimos los medicamentos base y le pasamos "true" para que se pueda hacer clic
                 if (paciente.medicamentos && elMedsContenedor) {
                     const meds = paciente.medicamentos.split("•").map((m: string) => m.trim()).filter((m: string) => m.length > 0);
                     meds.forEach((m: string) => crearEtiqueta(elMedsContenedor, m, true));
@@ -237,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- LÓGICA DE LA BARRA DE NAVEGACIÓN Y LOGIN (Se mantiene igual) ---
+    // --- LÓGICA DE LA BARRA DE NAVEGACIÓN Y LOGIN ---
     const linkLogin = document.querySelector('a[href*="login.html"]') as HTMLAnchorElement | null;
     if (linkLogin && localStorage.getItem("sesionActiva") === "true") {
         const liLogin = linkLogin.closest("li");
@@ -290,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     setupPasswordToggle("password", "togglePassword", "eyeIcon");
-    if (confirmarInput) setupPasswordToggle("confirmar", "toggleConfirm", "eyeIconConfirm");
+    if (confirmarInput) setupPasswordToggle("toggleConfirm", "eyeIconConfirm");
 
     form.addEventListener("submit", (e: Event) => {
         if (form.classList.contains("formulario1") && !correoInput) return; 
@@ -335,7 +334,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-            const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
+            const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados].filter(
+                (paciente, index, self) => self.findIndex(p => p.correo === paciente.correo) === index
+            );
             const pacienteEncontrado = todosLosPacientes.find((p: any) => p.correo === correo && p.password === password);
 
             if (pacienteEncontrado) {
