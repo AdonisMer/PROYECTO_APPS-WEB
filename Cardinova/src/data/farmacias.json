@@ -1,0 +1,23 @@
+[
+  {
+    "nombre": "Farmacia SanaVida",
+    "direccion": "Av. Principal",
+    "telefono": "0991111111",
+    "distancia": "1.2 km",
+    "medicamentos": [
+      "Paracetamol",
+      "Ibuprofeno",
+      "Vitamina C"
+    ]
+  },
+  {
+    "nombre": "Farmacia Cruz Azul",
+    "direccion": "Calle Central",
+    "telefono": "0992222222",
+    "distancia": "2.8 km",
+    "medicamentos": [
+      "Paracetamol",
+      "Amoxicilina"
+    ]
+  }
+]

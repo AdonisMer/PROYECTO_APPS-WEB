@@ -45,9 +45,33 @@
             </p>
         </div>
         <div class="buscador-farmacia">
-            <input type="text" placeholder="Buscar medicamento...">
-            <button class="botones">Buscar</button>
+            <input
+                type="text"
+                id="buscarMedicamento"
+                placeholder="Buscar farmacia o medicamento..."
+            >
+
+            <button
+                id="btnBuscar"
+                class="botones"
+            >
+                Buscar
+            </button>
         </div>
+        
+        <div id="contenedor-principal">
+            <div id="resultado"></div>
+        </div>
+
+        <div id="vista-detalle" style="display: none;">
+            <button onclick="volverALista()" class="botones">⬅ Volver a farmacias</button>
+            <h2 id="detalle-nombre"></h2>
+            
+            <input type="text" id="buscarMedEnFarmacia" placeholder="Buscar medicamento en esta farmacia...">
+            
+            <div id="lista-meds-farmacia"></div>
+        </div>
+        
         <div class="beneficios">
             <div class="beneficio">
                 <h3>💲 Precios accesibles</h3>
@@ -115,6 +139,11 @@
                 </p>
                 <button class="botones">Ver más</button>
             </article>
+        </div>
+        
+        <div id="favoritos" style="margin-top:40px;">
+            <h2>⭐ Mis Farmacias Favoritas</h2>
+            <div id="listaFavoritos"></div>
         </div>
     </section>
     <div class="volver-container">

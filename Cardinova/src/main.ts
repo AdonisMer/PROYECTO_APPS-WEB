@@ -3,10 +3,19 @@ import gestionMedica from './assets/gestion_medica.png';
 import publicoObjetivo from './assets/seccion_publico_objetivo.png';
 import doctoresPredeterminados from './data/doctores.json';
 import pacientesPredeterminados from './data/pacientes.json';
+import { iniciarRecomendaciones } from './recomendacion';
+import { mostrarFavoritos } from './favoritos';
+
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // MÓDULO DE FARMACIAS RECOMENDADAS
+    if (window.location.pathname.includes("recomendacion.html")) {
+        iniciarRecomendaciones();
+        mostrarFavoritos();
+    }
     
-    // --- 1. CONTROL DE ACCESO Y PERSONALIZACIÓN DE CITA MÉDICA ---
+    // CONTROL DE ACCESO Y PERSONALIZACIÓN DE CITA MÉDICA ---
     if (window.location.pathname.includes("cita.html")) {
         const sesionActiva = localStorage.getItem("sesionActiva");
         if (sesionActiva !== "true") {

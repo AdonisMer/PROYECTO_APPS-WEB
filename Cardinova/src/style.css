@@ -997,3 +997,63 @@ footer p {
         font-size: 0.8rem; 
     }
 }
+
+
+
+
+
+
+
+/* MANTÉN ESTO IGUAL */
+.contenedor-farmacias {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    padding: 20px;
+}
+
+.tarjeta-farmacia {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.tarjeta-farmacia:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header-tarjeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.body-tarjeta {
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
+.footer-tarjeta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: #6b7280;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 10px;
+}
+
+.btn-fav {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
