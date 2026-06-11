@@ -1,23 +1,99 @@
 [
   {
-    "nombre": "Farmacia SanaVida",
-    "direccion": "Av. Principal",
+    "nombre": "Farmacia Sana Sana",
+    "direccion": "Calle Central",
     "telefono": "0991111111",
-    "distancia": "1.2 km",
+    "distancia": "3.2 km",
     "medicamentos": [
       "Paracetamol",
       "Ibuprofeno",
-      "Vitamina C"
+      "Vitamina C",
+      "Amoxicilina",
+      "Loratadina",
+      "Omeprazol",
+      "Cetirizina",
+      "Aspirina"
     ]
   },
   {
     "nombre": "Farmacia Cruz Azul",
     "direccion": "Calle Central",
     "telefono": "0992222222",
-    "distancia": "2.8 km",
+    "distancia": "3.8 km",
     "medicamentos": [
       "Paracetamol",
+      "Amoxicilina",
+      "Loratadina",
+      "Omeprazol",
+      "Cetirizina",
+      "Aspirina"
+    ]
+  },
+  {
+    "nombre": "Farmacia Santa Martha",
+    "direccion": "Calle 12",
+    "telefono": "0993333333",
+    "distancia": "1.6 km",
+    "medicamentos": [
+      "Paracetamol",
+      "Amoxicilina",
+      "Loratadina",
+      "Aspirina"
+    ]
+  },
+  {
+    "nombre": "Farmacia Medicity",
+    "direccion": "Calle 12",
+    "telefono": "0994444444",
+    "distancia": "1.5 km",
+    "medicamentos": [
+      "Paracetamol",
+      "Ibuprofeno",
+      "Vitamina C",
+      "Amoxicilina",
+      "Loratadina",
+      "Omeprazol",
+      "Cetirizina",
+      "Aspirina"
+    ]
+  },
+  {
+    "nombre": "Farmacia San Gregorio",
+    "direccion": "Calle 12",
+    "telefono": "0995555555",
+    "distancia": "1.0 km",
+    "medicamentos": [
+      "Paracetamol",
+      "Ibuprofeno",
       "Amoxicilina"
+    ]
+  },
+  {
+    "nombre": "Farmacia Economica",
+    "direccion": "Hospital",
+    "telefono": "0996666666",
+    "distancia": "1.2 km",
+    "medicamentos": [
+      "Paracetamol",
+      "Loratadina",
+      "Aspirina",
+      "Omeprazol"
+    ]
+  },
+  {
+    "nombre": "Fybeca",
+    "direccion": "Mall del Pacífico",
+    "telefono": "0997777777",
+    "distancia": "3.0 km",
+    "medicamentos": [
+      "Paracetamol",
+      "Ibuprofeno",
+      "Vitamina C",
+      "Amoxicilina",
+      "Loratadina",
+      "Omeprazol",
+      "Cetirizina",
+      "Aspirina"
     ]
   }
 ]

@@ -59,18 +59,21 @@
             </button>
         </div>
         
-        <div id="contenedor-principal">
-            <div id="resultado"></div>
-        </div>
-
-        <div id="vista-detalle" style="display: none;">
-            <button onclick="volverALista()" class="botones">⬅ Volver a farmacias</button>
-            <h2 id="detalle-nombre"></h2>
-            
-            <input type="text" id="buscarMedEnFarmacia" placeholder="Buscar medicamento en esta farmacia...">
-            
-            <div id="lista-meds-farmacia"></div>
-        </div>
+        <section id="seccion-farmacias" >
+            <div id="contenedor-resultados"class="bloque-gris">
+                <div id="resultado"></div>
+            </div>
+        </section>
+        <section> 
+            <div id="vista-detalle" style="display: none;">
+                <button onclick="volverALista()" class="botones">⬅ Volver a farmacias</button>
+                <h2 id="detalle-nombre"></h2>
+                
+                <input type="text" id="buscarMedEnFarmacia" placeholder="Buscar medicamento en esta farmacia...">
+                
+                <div id="lista-meds-farmacia"></div>
+            </div>
+        </section>
         
         <div class="beneficios">
             <div class="beneficio">
