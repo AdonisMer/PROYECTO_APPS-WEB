@@ -107,8 +107,73 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        // --- GESTIÓN PERSISTENTE DE PACIENTES (EVITA PÉRDIDA AL RECARGAR) ---
+        const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
+        const listaBaseInicial = [...pacientesPredeterminados, ...usuariosGuardados].filter(
+            (paciente, index, self) => self.findIndex(p => p.correo === paciente.correo) === index
+        );
+
+        // Intentamos cargar la lista mutable del historial clínico desde localStorage
+        let pacientesClinica: any[] = JSON.parse(localStorage.getItem("pacientesClinica") || "null");
+        if (!pacientesClinica) {
+            pacientesClinica = listaBaseInicial;
+            localStorage.setItem("pacientesClinica", JSON.stringify(pacientesClinica));
+        } else {
+            // Sincroniza si hay nuevos registros creados desde la interfaz de registro
+            listaBaseInicial.forEach((pBase: any) => {
+                if (!pacientesClinica.some((pClin: any) => pClin.correo === pBase.correo)) {
+                    pacientesClinica.push(pBase);
+                }
+            });
+            localStorage.setItem("pacientesClinica", JSON.stringify(pacientesClinica));
+        }
+
+        // --- FUNCIÓN AUTOMÁTICA DE GUARDADO ---
+        const guardarCambiosPaciente = () => {
+            if (!selectorPacientes) return;
+            const correoActual = selectorPacientes.value;
+            const paciente = pacientesClinica.find((p: any) => p.correo === correoActual);
+            
+            if (!paciente) return;
+
+            // 1. Guarda el diagnóstico escrito
+            if (elDiagnostico) {
+                paciente.diagnostico = elDiagnostico.textContent?.trim() || "";
+            }
+
+            // 2. Guarda el conjunto actual de etiquetas de síntomas
+            if (elSintomasContenedor) {
+                const spans = elSintomasContenedor.querySelectorAll(".etiqueta-item span");
+                const listaSintomas: string[] = [];
+                spans.forEach(s => { if (s.textContent) listaSintomas.push(s.textContent.trim()); });
+                paciente.sintomasActivos = listaSintomas; // Propiedad personalizada persistente
+            }
+
+            // 3. Guarda el conjunto actual de etiquetas de medicamentos
+            if (elMedsContenedor) {
+                const spans = elMedsContenedor.querySelectorAll(".etiqueta-item span");
+                const listaMeds: string[] = [];
+                spans.forEach(s => { if (s.textContent) listaMeds.push(s.textContent.trim()); });
+                paciente.medicamentos = listaMeds.map(m => `• ${m}`).join(" "); // Estructura original
+            }
+
+            // Guardamos la actualización en la persistencia del navegador
+            localStorage.setItem("pacientesClinica", JSON.stringify(pacientesClinica));
+        };
+
         // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) ---
+        // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) CON VALIDACIÓN DE DUPLICADOS ---
         const crearEtiqueta = (contenedor: HTMLElement, texto: string, esMedicamento: boolean = false) => {
+            // 1. Verificación: Si ya existe un span con ese texto, no hacemos nada
+            const etiquetasExistentes = Array.from(contenedor.querySelectorAll(".etiqueta-item span"));
+            const yaExiste = etiquetasExistentes.some(span => span.textContent?.trim().toLowerCase() === texto.toLowerCase());
+
+            if (yaExiste) {
+                alert(" Este elemento ya ha sido agregado.");
+                return;
+            }
+
+            // 2. Si no existe, procedemos a crearla
             const tag = document.createElement("div");
             tag.className = "etiqueta-item";
             
@@ -124,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tag.querySelector(".btn-eliminar-etiqueta")?.addEventListener("click", (e) => {
                     e.stopPropagation(); 
                     tag.remove();
+                    guardarCambiosPaciente(); 
                 });
             } else {
                 tag.innerHTML = `<span>${texto}</span>`; 
@@ -142,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         elDiagnostico.contentEditable = "false";
                         btnEditarDiag.innerHTML = '<i class="fa-solid fa-pen"></i> Editar';
                         btnEditarDiag.style.color = "var(--color-accent)";
+                        guardarCambiosPaciente(); // Guarda el diagnóstico escrito al presionar "Guardar"
                     } else {
                         elDiagnostico.contentEditable = "true";
                         elDiagnostico.focus();
@@ -153,13 +220,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (selectorPacientes) {
-            const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-            
-            // 👉 ¡CORRECCIÓN AQUÍ!: Unimos las listas y filtramos duplicados basándonos en el correo único del paciente
-            const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados].filter(
-                (paciente, index, self) => self.findIndex(p => p.correo === paciente.correo) === index
-            );
-
             const selectSint = document.getElementById("select-sintomas") as HTMLSelectElement;
             const selectMed = document.getElementById("select-medicamentos") as HTMLSelectElement;
             
@@ -171,12 +231,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     if(selectSint.value && elSintomasContenedor) {
                         crearEtiqueta(elSintomasContenedor, selectSint.value, false); 
                         selectSint.value = "";
+                        guardarCambiosPaciente(); // Guarda el nuevo síntoma añadido
                     }
                 });
                 document.getElementById("btn-agregar-medicamento")?.addEventListener("click", () => {
                     if(selectMed.value && elMedsContenedor) {
                         crearEtiqueta(elMedsContenedor, selectMed.value, true); 
                         selectMed.value = "";
+                        guardarCambiosPaciente(); // Guarda el nuevo medicamento añadido
                     }
                 });
             } else {
@@ -197,7 +259,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const cita = agendamientosGuardados.find((a: any) => a.cedula === paciente.cedula);
                 
                 if (elFecha) elFecha.textContent = cita ? cita.fecha : "Sin cita programada";
-                if (cita && elSintomasContenedor) crearEtiqueta(elSintomasContenedor, cita.motivo, false); 
+                
+                // Si el doctor ya personalizó los síntomas de este paciente, los cargamos. Si no, tomamos el inicial de la cita.
+                if (paciente.sintomasActivos && paciente.sintomasActivos.length > 0) {
+                    paciente.sintomasActivos.forEach((s: string) => crearEtiqueta(elSintomasContenedor, s, false));
+                } else if (cita && elSintomasContenedor) {
+                    crearEtiqueta(elSintomasContenedor, cita.motivo, false); 
+                }
 
                 if (paciente.medicamentos && elMedsContenedor) {
                     const meds = paciente.medicamentos.split("•").map((m: string) => m.trim()).filter((m: string) => m.length > 0);
@@ -207,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (rolUsuario === "doctor") {
                 selectorPacientes.innerHTML = "";
-                todosLosPacientes.forEach((paciente: any) => {
+                pacientesClinica.forEach((paciente: any) => {
                     const option = document.createElement("option");
                     option.value = paciente.correo;
                     option.textContent = paciente.nombre;
@@ -215,11 +283,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 selectorPacientes.addEventListener("change", () => {
-                    const pacienteSeleccionado = todosLosPacientes.find(p => p.correo === selectorPacientes.value);
+                    const pacienteSeleccionado = pacientesClinica.find(p => p.correo === selectorPacientes.value);
                     if (pacienteSeleccionado) actualizarCamposPaciente(pacienteSeleccionado);
                 });
 
-                if (todosLosPacientes.length > 0) actualizarCamposPaciente(todosLosPacientes[0]);
+                if (pacientesClinica.length > 0) actualizarCamposPaciente(pacientesClinica[0]);
 
             } else {
                 selectorPacientes.innerHTML = "";
@@ -229,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 selectorPacientes.appendChild(option);
                 selectorPacientes.disabled = true;
 
-                const miPerfil = todosLosPacientes.find(p => p.nombre === nombreUsuario);
+                const miPerfil = pacientesClinica.find(p => p.nombre === nombreUsuario);
                 if (miPerfil) actualizarCamposPaciente(miPerfil);
                 else actualizarCamposPaciente({});
             }
@@ -334,7 +402,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-            const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados].filter(
+            const pacientesClinicaLocal = JSON.parse(localStorage.getItem("pacientesClinica") || "[]");
+            const todosLosPacientes = [...pacientesClinicaLocal, ...pacientesPredeterminados, ...usuariosGuardados].filter(
                 (paciente, index, self) => self.findIndex(p => p.correo === paciente.correo) === index
             );
             const pacienteEncontrado = todosLosPacientes.find((p: any) => p.correo === correo && p.password === password);
