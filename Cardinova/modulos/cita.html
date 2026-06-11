@@ -92,13 +92,37 @@
 
                 <div class="panel-medico">
                     <h3>Diagnóstico y Receta</h3>
+                    
                     <div class="grupo-campo">
-                        <label>Diagnóstico:</label>
-                        <div class="campo area" id="vista-diagnostico">-</div>
+                        <div class="encabezado-campo">
+                            <label style="margin: 0;">Diagnóstico:</label>
+                            <button id="btn-editar-diagnostico" class="btn-accion-pequeno">
+                                <i class="fa-solid fa-pen"></i> Editar
+                            </button>
+                        </div>
+                        <div class="campo area" id="vista-diagnostico" contenteditable="false">-</div>
                     </div>
+
                     <div class="grupo-campo">
-                        <label>Medicamentos:</label>
-                        <div class="campo area" id="vista-medicamentos">-</div>
+                        <label>Síntomas Observados:</label>
+                        <div class="controles-agregar" id="control-sintomas">
+                            <select id="select-sintomas" class="campo" style="margin-bottom: 0;">
+                                <option value="">Seleccione un síntoma...</option>
+                            </select>
+                            <button id="btn-agregar-sintoma" class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div id="contenedor-sintomas" class="contenedor-etiquetas"></div>
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label>Medicamentos Recetados:</label>
+                        <div class="controles-agregar" id="control-medicamentos">
+                            <select id="select-medicamentos" class="campo" style="margin-bottom: 0;">
+                                <option value="">Seleccione un medicamento...</option>
+                            </select>
+                            <button id="btn-agregar-medicamento" class="btn-add"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div id="contenedor-medicamentos" class="contenedor-etiquetas"></div>
                     </div>
                 </div>
 

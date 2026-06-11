@@ -3,21 +3,27 @@ import gestionMedica from './assets/gestion_medica.png';
 import publicoObjetivo from './assets/seccion_publico_objetivo.png';
 import doctoresPredeterminados from './data/doctores.json';
 import pacientesPredeterminados from './data/pacientes.json';
+import agendamientosData from './data/agendamientos.json'; 
+
+// Importamos las nuevas listas
+import sintomasList from './data/sintomas.json';
+import medicamentosList from './data/medicamentos_lista.json';
+
 import { iniciarRecomendaciones } from './recomendacion';
 import { mostrarFavoritos } from './favoritos';
 import { inicializarAgendamiento } from './agendamiento';
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.querySelector('.formulario1')) {
+    if (window.location.pathname.includes("agendamiento.html")) {
         inicializarAgendamiento();
     }
-    // MÓDULO DE FARMACIAS RECOMENDADAS
+    
     if (window.location.pathname.includes("recomendacion.html")) {
         iniciarRecomendaciones();
         mostrarFavoritos();
     }
     
-    // CONTROL DE ACCESO Y PERSONALIZACIÓN DE CITA MÉDICA ---
+    // --- 1. CONTROL DE ACCESO Y PERSONALIZACIÓN DE CITA MÉDICA ---
     if (window.location.pathname.includes("cita.html")) {
         const sesionActiva = localStorage.getItem("sesionActiva");
         if (sesionActiva !== "true") {
@@ -29,42 +35,120 @@ document.addEventListener("DOMContentLoaded", () => {
         const rolUsuario = localStorage.getItem("rolUsuario");
         const nombreUsuario = localStorage.getItem("nombreUsuario");
 
-        // --- SALUDO DINÁMICO PARA EL DOCTOR ---
         if (rolUsuario === "doctor" && nombreUsuario) {
             const infoCita = document.querySelector(".info-cita");
             if (infoCita) {
                 const saludo = document.createElement("h1");
                 saludo.className = "saludo-doctor";
                 saludo.textContent = `👋 ¡HOLA, ${nombreUsuario.toUpperCase()}!`;
-
                 const h2Cita = infoCita.querySelector("h2");
-                if (h2Cita) {
-                    infoCita.insertBefore(saludo, h2Cita);
-                } else {
-                    infoCita.prepend(saludo);
-                }
+                if (h2Cita) infoCita.insertBefore(saludo, h2Cita);
+                else infoCita.prepend(saludo);
             }
         }
 
-        // --- LÓGICA DEL SELECTOR DINÁMICO DE PACIENTES ---
         const selectorPacientes = document.getElementById("seleccionar-paciente") as HTMLSelectElement | null;
         const elEdad = document.getElementById("vista-edad");
         const elTelefono = document.getElementById("vista-telefono");
         const elSangre = document.getElementById("vista-sangre");
+        const elFecha = document.getElementById("vista-fecha"); 
+        
+        // Elementos interactivos
         const elDiagnostico = document.getElementById("vista-diagnostico");
-        const elMedicamentos = document.getElementById("vista-medicamentos");
+        const btnEditarDiag = document.getElementById("btn-editar-diagnostico");
+        const elSintomasContenedor = document.getElementById("contenedor-sintomas");
+        const elMedsContenedor = document.getElementById("contenedor-medicamentos");
+
+        // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) ---
+        const crearEtiqueta = (contenedor: HTMLElement, texto: string) => {
+            const tag = document.createElement("div");
+            tag.className = "etiqueta-item";
+            
+            if (rolUsuario === "doctor") {
+                tag.innerHTML = `${texto} <button type="button" class="btn-eliminar-etiqueta" title="Eliminar"><i class="fa-solid fa-xmark"></i></button>`;
+                tag.querySelector(".btn-eliminar-etiqueta")?.addEventListener("click", () => tag.remove());
+            } else {
+                tag.innerHTML = `${texto}`; // El paciente no tiene botón para eliminar
+            }
+            contenedor.appendChild(tag);
+        };
+
+        // Lógica del botón Editar Diagnóstico (Solo Doctor)
+        if (btnEditarDiag && elDiagnostico) {
+            if (rolUsuario !== "doctor") {
+                btnEditarDiag.style.display = "none"; // Ocultamos si es paciente
+            } else {
+                btnEditarDiag.addEventListener("click", () => {
+                    const editando = elDiagnostico.isContentEditable;
+                    if (editando) {
+                        elDiagnostico.contentEditable = "false";
+                        btnEditarDiag.innerHTML = '<i class="fa-solid fa-pen"></i> Editar';
+                        btnEditarDiag.style.color = "var(--color-accent)";
+                    } else {
+                        elDiagnostico.contentEditable = "true";
+                        elDiagnostico.focus();
+                        btnEditarDiag.innerHTML = '<i class="fa-solid fa-save"></i> Guardar';
+                        btnEditarDiag.style.color = "green";
+                    }
+                });
+            }
+        }
 
         if (selectorPacientes) {
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
             const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
 
-            // FUNCIÓN QUE CAMBIA TODA LA INFORMACIÓN EN PANTALLA
+            // Configurar listas desplegables
+            const selectSint = document.getElementById("select-sintomas") as HTMLSelectElement;
+            const selectMed = document.getElementById("select-medicamentos") as HTMLSelectElement;
+            
+            if (rolUsuario === "doctor") {
+                if (selectSint) sintomasList.forEach(s => selectSint.appendChild(new Option(s, s)));
+                if (selectMed) medicamentosList.forEach(m => selectMed.appendChild(new Option(m, m)));
+                
+                // Botones de agregar
+                document.getElementById("btn-agregar-sintoma")?.addEventListener("click", () => {
+                    if(selectSint.value && elSintomasContenedor) {
+                        crearEtiqueta(elSintomasContenedor, selectSint.value);
+                        selectSint.value = "";
+                    }
+                });
+                document.getElementById("btn-agregar-medicamento")?.addEventListener("click", () => {
+                    if(selectMed.value && elMedsContenedor) {
+                        crearEtiqueta(elMedsContenedor, selectMed.value);
+                        selectMed.value = "";
+                    }
+                });
+            } else {
+                // Si es paciente, ocultamos por completo la barra para agregar cosas
+                document.getElementById("control-sintomas")!.style.display = "none";
+                document.getElementById("control-medicamentos")!.style.display = "none";
+            }
+
             const actualizarCamposPaciente = (paciente: any) => {
                 if (elEdad) elEdad.textContent = paciente.edad ? `${paciente.edad} años` : "No especificado";
                 if (elTelefono) elTelefono.textContent = paciente.telefono || "No especificado";
                 if (elSangre) elSangre.textContent = paciente.tipoSangre || "No especificado";
-                if (elDiagnostico) elDiagnostico.textContent = paciente.diagnostico || "Sin diagnóstico registrado";
-                if (elMedicamentos) elMedicamentos.innerHTML = paciente.medicamentos || "Sin medicamentos asignados";
+                
+                // Rellenamos el diagnóstico editable
+                if (elDiagnostico) elDiagnostico.textContent = paciente.diagnostico || "Evaluación inicial pendiente.";
+
+                // Limpiamos contenedores de etiquetas
+                if (elSintomasContenedor) elSintomasContenedor.innerHTML = "";
+                if (elMedsContenedor) elMedsContenedor.innerHTML = "";
+
+                // Buscamos cita para extraer la fecha y el síntoma inicial
+                const agendamientosGuardados = JSON.parse(localStorage.getItem("agendamientos") || "null") || agendamientosData;
+                const cita = agendamientosGuardados.find((a: any) => a.cedula === paciente.cedula);
+                
+                if (elFecha) elFecha.textContent = cita ? cita.fecha : "Sin cita programada";
+                if (cita && elSintomasContenedor) crearEtiqueta(elSintomasContenedor, cita.motivo); // Etiqueta del síntoma de la cita
+
+                // Convertimos el string de medicamentos viejo a etiquetas bonitas
+                if (paciente.medicamentos && elMedsContenedor) {
+                    const meds = paciente.medicamentos.split("•").map((m: string) => m.trim()).filter((m: string) => m.length > 0);
+                    meds.forEach((m: string) => crearEtiqueta(elMedsContenedor, m));
+                }
             };
 
             if (rolUsuario === "doctor") {
@@ -78,14 +162,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 selectorPacientes.addEventListener("change", () => {
                     const pacienteSeleccionado = todosLosPacientes.find(p => p.correo === selectorPacientes.value);
-                    if (pacienteSeleccionado) {
-                        actualizarCamposPaciente(pacienteSeleccionado);
-                    }
+                    if (pacienteSeleccionado) actualizarCamposPaciente(pacienteSeleccionado);
                 });
 
-                if (todosLosPacientes.length > 0) {
-                    actualizarCamposPaciente(todosLosPacientes[0]);
-                }
+                if (todosLosPacientes.length > 0) actualizarCamposPaciente(todosLosPacientes[0]);
 
             } else {
                 selectorPacientes.innerHTML = "";
@@ -96,15 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 selectorPacientes.disabled = true;
 
                 const miPerfil = todosLosPacientes.find(p => p.nombre === nombreUsuario);
-                if (miPerfil) {
-                    actualizarCamposPaciente(miPerfil);
-                } else {
-                    if (elEdad) elEdad.textContent = "N/A";
-                    if (elTelefono) elTelefono.textContent = "N/A";
-                    if (elSangre) elSangre.textContent = "N/A";
-                    if (elDiagnostico) elDiagnostico.textContent = "Evaluación inicial pendiente.";
-                    if (elMedicamentos) elMedicamentos.textContent = "Sin recetas registradas.";
-                }
+                if (miPerfil) actualizarCamposPaciente(miPerfil);
+                else actualizarCamposPaciente({});
             }
         }
     }
@@ -131,11 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.removeItem("nombreUsuario");
                 
                 alert("🔒 Sesión cerrada correctamente");
-                if (window.location.pathname.includes("modulos")) {
-                    window.location.href = "../index.html";
-                } else {
-                    window.location.href = "index.html";
-                }
+                window.location.href = window.location.pathname.includes("modulos") ? "../index.html" : "index.html";
             });
             
             liLogout.appendChild(linkLogout);
@@ -150,9 +219,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (imgFondo) imgFondo.src = gestionMedica;
     if (imgPublico) imgPublico.src = publicoObjetivo;
 
-    // --- 4. LÓGICA DE FORMULARIOS ---
+    // --- 4. LÓGICA DE FORMULARIOS DE SESIÓN ---
     const form = document.querySelector("form") as HTMLFormElement | null;
-    const nombreInput = document.getElementById("nombre") as HTMLInputElement | null;
+    const nombresInput = document.getElementById("nombres") as HTMLInputElement | null;
+    const apellidosInput = document.getElementById("apellidos") as HTMLInputElement | null;
     const cedulaInput = document.getElementById("cedula") as HTMLInputElement | null;
     const correoInput = (document.getElementById("correo") || document.getElementById("email")) as HTMLInputElement | null;
     const passwordInput = document.getElementById("password") as HTMLInputElement | null;
@@ -164,72 +234,51 @@ document.addEventListener("DOMContentLoaded", () => {
         const input = document.getElementById(inputId) as HTMLInputElement | null;
         const button = document.getElementById(buttonId) as HTMLButtonElement | null;
         const icon = document.getElementById(iconId) as HTMLElement | null;
-        
         if (button && input && icon) {
             button.addEventListener("click", () => {
                 const isPassword = input.type === "password";
                 input.type = isPassword ? "text" : "password";
                 icon.className = isPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
-                button.setAttribute("aria-label", isPassword ? "Ocultar" : "Mostrar");
             });
         }
     };
 
     setupPasswordToggle("password", "togglePassword", "eyeIcon");
-    if (confirmarInput) setupPasswordToggle("toggleConfirm", "eyeIconConfirm");
-
-    const setBorder = (el: HTMLInputElement | null, isValid: boolean) => {
-        if (el) el.style.border = `2px solid ${isValid ? "green" : "red"}`;
-    };
-
-    if (correoInput) correoInput.addEventListener("input", () => setBorder(correoInput, correoInput.value.includes("@")));
-    if (passwordInput) passwordInput.addEventListener("input", () => setBorder(passwordInput, passwordInput.value.length >= 4));
-    if (confirmarInput && passwordInput) {
-        confirmarInput.addEventListener("input", () => setBorder(confirmarInput, confirmarInput.value === passwordInput.value));
-    }
+    if (confirmarInput) setupPasswordToggle("confirmar", "toggleConfirm", "eyeIconConfirm");
 
     form.addEventListener("submit", (e: Event) => {
+        if (form.classList.contains("formulario1") && !correoInput) return; 
+        
         e.preventDefault();
         const correo = correoInput?.value.trim() ?? "";
         const password = passwordInput?.value.trim() ?? "";
 
         if (!correo || !password) return alert("❌ Completa los campos obligatorios");
 
-        const esRegistro = nombreInput !== null && confirmarInput !== null;
+        const esRegistro = nombresInput !== null && apellidosInput !== null && confirmarInput !== null;
 
-        if (esRegistro && nombreInput && confirmarInput) {
+        if (esRegistro && nombresInput && apellidosInput && confirmarInput) {
             if (password !== confirmarInput.value.trim()) return alert("❌ Las contraseñas no coinciden");
             
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-            const correoExiste = usuariosGuardados.some((u: any) => u.correo === correo);
-            if (correoExiste) return alert("❌ Este correo ya está registrado.");
-            const cedulaExistente = usuariosGuardados.some((u: any) => u.cedula === cedulaInput?.value.trim());
-            if (cedulaExistente) return alert("❌ Esta cédula ya está registrada.");
+            if (usuariosGuardados.some((u: any) => u.correo === correo)) return alert("❌ Este correo ya está registrado.");
 
-            // Cuando un usuario nuevo se registre, le asignamos historial cardiovascular clínico inicial por defecto
+            const nombreCompleto = `${nombresInput.value.trim()} ${apellidosInput.value.trim()}`;
             const nuevoUsuario = { 
-                nombre: nombreInput.value.trim(), 
-                correo: correo, 
-                password: password,
-                cedula: cedulaInput?.value.trim() || "",
-                rol: "paciente",
+                nombre: nombreCompleto, correo: correo, password: password,
+                cedula: cedulaInput?.value.trim() || "", rol: "paciente",
                 edad: Math.floor(Math.random() * (75 - 45 + 1)) + 45, 
                 telefono: "099" + Math.floor(1000000 + Math.random() * 9000000),
                 tipoSangre: "O+",
-                diagnostico: "Evaluación inicial preventiva pendiente. Monitoreo clínico de valores de presión arterial.",
-                medicamentos: "• Pendiente de asignación por el especialista médico."
+                diagnostico: "Evaluación inicial preventiva pendiente.",
+                medicamentos: ""
             };
             usuariosGuardados.push(nuevoUsuario);
-            
             localStorage.setItem("usuariosRegistrados", JSON.stringify(usuariosGuardados));
             alert("✅ Cuenta creada correctamente");
             window.location.href = "login.html";
         } else {
-            // --- LOGICA DE LOGIN ---
-            const medicoEncontrado = doctoresPredeterminados.find(
-                (medico: any) => medico.correo === correo && medico.password === password
-            );
-
+            const medicoEncontrado = doctoresPredeterminados.find((m: any) => m.correo === correo && m.password === password);
             if (medicoEncontrado) {
                 alert(`✅ Bienvenido ${medicoEncontrado.nombre} (Personal Médico)`);
                 localStorage.setItem("sesionActiva", "true");
@@ -241,10 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
             const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
-
-            const pacienteEncontrado = todosLosPacientes.find(
-                (paciente: any) => paciente.correo === correo && paciente.password === password
-            );
+            const pacienteEncontrado = todosLosPacientes.find((p: any) => p.correo === correo && p.password === password);
 
             if (pacienteEncontrado) {
                 alert(`✅ Bienvenido ${pacienteEncontrado.nombre}`);
@@ -252,9 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 localStorage.setItem("rolUsuario", pacienteEncontrado.rol);
                 localStorage.setItem("nombreUsuario", pacienteEncontrado.nombre);
                 window.location.href = "cita.html";
-            } else {
-                alert("❌ Correo o contraseña incorrectos");
-            }
+            } else alert("❌ Correo o contraseña incorrectos");
         }
     });
 });
