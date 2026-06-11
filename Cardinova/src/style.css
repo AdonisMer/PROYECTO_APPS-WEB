@@ -1273,3 +1273,24 @@ footer p {
 
 .etiqueta-item { cursor: pointer; transition: transform 0.2s; }
 .etiqueta-item:hover { transform: scale(1.05); }
+
+.contenedor-acciones {
+    display: flex;
+    justify-content: flex-end; /* Alineación a la derecha */
+    width: 100%;
+}
+
+#btn-enviar-receta {
+    padding: 10px 20px;
+    background-color: var(--color-nav);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+#btn-enviar-receta:hover {
+    background-color: var(--color-accent);
+}
