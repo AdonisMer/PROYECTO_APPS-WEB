@@ -26,6 +26,7 @@
             </div>
         </nav>
     </header>
+
     <section class="producto1">
         <div class="etiqueta">
             <span>
@@ -34,6 +35,7 @@
             </span>            
         </div>
         <h2>Agendamiento de Citas Médicas</h2>
+        
         <table class="tabla1">
             <thead>
                 <tr>
@@ -54,13 +56,10 @@
                     <td>Lunes, Miércoles, Viernes</td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">Para más información, contáctenos al 123-456-7890</td>
-                </tr>
-            </tfoot>
         </table>
+
         <br>
+        
         <form action="#" class="formulario1">
             <fieldset>
                 <legend>Información de la Consulta</legend>
@@ -70,27 +69,42 @@
                     <option value="dr_carlos_rodriguez">Dr. Carlos Rodríguez</option>
                     <option value="dra_maria_gomez">Dra. María Gómez</option>
                 </select>
+
                 <label for="fecha">Fecha de la Consulta:</label>
                 <input type="date" id="fecha" name="fecha" required>
-                <label for="hora">Hora de la Consulta:</label>
-                <input type="time" id="hora" name="hora" min="08:00" max="18:00" required>
+
+                <label for="hora">Seleccione Hora:</label>
+                <select id="hora" name="hora" required>
+                    <option value="">-- Elige una hora --</option>
+                </select>
+
                 <label for="motivo">Motivo de la consulta:</label>
                 <textarea id="motivo" name="motivo" maxlength="250" required></textarea>
+
                 <label for="tipo">Tipo de atención:</label>
                 <select id="tipo" name="tipo" required>
                     <option value="">Seleccione su modalidad</option>
                     <option>Presencial</option>
                     <option>Virtual</option>
                 </select>
+
+                <label for="cedula">Cédula de identidad:</label>
+                <input type="text" id="cedula" name="cedula" pattern="\d{10}" placeholder="Ej: 1300000000" title="Debe contener 10 dígitos" required>
             </fieldset>
+            
             <br>
-            <a href="#mensajeConfirmacion" class="boton-registrar-consulta botones">
+            <button type="submit" class="boton-registrar-consulta botones">
                 Registrar Consulta
-            </a>
-            <p id="mensajeConfirmacion">
-                ✅ Cita agendada correctamente
-            </p>
+            </button>
         </form>
+
+        <div id="resultado-cita" style="margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; display: none;">
+            <h3>✅ ¡Cita confirmada!</h3>
+            <p><strong>Paciente:</strong> <span id="res-paciente"></span></p>
+            <p><strong>Médico:</strong> <span id="res-medico"></span></p>
+            <p><strong>Día:</strong> <span id="res-fecha"></span></p>
+            <p><strong>Hora:</strong> <span id="res-hora"></span></p>
+        </div>
     </section>
     <div class="volver-container">
         <a href="../index.html" class="botones">⬅ Volver al inicio</a>

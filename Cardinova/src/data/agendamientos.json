@@ -1,0 +1,34 @@
+[
+    {
+        "medico_id": "dr_carlos_rodriguez",
+        "cedula": "1301234567",
+        "fecha": "2026-06-16",
+        "hora": "09:00",
+        "motivo": "Control de presión arterial",
+        "tipo": "Presencial"
+    },
+    {
+        "medico_id": "dr_carlos_rodriguez",
+        "cedula": "1307654321",
+        "fecha": "2026-06-16",
+        "hora": "11:00",
+        "motivo": "Chequeo preventivo",
+        "tipo": "Virtual"
+    },
+    {
+        "medico_id": "dra_maria_gomez",
+        "cedula": "1305556667",
+        "fecha": "2026-06-15",
+        "hora": "15:30",
+        "motivo": "Revisión post-quirúrgica",
+        "tipo": "Presencial"
+    },
+    {
+        "medico_id": "dra_maria_gomez",
+        "cedula": "1301112223",
+        "fecha": "2026-06-15",
+        "hora": "17:30",
+        "motivo": "Consulta hipertensión",
+        "tipo": "Virtual"
+    }
+]

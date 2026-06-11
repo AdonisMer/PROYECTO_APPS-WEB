@@ -5,10 +5,12 @@ import doctoresPredeterminados from './data/doctores.json';
 import pacientesPredeterminados from './data/pacientes.json';
 import { iniciarRecomendaciones } from './recomendacion';
 import { mostrarFavoritos } from './favoritos';
-
+import { inicializarAgendamiento } from './agendamiento';
 
 document.addEventListener("DOMContentLoaded", () => {
-
+    if (document.querySelector('.formulario1')) {
+        inicializarAgendamiento();
+    }
     // MÓDULO DE FARMACIAS RECOMENDADAS
     if (window.location.pathname.includes("recomendacion.html")) {
         iniciarRecomendaciones();
@@ -151,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 4. LÓGICA DE FORMULARIOS ---
     const form = document.querySelector("form") as HTMLFormElement | null;
     const nombreInput = document.getElementById("nombre") as HTMLInputElement | null;
+    const cedulaInput = document.getElementById("cedula") as HTMLInputElement | null;
     const correoInput = (document.getElementById("correo") || document.getElementById("email")) as HTMLInputElement | null;
     const passwordInput = document.getElementById("password") as HTMLInputElement | null;
     const confirmarInput = document.getElementById("confirmar") as HTMLInputElement | null;
@@ -200,12 +203,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
             const correoExiste = usuariosGuardados.some((u: any) => u.correo === correo);
             if (correoExiste) return alert("❌ Este correo ya está registrado.");
+            const cedulaExistente = usuariosGuardados.some((u: any) => u.cedula === cedulaInput?.value.trim());
+            if (cedulaExistente) return alert("❌ Esta cédula ya está registrada.");
 
             // Cuando un usuario nuevo se registre, le asignamos historial cardiovascular clínico inicial por defecto
             const nuevoUsuario = { 
                 nombre: nombreInput.value.trim(), 
                 correo: correo, 
                 password: password,
+                cedula: cedulaInput?.value.trim() || "",
                 rol: "paciente",
                 edad: Math.floor(Math.random() * (75 - 45 + 1)) + 45, 
                 telefono: "099" + Math.floor(1000000 + Math.random() * 9000000),

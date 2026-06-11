@@ -1,0 +1,28 @@
+{
+    "dr_carlos_rodriguez": {
+        "dias_atencion": ["Martes", "Jueves", "Sábado"],
+        "horarios": [
+            { "hora": "08:00", "disponible": false },
+            { "hora": "08:30", "disponible": true },
+            { "hora": "09:00", "disponible": true },
+            { "hora": "09:30", "disponible": true },
+            { "hora": "10:00", "disponible": true },
+            { "hora": "10:30", "disponible": true },
+            { "hora": "11:00", "disponible": true },
+            { "hora": "11:30", "disponible": true }
+        ]
+    },
+    "dra_maria_gomez": {
+        "dias_atencion": ["Lunes", "Miércoles", "Viernes"],
+        "horarios": [
+            { "hora": "14:00", "disponible": true },
+            { "hora": "14:30", "disponible": true },
+            { "hora": "15:00", "disponible": true },
+            { "hora": "15:30", "disponible": true },
+            { "hora": "16:00", "disponible": true },
+            { "hora": "16:30", "disponible": true },
+            { "hora": "17:00", "disponible": true },
+            { "hora": "17:30", "disponible": true }
+        ]
+    }
+}
