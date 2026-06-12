@@ -26,6 +26,7 @@ let medicamentoBuscado:string = "";
 (window as any).volverALista = volverALista;
 (window as any).toggleFavorito = toggleFavorito;
 (window as any).mostrarFavoritos = mostrarFavoritos;
+(window as any).buscarMedicamento = buscarMedicamento;
 
 
 function verDetalle(nombre: string) {
@@ -34,11 +35,15 @@ function verDetalle(nombre: string) {
         f => f.nombre === nombre
     );
     if (!farmacia) return;
+
     document.getElementById("seccion-farmacias")!.style.display = "none";
     document.getElementById("vista-detalle")!.style.display = "block";
+
     document.getElementById("detalle-nombre")!.innerText =
     `🏥 ${farmacia.nombre}`;
+
     const info = document.getElementById("lista-meds-farmacia")!;
+
     info.innerHTML = `
         <div class="info-farmacia">
             <p>
@@ -57,30 +62,10 @@ function verDetalle(nombre: string) {
         <h3>
         <i class="fa-solid fa-capsules"></i> Medicamentos disponibles
         </h3>
-        ${farmacia.medicamentos.map(m => `
-        <div class="med-card">
-
-            <h3>
-            <i class="fa-solid fa-pills"></i>
-            ${m.nombre}
-            </h3>
-
-            <p class="precio">
-            <i class="fa-solid fa-tag"></i>
-            $${m.precio}
-            </p>
-
-            <p>
-            ${
-                m.disponible
-                ? `<i class="fa-solid fa-circle-check disponible"></i> Disponible`
-                : `<i class="fa-solid fa-circle-xmark no-disponible"></i> No disponible`
-            }
-            </p>
-
-        </div>
-        `).join("")}
     `;
+
+    renderizarMedicamentos(farmacia.medicamentos);
+
 }
 
 function renderizarMedicamentos(meds: Medicamento[]) {
@@ -275,18 +260,21 @@ function obtenerMejorOpcion(farmacias: Farmacia[], medicamento: string) {
 
 function mostrarRecomendacion() {
     const caja = document.getElementById("recomendacion");
-    if(!caja || medicamentoBuscado === "") return;
+    if(!caja || medicamentoBuscado === "") {
+        caja!.innerHTML = "";
+        return;
+    }
+
     const mejor = obtenerMejorOpcion(
         farmaciasGlobales,
         medicamentoBuscado
-    );
-    if(mejor){
+    ) as { farmacia: Farmacia; medicamento: Medicamento } | null;
+
+    if(mejor !== null){
         caja.innerHTML = `
         <div class="tarjeta-recomendacion">
 
-            <h3>
-            ⭐ Mejor opción recomendada
-            </h3>
+            <h3>⭐ Mejor opción recomendada</h3>
 
             <h4>
             <i class="fa-solid fa-hospital"></i> 
@@ -298,22 +286,15 @@ function mostrarRecomendacion() {
             ${mejor.medicamento.nombre}
             </p>
 
-            <p>
-            💵 Precio:
-            $${mejor.medicamento.precio}
-            </p>
+            <p>💵 Precio: $${mejor.medicamento.precio}</p>
 
-            <p>
-            🚗 Distancia:
-            ${mejor.farmacia.distancia} km
-            </p>
+            <p>🚗 Distancia: ${mejor.farmacia.distancia} km</p>
 
-            <p>
-            📍 ${mejor.farmacia.direccion}
-            </p>
+            <p>📍 ${mejor.farmacia.direccion}</p>
+
         </div>
         `;
-    }else{
+    } else {
         caja.innerHTML = "";
     }
 }
