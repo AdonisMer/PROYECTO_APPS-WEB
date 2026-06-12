@@ -132,31 +132,22 @@ nav {
 }
 
 .contenido-texto {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 .imagen-fondo {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 90%;
-    object-fit: cover;
-    display: block;
-    border-radius: 60px;
-    margin-top: 30px;
+    height: auto;
+    border-radius: 20px;
 }
 
 .bloque-cabecera {
-    position: absolute;
-    top: 60%;
-    left: 7%;
-    transform: translateY(-50%);
-    color: white;
-    max-width: 1200px;
+    text-align: center;
+    max-width: 90%;
 }
 
 .titulo-frontal {
@@ -823,81 +814,112 @@ footer p {
 .tabla1 td {
     padding: 12px;
 }
-/*CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES*/
+
+/* ========================= */
+/* CELULARES */
+/* ========================= */
+
 @media (max-width: 768px) {
+
     /* NAV */
     header {
-        position: relative; 
-        top: auto;
+        position: relative !important;
+        top: auto !important;
     }
+
     nav {
-        position: relative;
+        display: flex;
         flex-direction: column;
         align-items: center;
+        height: auto !important;
+        min-height: auto !important;
         padding: 10px;
     }
+
     .nav-links {
-        position: absolute; 
-        top: 100%; 
-        left: 0;
+        position: static;
         width: 100%;
-        background-color: var(--color-nav);
-        z-index: 999;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
+
     .nav-links ul {
-        flex-direction: column;
-        gap: 10px;
-        padding: 20px;
+        display: flex;
+        flex-wrap: wrap; /* 👈 CLAVE */
+        justify-content: center;
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .nav-links li {
+        list-style: none;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+        padding: 4px 6px;
+        white-space: nowrap;
     }
 
     /* INICIO */
-    .bloque-cabecera {
-        position: static;
-        transform: none;
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .titulo-frontal {
-        font-size: 2rem;
-        text-align: center;
+    .contenido-texto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .imagen-fondo {
+        width: 100%;
         height: auto;
-        border-radius: 20px;
+        border-radius: 15px;
     }
 
-    /* PUBLICO OBJETIVO */
+    .bloque-cabecera {
+        width: 90%;
+        margin: 15px auto;
+        text-align: center;
+    }
+
+    .titulo-frontal {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    .boton-inicio {
+        margin-top: 10px;
+    }
+
+    /* PUBLICO */
     .publico_objetivo {
         flex-direction: column;
         text-align: center;
+        gap: 20px;
     }
+
     .imagen-publico img {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
+
     /* FARMACIAS */
-    #recomendacion .beneficios {
-        grid-template-columns: 1fr;
-    }
+    #recomendacion .beneficios,
     #recomendacion .galeria {
         grid-template-columns: 1fr;
     }
+
     .buscador-farmacia {
         flex-direction: column;
         border-radius: 20px;
     }
+
     .buscador-farmacia button {
         width: 100%;
     }
+
     /* EQUIPO */
     .miembros {
         flex-direction: column;
+        gap: 20px;
     }
 }
-
 
 
 /* ========================= */
@@ -923,52 +945,6 @@ footer p {
     }
 }
 
-
-/* ========================= */
-/* CELULARES */
-/* ========================= */
-
-@media (max-width: 768px) {
-
-    .contenido-texto {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .bloque-cabecera {
-        order: 1;
-        position: relative;
-        top: unset;
-        left: unset;
-        transform: none;
-        width: 90%;
-        text-align: center;
-        margin-top: 40px;
-        margin-bottom: 25px;
-        color: var(--color-text-title);
-    }
-    
-    .imagen-fondo {
-        order: 2;
-        position: relative;
-        width: 100%;
-        height: auto;
-        border-radius: 25px;
-        margin-top: 0;
-    }
-    .titulo-frontal {
-        font-size: 2.2rem;
-        text-align: center;
-        line-height: 1.2;
-    }
-
-    .boton-inicio {
-        display: inline-block;
-        margin-top: 15px;
-    }
-
-}
 
 @media(max-width: 991px){
     .contenedor-cita{
