@@ -1,4 +1,3 @@
-// Esta función ahora hace el toggle (agregar/quitar)
 export function toggleFavorito(nombreFarmacia: string) {
     let favoritos: string[] = JSON.parse(localStorage.getItem("favoritos") || "[]");
 
@@ -35,5 +34,4 @@ export function mostrarFavoritos() {
     `).join("");
 }
 
-// ESTA LÍNEA ES LA QUE HACE QUE EL BOTÓN FUNCIONE
 (window as any).toggleFavorito = toggleFavorito;

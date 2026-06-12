@@ -1,4 +1,4 @@
-import './style.css';
+import './css/main.css';
 import gestionMedica from './assets/gestion_medica.png';
 import publicoObjetivo from './assets/seccion_publico_objetivo.png';
 import doctoresPredeterminados from './data/doctores.json';

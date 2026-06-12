@@ -1006,82 +1006,10 @@ footer p {
 
 
 
-.bloque-gris {
-    background-color: #eef2f5; /* El color gris de tu ejemplo */
-    border-radius: 40px;       /* Bordes redondeados */
-    padding: 20px;             /* Espacio interno para que no se peguen al borde */
-    min-height: 200px;         /* Tamaño inicial aunque no haya resultados */
-    /* margin-top: 10px; */
-    /* width: 100%; */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;                 /* Espacio entre las tarjetas dentro del gris */
-}
 
-.contenedor-resultados {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Aumentamos el espacio entre tarjetas */
-    width: 100%;
-    padding-top: 30px; /* Espacio extra entre el buscador y el inicio de la lista */
-    padding-bottom: 30px;
-}
 
-#seccion-farmacias {
-    padding: 70px 10%;
-    /* background-color: var(--color-primary); */
-    border-radius: 60px;
-}
 
-.tarjeta-farmacia {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 20px; /* Un poco más de aire interno */
-    margin-bottom: 5px; /* Margen inferior para que no se peguen a nada */
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
 
-.tarjeta-farmacia:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.header-tarjeta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-}
-
-.body-tarjeta {
-    color: #4b5563;
-    font-size: 0.95rem;
-}
-
-.footer-tarjeta {
-    display: flex;
-    gap: 20px;
-    font-size: 0.85rem;
-    color: #6b7280;
-    border-top: 1px solid #f3f4f6;
-    padding-top: 10px;
-}
-
-.btn-fav {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-/* Agrega esto para separar el buscador de cualquier cosa que esté abajo */
-#resultado {
-    margin-top: 40px; /* Esto empuja las tarjetas lejos del buscador */
-    min-height: 400px; /* Da espacio aunque no haya resultados */
-}
 /* --- NUEVOS ESTILOS: PANEL INTERACTIVO DE DIAGNÓSTICO --- */
 .encabezado-campo {
     display: flex;

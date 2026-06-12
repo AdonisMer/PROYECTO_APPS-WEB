@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/styles.css">
+    <link rel="stylesheet" href="../src/CSS/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
     <title>Farmacias Recomendadas</title>
 </head>
@@ -59,96 +59,37 @@
             </button>
         </div>
         
-        <section id="seccion-farmacias" >
-            <div id="contenedor-resultados"class="bloque-gris">
-                <div id="resultado"></div>
-            </div>
-        </section>
-        <section> 
-            <div id="vista-detalle" style="display: none;">
-                <button onclick="volverALista()" class="botones">⬅ Volver a farmacias</button>
-                <h2 id="detalle-nombre"></h2>
+       <div class="app-grid">
+            <main>
+                <section id="seccion-farmacias">
+                    <div id="contenedor-resultados" class="bloque-gris">
+                        <div id="resultado"></div>
+                    </div>
+                </section>
                 
-                <input type="text" id="buscarMedEnFarmacia" placeholder="Buscar medicamento en esta farmacia...">
-                
-                <div id="lista-meds-farmacia"></div>
-            </div>
-        </section>
-        
-        <div class="beneficios">
-            <div class="beneficio">
-                <h3>💲 Precios accesibles</h3>
-                <p>Compara precios y ahorra en tus compras.</p>
-            </div>
-            <div class="beneficio">
-                <h3>📍 Farmacias cercanas</h3>
-                <p>Encuentra opciones cerca de tu ubicación.</p>
-            </div>
-            <div class="beneficio">
-                <h3>🕒 Disponibilidad 24/7</h3>
-                <p>Consulta farmacias abiertas en cualquier momento.</p>
-            </div>
-            <div class="beneficio">
-                <h3>✅ Productos confiables</h3>
-                <p>Medicamentos seguros y certificados.</p>
-            </div>
-        </div>
-        <div class="galeria">
-            <article>
-                <div class="icono-card">💲</div>
-                <h3>Precios accesibles</h3>
-                <p>
-                    Nuestros precios están adaptados para todo tipo de clientes.
-                </p>
-                <button class="botones">Ver más</button>
-            </article>
-            <article>
-                <div class="icono-card">📦</div>
-                <h3>Distintas categorías</h3>
-                <p>
-                    Contamos con gran variedad de medicamentos y productos médicos.
-                </p>
-                <button class="botones">Ver más</button>
-            </article>
-            <article>
-                <div class="icono-card">🚚</div>
-                <h3>Garantía de envío</h3>
-                <p>
-                    Entregas seguras y rápidas para tus medicamentos.
-                </p>
-                <button class="botones">Ver más</button>
-            </article>
-            <article>
-                <div class="icono-card">📍</div>
-                <h3>Farmacias cercanas</h3>
-                <p>
-                    Encuentra la farmacia más próxima según tu ubicación.
-                </p>
-                <button class="botones">Ver más</button>
-            </article>
-            <article>
-                <div class="icono-card">💊</div>
-                <h3>Medicamentos disponibles</h3>
-                <p>
-                    Consulta disponibilidad en tiempo real.
-                </p>
-                <button class="botones">Ver más</button>
-            </article>
-            <article>
-                <div class="icono-card">⭐</div>
-                <h3>Mejor valoración</h3>
-                <p>
-                    Descubre las farmacias mejor calificadas por usuarios.
-                </p>
-                <button class="botones">Ver más</button>
-            </article>
-        </div>
-        
-        <div id="favoritos" style="margin-top:40px;">
-            <h2>⭐ Mis Farmacias Favoritas</h2>
-            <div id="listaFavoritos"></div>
+                <section id="seccion-detalle"> 
+                    <div id="vista-detalle" style="display: none;">
+                        <button onclick="volverALista()" class="botones">⬅ Volver a farmacias</button>
+                        <h2 id="detalle-nombre"></h2>
+                        <input type="text" id="buscarMedEnFarmacia" placeholder="Buscar medicamento en esta farmacia...">
+                        <div id="lista-meds-farmacia"></div>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="panel-lateral">
+                <div class="info-card">
+                    <h3>💡 Consejo de salud</h3>
+                    <p>Los precios pueden variar. Te recomendamos llamar a la farmacia para confirmar disponibilidad.</p>
+                </div>
+                <div id="favoritos">
+                    <h2>⭐ Mis Favoritas</h2>
+                    <div id="listaFavoritos"></div>
+                </div>
+            </aside>
         </div>
     </section>
+
     <div class="volver-container">
         <a href="../index.html" class="botones">⬅ Volver al inicio</a>
     </div>
