@@ -68,25 +68,35 @@ document.addEventListener("DOMContentLoaded", () => {
         const abrirModalFarmacias = (nombreMedicamentoCompleto: string) => {
             if (!modalFarmacias || !tituloModal || !listaFarmacias) return;
 
-            const nombreBusqueda = nombreMedicamentoCompleto.split(" (")[0].toLowerCase().trim();
+            // Función interna para ignorar tildes y mayúsculas (Ej: "Losartán" vs "Losartan")
+            const normalizar = (texto: string) => texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            
+            const nombrePuro = nombreMedicamentoCompleto.split(" (")[0].trim();
+            const nombreBusqueda = normalizar(nombrePuro);
 
-            tituloModal.innerHTML = `<i class="fa-solid fa-pills"></i> Disponible en: ${nombreMedicamentoCompleto.split(" (")[0]}`;
+            tituloModal.innerHTML = `<i class="fa-solid fa-pills"></i> Disponible en: ${nombrePuro}`;
             listaFarmacias.innerHTML = ""; 
 
+            // ¡CORRECCIÓN AQUÍ! Ahora busca dentro del objeto "m.nombre" y verifica si "m.disponible" es true
             const farmaciasDisponibles = farmaciasData.filter((f: any) => 
-                f.medicamentos.some((m: string) => m.toLowerCase().includes(nombreBusqueda))
+                f.medicamentos.some((m: any) => normalizar(m.nombre).includes(nombreBusqueda) && m.disponible === true)
             );
 
             if (farmaciasDisponibles.length === 0) {
                 listaFarmacias.innerHTML = `<p style="text-align:center; color:#ef4444; font-weight:bold;">No hay stock reportado en farmacias cercanas.</p>`;
             } else {
                 farmaciasDisponibles.forEach((f: any) => {
+                    // Buscamos el medicamento exacto para sacar su precio de la nueva base de datos
+                    const medEncontrado = f.medicamentos.find((m: any) => normalizar(m.nombre).includes(nombreBusqueda));
+                    const precioStr = medEncontrado ? `$${medEncontrado.precio.toFixed(2)}` : "Consultar";
+
                     const tarjeta = document.createElement("div");
                     tarjeta.className = "tarjeta-farmacia-mini";
                     tarjeta.innerHTML = `
                         <h4><i class="fa-solid fa-house-medical"></i> ${f.nombre}</h4>
-                        <p><i class="fa-solid fa-location-dot"></i> ${f.direccion} <strong>(${f.distancia})</strong></p>
+                        <p><i class="fa-solid fa-location-dot"></i> ${f.direccion} <strong>(${f.distancia} km)</strong></p>
                         <p><i class="fa-solid fa-phone"></i> ${f.telefono}</p>
+                        <p style="color: #22c55e; font-weight: bold; margin-top: 5px;"><i class="fa-solid fa-tag"></i> Precio: ${precioStr}</p>
                     `;
                     listaFarmacias.appendChild(tarjeta);
                 });
@@ -164,17 +174,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) ---
         // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) CON VALIDACIÓN DE DUPLICADOS ---
-        const crearEtiqueta = (contenedor: HTMLElement, texto: string, esMedicamento: boolean = false) => {
-            // 1. Verificación: Si ya existe un span con ese texto, no hacemos nada
+        // --- FUNCIÓN PARA CREAR ETIQUETAS (CHIPS) CON VALIDACIÓN DE DUPLICADOS ---
+        // Le añadimos "mostrarAlerta" por defecto en true
+        const crearEtiqueta = (contenedor: HTMLElement, texto: string, esMedicamento: boolean = false, mostrarAlerta: boolean = true) => {
             const etiquetasExistentes = Array.from(contenedor.querySelectorAll(".etiqueta-item span"));
-            const yaExiste = etiquetasExistentes.some(span => span.textContent?.trim().toLowerCase() === texto.toLowerCase());
+            const yaExiste = etiquetasExistentes.some(span => span.textContent?.trim().toLowerCase() === texto.trim().toLowerCase());
 
             if (yaExiste) {
-                alert(" Este elemento ya ha sido agregado.");
+                // Solo muestra el popup si el modo alerta está activado
+                if (mostrarAlerta) {
+                    alert("Este elemento ya ha sido agregado.");
+                }
                 return;
             }
 
-            // 2. Si no existe, procedemos a crearla
             const tag = document.createElement("div");
             tag.className = "etiqueta-item";
             
@@ -230,16 +243,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 document.getElementById("btn-agregar-sintoma")?.addEventListener("click", () => {
                     if(selectSint.value && elSintomasContenedor) {
-                        crearEtiqueta(elSintomasContenedor, selectSint.value, false); 
+                        // Pasamos 'true' al final para que SÍ alerte si el doctor se equivoca
+                        crearEtiqueta(elSintomasContenedor, selectSint.value, false, true); 
                         selectSint.value = "";
-                        guardarCambiosPaciente(); // Guarda el nuevo síntoma añadido
+                        guardarCambiosPaciente(); 
                     }
                 });
                 document.getElementById("btn-agregar-medicamento")?.addEventListener("click", () => {
                     if(selectMed.value && elMedsContenedor) {
-                        crearEtiqueta(elMedsContenedor, selectMed.value, true); 
+                        // Pasamos 'true' al final para que SÍ alerte si el doctor se equivoca
+                        crearEtiqueta(elMedsContenedor, selectMed.value, true, true); 
                         selectMed.value = "";
-                        guardarCambiosPaciente(); // Guarda el nuevo medicamento añadido
+                        guardarCambiosPaciente(); 
                     }
                 });
             } else {
@@ -261,16 +276,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (elFecha) elFecha.textContent = cita ? cita.fecha : "Sin cita programada";
                 
-                // Si el doctor ya personalizó los síntomas de este paciente, los cargamos. Si no, tomamos el inicial de la cita.
-                if (paciente.medicamentos && elMedsContenedor) {
-                paciente.medicamentos.split("•").map((m: string) => m.trim()).filter((m: string) => m.length > 0).forEach((m: string) =>
-                    crearEtiqueta(elMedsContenedor, m, true)
-                    );
+                if (elSintomasContenedor) {
+                    if (paciente.sintomasActivos && paciente.sintomasActivos.length > 0) {
+                        paciente.sintomasActivos.forEach((s: string) => crearEtiqueta(elSintomasContenedor, s, false, false));
+                    } else if (cita && cita.motivo) {
+                        crearEtiqueta(elSintomasContenedor, cita.motivo, false, false); 
+                    }
                 }
 
-                if (paciente.medicamentos && elMedsContenedor) {
+                if (elMedsContenedor && paciente.medicamentos) {
                     const meds = paciente.medicamentos.split("•").map((m: string) => m.trim()).filter((m: string) => m.length > 0);
-                    meds.forEach((m: string) => crearEtiqueta(elMedsContenedor, m, true));
+                    meds.forEach((m: string) => crearEtiqueta(elMedsContenedor, m, true, false));
                 }
             };
 
