@@ -1,105 +1,152 @@
-// src/agendamiento.ts
+// Importamos datos
 import horariosData from './data/horarios.json';
 import pacientesPredeterminados from './data/pacientes.json';
 import agendamientosData from './data/agendamientos.json';
-
+// Función principal
 export function inicializarAgendamiento() {
     const form = document.querySelector('.formulario1') as HTMLFormElement;
-    const selectMedico = document.getElementById('medico') as HTMLSelectElement | null;
-    const selectHora = document.getElementById('hora') as HTMLSelectElement | null;
-    const inputFecha = document.getElementById('fecha') as HTMLInputElement | null;
-
+    const selectMedico = document.getElementById('medico') as HTMLSelectElement;
+    const selectHora = document.getElementById('hora') as HTMLSelectElement;
+    const inputFecha = document.getElementById('fecha') as HTMLInputElement;
+    const inputCedula = document.getElementById('cedula') as HTMLInputElement;
     if (!form) return;
-
-    // Cargar citas previas desde localStorage o usar el archivo inicial
     const obtenerAgendamientos = (): any[] => {
         const guardados = localStorage.getItem("agendamientos");
         return guardados ? JSON.parse(guardados) : [...agendamientosData];
     };
-
-    // 1. Lógica para cargar horas dinámicamente al cambiar de médico o fecha
+    const guardarAgendamientos = (data: any[]) => {
+        localStorage.setItem("agendamientos", JSON.stringify(data));
+    };
+    const normalizar = (texto: string): string =>
+        texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const obtenerDiaSemana = (fecha: string): string => {
+        const dias = ["domingo","lunes","martes","miercoles","jueves","viernes","sabado"];
+        const [y, m, d] = fecha.split('-').map(Number);
+        return dias[new Date(y, m - 1, d).getDay()];
+    };
+    const eliminarCita = (citaEliminar: any) => {
+        if (!confirm("¿Seguro que quieres eliminar esta cita?")) return;
+        let citas = obtenerAgendamientos();
+        citas = citas.filter(c =>
+            !(c.medico_id === citaEliminar.medico_id &&
+                c.fecha === citaEliminar.fecha &&
+                c.hora === citaEliminar.hora &&
+                c.cedula === citaEliminar.cedula)
+        );
+        guardarAgendamientos(citas);
+        mostrarCitasGuardadas();
+    };
+    const mostrarCitasGuardadas = () => {
+        const lista = document.getElementById('lista-citas') as HTMLDivElement;
+        if (!lista) return;
+        lista.innerHTML = "";
+        const cedulaActual = inputCedula.value.trim();
+        if (!cedulaActual) {
+            lista.innerHTML = "<p>Ingrese una cédula para ver sus citas.</p>";
+            return;
+        }
+        const citas = obtenerAgendamientos();
+        const citasFiltradas = citas.filter(c => c.cedula === cedulaActual);
+        if (citasFiltradas.length === 0) {
+            lista.innerHTML = "<p>No tienes citas registradas.</p>";
+            return;
+        }
+        citasFiltradas.forEach((cita) => {
+            const item = document.createElement('div');
+            item.style.border = "1px solid #ddd";
+            item.style.padding = "10px";
+            item.style.borderRadius = "6px";
+            item.style.marginBottom = "10px";
+            const nombreMedico =
+                cita.medico_id === "dr_carlos_rodriguez"
+                    ? "Dr. Carlos Rodríguez"
+                    : "Dra. María Gómez";
+            item.innerHTML = `
+                <p><strong>Cédula:</strong> ${cita.cedula}</p>
+                <p><strong>Médico:</strong> ${nombreMedico}</p>
+                <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                <p><strong>Hora:</strong> ${cita.hora}</p>
+                <button class="btn-eliminar">
+                    <i class="fa-solid fa-trash"></i> Eliminar
+                </button>
+            `;
+            item.querySelector('.btn-eliminar')!.addEventListener('click', () => {
+                eliminarCita(cita);
+            });
+            lista.appendChild(item);
+        });
+    };
     const actualizarHoras = () => {
-        if (!selectMedico || !selectHora) return;
         const medicoId = selectMedico.value;
-        const fecha = inputFecha?.value;
-        
+        const fecha = inputFecha.value;
         selectHora.innerHTML = '<option value="">-- Elige una hora --</option>';
         if (!medicoId || !fecha) return;
-
         const datosMedico = (horariosData as any)[medicoId];
-        const citasActuales = obtenerAgendamientos();
-
-        if (datosMedico && datosMedico.horarios) {
-            datosMedico.horarios.forEach((h: any) => {
-                // Verificar si esta hora ya está ocupada
-                const estaOcupado = citasActuales.some(
-                    (c) => c.medico_id === medicoId && c.fecha === fecha && c.hora === h.hora
-                );
-
-                if (!estaOcupado) {
-                    const option = document.createElement('option');
-                    option.value = h.hora;
-                    option.textContent = h.hora;
-                    selectHora.appendChild(option);
-                }
-            });
+        if (!datosMedico) return;
+        const citas = obtenerAgendamientos();
+        const dia = obtenerDiaSemana(fecha);
+        const diasValidos = datosMedico.dias_atencion.map((d: string) => normalizar(d));
+        if (!diasValidos.includes(dia)) {
+            const option = document.createElement('option');
+            option.textContent = "No atiende este día";
+            option.disabled = true;
+            selectHora.appendChild(option);
+            return;
         }
+        datosMedico.horarios.forEach((h: any) => {
+            const ocupado = citas.some(c =>
+                c.medico_id === medicoId &&
+                c.fecha === fecha &&
+                c.hora === h.hora
+            );
+            if (!ocupado && h.disponible) {
+                const option = document.createElement('option');
+                option.value = h.hora;
+                option.textContent = h.hora;
+                selectHora.appendChild(option);
+            }
+        });
     };
-
-    selectMedico?.addEventListener('change', actualizarHoras);
-    inputFecha?.addEventListener('change', actualizarHoras);
-
-    // 2. Lógica de envío del formulario
+    selectMedico.addEventListener('change', actualizarHoras);
+    inputFecha.addEventListener('change', actualizarHoras);
+    inputCedula.addEventListener('input', mostrarCitasGuardadas);
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const inputCedula = document.getElementById('cedula') as HTMLInputElement | null;
-        const selectTipo = document.getElementById('tipo') as HTMLSelectElement | null;
-        const textMotivo = document.getElementById('motivo') as HTMLTextAreaElement | null;
-
-        const cedula = inputCedula?.value.trim();
-        const medicoId = selectMedico?.value;
-        const fecha = inputFecha?.value;
-        const hora = selectHora?.value;
-        const tipo = selectTipo?.value;
-        const motivo = textMotivo?.value || "";
-
-        if (!medicoId || !fecha || !hora || !cedula || !tipo) {
-            alert("Por favor, completa todos los campos requeridos.");
+        const cedula = inputCedula.value.trim();
+        const medicoId = selectMedico.value;
+        const fecha = inputFecha.value;
+        const hora = selectHora.value;
+        const tipo = (document.getElementById('tipo') as HTMLSelectElement).value;
+        const motivo = (document.getElementById('motivo') as HTMLTextAreaElement).value || "";
+        if (!cedula || !medicoId || !fecha || !hora || !tipo) {
+            alert("Completa todos los campos");
             return;
         }
-
-        const usuariosGuardados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-        const todosLosPacientes = [...pacientesPredeterminados, ...usuariosGuardados];
-        const pacienteEncontrado = todosLosPacientes.find((p: any) => p.cedula === cedula);
-
-        if (!pacienteEncontrado) {
-            alert("Error: La cédula ingresada no se encuentra registrada.");
+        const usuarios = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
+        const pacientes = [...pacientesPredeterminados, ...usuarios];
+        const paciente = pacientes.find((p: any) => p.cedula === cedula);
+        if (!paciente) {
+            alert("Cédula no registrada");
             return;
         }
-
-        // Guardar la nueva cita
-        const nuevaCita = { medico_id: medicoId, cedula, fecha, hora, motivo, tipo };
-        const todasLasCitas = obtenerAgendamientos();
-        todasLasCitas.push(nuevaCita);
-        
-        // --- PERSISTENCIA: Guardar en localStorage ---
-        localStorage.setItem("agendamientos", JSON.stringify(todasLasCitas));
-        
-        // --- MOSTRAR RESULTADO EN PANTALLA ---
-        const divResultado = document.getElementById('resultado-cita') as HTMLDivElement;
-        const nombreMedico = selectMedico!.options[selectMedico!.selectedIndex].text;
-        
-        if (divResultado) {
-            document.getElementById('res-paciente')!.textContent = pacienteEncontrado.nombre;
-            document.getElementById('res-medico')!.textContent = nombreMedico;
-            document.getElementById('res-fecha')!.textContent = fecha!;
-            document.getElementById('res-hora')!.textContent = hora!;
-            divResultado.style.display = 'block';
+        const citas = obtenerAgendamientos();
+        const yaExiste = citas.some(c =>
+            c.medico_id === medicoId &&
+            c.fecha === fecha &&
+            c.hora === hora
+        );
+        if (yaExiste) {
+            alert("Esa hora ya está ocupada");
+            return;
         }
-
-        alert(`✅ ¡Cita confirmada para ${pacienteEncontrado.nombre}!`);
+        const nueva = { medico_id: medicoId, cedula, fecha, hora, tipo, motivo };
+        citas.push(nueva);
+        guardarAgendamientos(citas);
+        alert(`✅ Cita confirmada para ${paciente.nombre}`);
         form.reset();
-        actualizarHoras(); 
+        inputCedula.value = cedula;
+        actualizarHoras();
+        mostrarCitasGuardadas();
     });
+    mostrarCitasGuardadas();
 }

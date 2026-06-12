@@ -2,7 +2,7 @@
     "dr_carlos_rodriguez": {
         "dias_atencion": ["Martes", "Jueves", "Sábado"],
         "horarios": [
-            { "hora": "08:00", "disponible": false },
+            { "hora": "08:00", "disponible": true },
             { "hora": "08:30", "disponible": true },
             { "hora": "09:00", "disponible": true },
             { "hora": "09:30", "disponible": true },
