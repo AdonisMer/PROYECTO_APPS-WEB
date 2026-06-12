@@ -42,7 +42,7 @@
   },
 
   {
-    "nombre": "Farmacia Salud Total",
+    "nombre": "Farmacia Cruz Azul",
     "direccion": "Avenida Principal",
     "telefono": "0992222222",
     "distancia": 5.0 ,
@@ -84,7 +84,7 @@
   },
 
   {
-    "nombre": "Farmacia Vida Sana",
+    "nombre": "Farmacia Santa Martha",
     "direccion": "Calle Secundaria",
     "telefono": "0993333333",
     "distancia": 2.5,
@@ -126,7 +126,7 @@
   },
 
   {
-    "nombre": "Farmacia Bienestar",
+    "nombre": "Farmacia Economica",
     "direccion": "Avenida Secundaria",
     "telefono": "0994444444",
     "distancia": 4.0,
@@ -168,7 +168,7 @@
   },
 
   {
-    "nombre": "Farmacia Salud y Vida",
+    "nombre": "Medicity",
     "direccion": "Calle Tercera",
     "telefono": "0995555555",
     "distancia": 3.8,
@@ -210,7 +210,7 @@
   },
 
   {
-    "nombre": "Farmacia Vida Plena",
+    "nombre": "Fybeca",
     "direccion": "Avenida Tercera",
     "telefono": "0996666666",
     "distancia": 2.0,
@@ -252,7 +252,7 @@
   },
 
   {
-    "nombre": "Farmacia Salud Total",
+    "nombre": "Farmacia San Gregorio",
     "direccion": "Calle Cuarta",
     "telefono": "0997777777",
     "distancia": 4.5,
@@ -294,7 +294,7 @@
   },
 
   {
-    "nombre": "Farmacia Bienestar Total",
+    "nombre": "Farmacia Central",
     "direccion": "Avenida Cuarta",
     "telefono": "0998888888",
     "distancia": 3.0,
