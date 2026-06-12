@@ -3,133 +3,336 @@
     "nombre": "Farmacia Sana Sana",
     "direccion": "Calle Central",
     "telefono": "0991111111",
-    "distancia": "3.2 km",
+    "distancia": 3.2,
+
     "medicamentos": [
-      "Paracetamol",
-      "Ibuprofeno",
-      "Vitamina C",
-      "Amoxicilina",
-      "Loratadina",
-      "Omeprazol",
-      "Cetirizina",
-      "Aspirina",
-      "Losartán",
-      "Enalapril",
-      "Bisoprolol",
-      "Atorvastatina",
-      "Metoprolol",
-      "Hidroclorotiazida"
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.50,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.00,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.50,
+        "disponible": false
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.25,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.00,
+        "disponible": true
+      }
+
     ]
+
   },
+
   {
-    "nombre": "Farmacia Cruz Azul",
-    "direccion": "Calle Central",
+    "nombre": "Farmacia Salud Total",
+    "direccion": "Avenida Principal",
     "telefono": "0992222222",
-    "distancia": "3.8 km",
+    "distancia": 5.0 ,
+
     "medicamentos": [
-      "Paracetamol",
-      "Amoxicilina",
-      "Loratadina",
-      "Omeprazol",
-      "Cetirizina",
-      "Aspirina",
-      "Enalapril",
-      "Carvedilol",
-      "Furosemida",
-      "Apixabán",
-      "Metoprolol"
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.75,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.25,
+        "disponible": false
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.75,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.50,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.50,
+        "disponible": false
+      }
+
     ]
+
   },
+
   {
-    "nombre": "Farmacia Santa Martha",
-    "direccion": "Calle 12",
+    "nombre": "Farmacia Vida Sana",
+    "direccion": "Calle Secundaria",
     "telefono": "0993333333",
-    "distancia": "1.6 km",
+    "distancia": 2.5,
+
     "medicamentos": [
-      "Paracetamol",
-      "Amoxicilina",
-      "Loratadina",
-      "Aspirina",
-      "Amlodipino",
-      "Espironolactona",
-      "Hidroclorotiazida"
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.60,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.10,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.60,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.30,
+        "disponible": false
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.20,
+        "disponible": true
+      }
+
     ]
+
   },
+
   {
-    "nombre": "Farmacia Medicity",
-    "direccion": "Calle 12",
+    "nombre": "Farmacia Bienestar",
+    "direccion": "Avenida Secundaria",
     "telefono": "0994444444",
-    "distancia": "1.5 km",
+    "distancia": 4.0,
+
     "medicamentos": [
-      "Paracetamol",
-      "Ibuprofeno",
-      "Vitamina C",
-      "Amoxicilina",
-      "Loratadina",
-      "Omeprazol",
-      "Cetirizina",
-      "Aspirina",
-      "Losartán",
-      "Atorvastatina",
-      "Carvedilol",
-      "Bisoprolol",
-      "Metoprolol",
-      "Apixabán"
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.80,
+        "disponible": false
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.50,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.80,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.75,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.75,
+        "disponible": true
+      }
+
     ]
+
   },
+
   {
-    "nombre": "Farmacia San Gregorio",
-    "direccion": "Calle 12",
+    "nombre": "Farmacia Salud y Vida",
+    "direccion": "Calle Tercera",
     "telefono": "0995555555",
-    "distancia": "1.0 km",
+    "distancia": 3.8,
+
     "medicamentos": [
-      "Paracetamol",
-      "Ibuprofeno",
-      "Amoxicilina",
-      "Enalapril",
-      "Furosemida",
-      "Losartán",
-      "Hidroclorotiazida"
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.65,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.20,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.65,
+        "disponible": false
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.40,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.30,
+        "disponible": true
+      }
+
     ]
+
   },
+
   {
-    "nombre": "Farmacia Economica",
-    "direccion": "Hospital",
+    "nombre": "Farmacia Vida Plena",
+    "direccion": "Avenida Tercera",
     "telefono": "0996666666",
-    "distancia": "1.2 km",
+    "distancia": 2.0,
+
     "medicamentos": [
-      "Paracetamol",
-      "Loratadina",
-      "Aspirina",
-      "Omeprazol",
-      "Bisoprolol",
-      "Amlodipino",
-      "Espironolactona",
-      "Apixabán"
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.55,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.15,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.55,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.20,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.10,
+        "disponible": false
+      }
+
     ]
+
   },
+
   {
-    "nombre": "Fybeca",
-    "direccion": "Mall del Pacífico",
+    "nombre": "Farmacia Salud Total",
+    "direccion": "Calle Cuarta",
     "telefono": "0997777777",
-    "distancia": "3.0 km",
+    "distancia": 4.5,
+
     "medicamentos": [
-      "Paracetamol",
-      "Ibuprofeno",
-      "Vitamina C",
-      "Amoxicilina",
-      "Loratadina",
-      "Omeprazol",
-      "Cetirizina",
-      "Aspirina",
-      "Losartán",
-      "Amlodipino",
-      "Atorvastatina",
-      "Furosemida",
-      "Espironolactona",
-      "Metoprolol",
-      "Apixabán",
-      "Hidroclorotiazida"
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.70,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.30,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.70,
+        "disponible": false
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.60,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.40,
+        "disponible": true
+      }
+
     ]
+
+  },
+
+  {
+    "nombre": "Farmacia Bienestar Total",
+    "direccion": "Avenida Cuarta",
+    "telefono": "0998888888",
+    "distancia": 3.0,
+
+    "medicamentos": [
+
+      {
+        "nombre": "Paracetamol",
+        "precio": 2.85,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Ibuprofeno",
+        "precio": 3.55,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Vitamina C",
+        "precio": 5.85,
+        "disponible": true
+      },
+
+      {
+        "nombre": "Aspirina",
+        "precio": 4.80,
+        "disponible": false
+      },
+
+      {
+        "nombre": "Losartan",
+        "precio": 8.80,
+        "disponible": true
+      }
+
+    ]
+
   }
+
 ]
