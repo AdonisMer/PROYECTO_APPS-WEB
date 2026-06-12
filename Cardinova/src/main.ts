@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 else infoCita.prepend(saludo);
             }
         }
+    
 
         const selectorPacientes = document.getElementById("seleccionar-paciente") as HTMLSelectElement | null;
         const elEdad = document.getElementById("vista-edad");
@@ -261,10 +262,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (elFecha) elFecha.textContent = cita ? cita.fecha : "Sin cita programada";
                 
                 // Si el doctor ya personalizó los síntomas de este paciente, los cargamos. Si no, tomamos el inicial de la cita.
-                if (paciente.sintomasActivos && paciente.sintomasActivos.length > 0) {
-                    paciente.sintomasActivos.forEach((s: string) => crearEtiqueta(elSintomasContenedor, s, false));
-                } else if (cita && elSintomasContenedor) {
-                    crearEtiqueta(elSintomasContenedor, cita.motivo, false); 
+                if (paciente.medicamentos && elMedsContenedor) {
+                paciente.medicamentos.split("•").map((m: string) => m.trim()).filter((m: string) => m.length > 0).forEach((m: string) =>
+                    crearEtiqueta(elMedsContenedor, m, true)
+                    );
                 }
 
                 if (paciente.medicamentos && elMedsContenedor) {
@@ -357,8 +358,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     setupPasswordToggle("password", "togglePassword", "eyeIcon");
-    if (confirmarInput) setupPasswordToggle("toggleConfirm", "eyeIconConfirm");
-
+    if (confirmarInput) {
+        setupPasswordToggle("confirmar", "toggleConfirm", "eyeIconConfirm");
+    }
     form.addEventListener("submit", (e: Event) => {
         if (form.classList.contains("formulario1") && !correoInput) return; 
         
