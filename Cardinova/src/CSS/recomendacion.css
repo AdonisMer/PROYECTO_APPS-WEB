@@ -143,6 +143,11 @@
 .tarjeta-farmacia {
     min-height: auto;
     padding: 16px;
+    background: var(--color-cards);
+    border-radius: 18px;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: 0.3s;
 }
 
 .tarjeta-farmacia:hover {
@@ -180,3 +185,43 @@
 
 
 
+
+.med-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.2s;
+}
+
+.med-card:hover {
+  transform: translateY(-3px);
+}
+
+.med-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.med-card p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+}
+
+.precio {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.disponible {
+  color: #2ecc71;
+}
+
+.no-disponible {
+  color: #e74c3c;
+}

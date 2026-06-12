@@ -42,38 +42,43 @@ function verDetalle(nombre: string) {
     info.innerHTML = `
         <div class="info-farmacia">
             <p>
-            📍 Dirección:
+            <i class="fa-solid fa-location-dot"></i> Dirección:
             ${farmacia.direccion}
             </p>
             <p>
-            📞 Teléfono:
+            <i class="fa-solid fa-phone"></i> Teléfono:
             ${farmacia.telefono}
             </p>
             <p>
-            🚗 Distancia:
+            <i class="fa-solid fa-car"></i> Distancia:
             ${farmacia.distancia} km
             </p>
         </div>
         <h3>
-        💊 Medicamentos disponibles
+        <i class="fa-solid fa-capsules"></i> Medicamentos disponibles
         </h3>
         ${farmacia.medicamentos.map(m => `
-            <div class="medicamento-item">
-                <h4>
-                ${m.nombre}
-                </h4>
-                <p>
-                💵 Precio:
-                $${m.precio}
-                </p>
-                <p>
-                ${
-                    m.disponible
-                    ? "🟢 Disponible"
-                    : "🔴 No disponible"
-                }
-                </p>
-            </div>
+        <div class="med-card">
+
+            <h3>
+            <i class="fa-solid fa-pills"></i>
+            ${m.nombre}
+            </h3>
+
+            <p class="precio">
+            <i class="fa-solid fa-tag"></i>
+            $${m.precio}
+            </p>
+
+            <p>
+            ${
+                m.disponible
+                ? `<i class="fa-solid fa-circle-check disponible"></i> Disponible`
+                : `<i class="fa-solid fa-circle-xmark no-disponible"></i> No disponible`
+            }
+            </p>
+
+        </div>
         `).join("")}
     `;
 }
@@ -124,18 +129,18 @@ function mostrarFarmacias(farmacias: Farmacia[], contenedor: HTMLElement) {
                 ${
                 f.distancia === farmacias[0].distancia
                 ?
-                "⭐ "
+                " "
                 :
                 ""
                 }
-                🏥 ${f.nombre}
+                <i class="fa-solid fa-house-medical"></i> ${f.nombre}
                 </strong>
 
 
                 <button 
                 class="btn-fav"
                 onclick="event.stopPropagation(); toggleFavorito('${f.nombre}')">
-                ❤️                
+                <i class="fa-solid fa-bookmark"></i> <!-- tipo guardar favorito -->                
                 </button>
             </div>
             
@@ -146,7 +151,7 @@ function mostrarFarmacias(farmacias: Farmacia[], contenedor: HTMLElement) {
 
             `
             <p>
-            💊 Medicamento encontrado:
+            <i class="fa-solid fa-capsules"></i> Medicamento encontrado:
             <strong>
             ${medicamentoEncontrado.nombre}
             </strong>
@@ -168,7 +173,7 @@ function mostrarFarmacias(farmacias: Farmacia[], contenedor: HTMLElement) {
             :
             `
             <p>
-            💊 ${f.medicamentos
+            <i class="fa-solid fa-pills"></i> ${f.medicamentos
             .slice(0,3)
             .map(m=>m.nombre)
             .join(", ")}
@@ -176,15 +181,15 @@ function mostrarFarmacias(farmacias: Farmacia[], contenedor: HTMLElement) {
             `
             }
             <p>
-            📍 ${f.direccion}
+            <i class="fa-solid fa-location-dot"></i> ${f.direccion}
             </p>
             </div>
             <div class="footer-tarjeta">
                 <span>
-                📞 ${f.telefono}
+                <i class="fa-solid fa-phone"></i> ${f.telefono}
                 </span>
                 <span>
-                🚗 ${f.distancia} km
+                <i class="fa-solid fa-car"></i> ${f.distancia} km
                 </span>
             </div>
         `;
@@ -284,11 +289,13 @@ function mostrarRecomendacion() {
             </h3>
 
             <h4>
-            🏥 ${mejor.farmacia.nombre}
+            <i class="fa-solid fa-hospital"></i> 
+            ${mejor.farmacia.nombre}
             </h4>
 
             <p>
-            💊 ${mejor.medicamento.nombre}
+            <i class="fa-solid fa-capsules"></i>
+            ${mejor.medicamento.nombre}
             </p>
 
             <p>
@@ -349,24 +356,40 @@ export async function iniciarRecomendaciones() {
         if (contenedor) {
             // Esto es lo que pone las farmacias en pantalla
             mostrarFarmacias(farmaciasGlobales, contenedor as HTMLElement);
-            const boton = document.getElementById("btnBuscar");
-            const input = document.getElementById("buscarMedicamento") as HTMLInputElement | null;
-            if(boton && input){
-                boton.addEventListener("click",()=>{
-                    
-                    const texto = input.value.trim();
-                    if(texto===""){
-                        mostrarFarmacias(
-                            farmaciasGlobales,
-                            contenedor as HTMLElement
-                        );
-                    }else{
-                        medicamentoBuscado = texto;
-                        buscarMedicamento(texto);
-                        mostrarRecomendacion();
-                    }
-                });
+            const inputMed = document.getElementById("buscarMedicamento") as HTMLInputElement | null;
+            const inputFarm = document.getElementById("buscarFarmacia") as HTMLInputElement | null;
+            function aplicarBusqueda() {
+                const med = inputMed?.value.trim().toLowerCase() || "";
+                const farm = inputFarm?.value.trim().toLowerCase() || "";
+
+                medicamentoBuscado = med;
+
+                let resultado = farmaciasGlobales;
+
+                if (farm !== "") {
+                    resultado = resultado.filter(f =>
+                        f.nombre.toLowerCase().includes(farm)
+                    );
+                }
+
+                if (med !== "") {
+                    resultado = resultado.filter(f =>
+                        f.medicamentos.some(m =>
+                            m.nombre.toLowerCase().includes(med)
+                        )
+                    );
+                }
+
+                const contenedor = document.getElementById("resultado");
+                if (contenedor) {
+                    mostrarFarmacias(resultado, contenedor as HTMLElement);
+                }
+
+                mostrarRecomendacion();
             }
+        inputMed?.addEventListener("input", aplicarBusqueda);
+        inputFarm?.addEventListener("input", aplicarBusqueda);
+        
         } else {
             console.error("No se encontró el elemento con ID 'resultado' en el HTML");
         }
